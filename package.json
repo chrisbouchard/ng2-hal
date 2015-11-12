@@ -1,0 +1,20 @@
+{
+  "name": "fate-charsheet-2.0",
+  "version": "0.1.0",
+  "description": "An application to manage FATE character sheets.",
+  "repository": "chrisbouchard/fate-charsheet-2.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Chris Bouchard <chris@upliftinglemma.net>",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "angular2": "2.0.0-alpha.44",
+    "systemjs": "0.19.2"
+  },
+  "devDependencies": {
+    "live-server": "^0.8.2",
+    "typescript": "^1.6.2"
+  }
+}
