@@ -4,7 +4,8 @@
   "description": "An application to manage FATE character sheets.",
   "repository": "chrisbouchard/fate-charsheet-2.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "tsc": "tsc -p src -w",
+    "start": "live-server --open=src"
   },
   "keywords": [],
   "author": "Chris Bouchard <chris@upliftinglemma.net>",
