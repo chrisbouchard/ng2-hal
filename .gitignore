@@ -1,6 +1,5 @@
 node_modules/
 npm-debug.log
 semantic/dist/
-src/app/**/*.js
-src/app/**/*.map
+src/app
 

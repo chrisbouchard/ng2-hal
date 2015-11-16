@@ -4,7 +4,7 @@
   "description": "An application to manage FATE character sheets.",
   "repository": "chrisbouchard/fate-charsheet-2.0",
   "scripts": {
-    "build": "tsc -p src -w",
+    "build": "tsc --project app --watch --outDir src/app",
     "start": "live-server --open=src"
   },
   "keywords": [],
