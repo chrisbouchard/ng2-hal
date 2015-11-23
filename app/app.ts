@@ -5,12 +5,17 @@ import {Card} from './ui/card';
 @Component({
     selector: 'my-app',
     directives: [Card],
-    template: '<card [(character)]="character"></card>'
+    template: `
+      <div class="ui very padded container">
+        <card [(character)]="character"></card>
+      </div>
+      `
 })
 class AppComponent {
 
   character: Character = {
     name: 'John Smith',
+    portrait: './img/placeholder.svg'
     aspects: [
       { label: 'High Concept', name: 'Frobulator of Widgets' },
       { label: 'Trouble', name: 'Troublesome Past' }

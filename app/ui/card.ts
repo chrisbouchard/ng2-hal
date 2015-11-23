@@ -6,8 +6,14 @@ import {Character} from '../model/character';
     properties: ['character: character'],
     directives: [CORE_DIRECTIVES],
     template: `
-    <h1>{{character.name}}</h1>
-    <h2>{{character.aspects[0].name}}</h2>
+      <div class="ui card">
+        <div class="image">
+          <img [src]="character.portrait">
+        </div>
+        <div class="content">
+          <a class="header">{{character.name}}</a>
+        </div>
+      </div>
       `
 })
 export class Card {
