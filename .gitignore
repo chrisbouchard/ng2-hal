@@ -2,4 +2,5 @@ content/js
 node_modules/
 npm-debug.log
 semantic/dist/
+typings/
 
