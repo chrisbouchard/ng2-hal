@@ -5,7 +5,7 @@
   "repository": "chrisbouchard/fate-charsheet-2.0",
   "scripts": {
     "build": "webpack",
-    "start": "live-server --mount=/:content/ --mount=/semantic-ui:semantic/dist/"
+    "start": "live-server --mount=/:content/ --mount=/semantic-ui:semantic/dist/ --mount=/jquery:node_modules/jquery/dist"
   },
   "keywords": [],
   "author": "Chris Bouchard <chris@upliftinglemma.net>",
@@ -27,8 +27,9 @@
     "babel-loader": "*",
     "babel-plugin-transform-runtime": "*",
     "babel-preset-es2015": "*",
-    "ts-loader": "*",
+    "html-loader": "^0.4.0",
     "live-server": "*",
+    "ts-loader": "*",
     "typescript": "next",
     "webpack": "*"
   }

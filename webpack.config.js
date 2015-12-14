@@ -1,6 +1,9 @@
+var path = require('path');
+
 var webpack = require('webpack');
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin;
+var ProvidePlugin = webpack.ProvidePlugin;
 
 module.exports = {
   devtool: 'source-map',
@@ -27,17 +30,20 @@ module.exports = {
       'babel-polyfill'
     ],
     'app': [
-      './src/init'
+      path.resolve(__dirname, 'src/init')
     ]
   },
 
   output: {
-    path: 'content/js',
+    path: path.resolve(__dirname, 'content/js'),
     filename: '[name].js',
     sourceMapFilename: '[name].js.map'
   },
 
   resolve: {
+    alias: {
+      'semantic': path.resolve(__dirname, 'semantic/dist')
+    },
     extensions: ['', '.ts', '.js']
   },
 
@@ -52,14 +58,18 @@ module.exports = {
           /\.e2e\.ts$/,
           /node_modules/
         ]
+      },
+      {
+        test: /\.html$/,
+        loader: 'html?attrs=false'
       }
     ]
   },
 
   plugins: [
+    new CommonsChunkPlugin({ name: 'vendor', minChunks: Infinity }),
     new OccurenceOrderPlugin(),
-    // new webpack.optimize.UglifyJsPlugin(),
-    new CommonsChunkPlugin({ name: 'vendor', minChunks: Infinity })
+    new ProvidePlugin({ 'jQuery': 'jquery' })
   ]
 }
 
