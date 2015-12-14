@@ -8,6 +8,6 @@
     "sourceMap": true,
     "target": "es6"
   },
-  "files": []
+  "files": [ "custom_typings/custom.d.ts" ]
 }
 

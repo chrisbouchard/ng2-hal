@@ -30,7 +30,7 @@ module.exports = {
       'babel-polyfill'
     ],
     'app': [
-      path.resolve(__dirname, 'src/init')
+      'app/init'
     ]
   },
 
@@ -42,6 +42,7 @@ module.exports = {
 
   resolve: {
     alias: {
+      'app': path.resolve(__dirname, 'src'),
       'semantic': path.resolve(__dirname, 'semantic/dist')
     },
     extensions: ['', '.ts', '.js']

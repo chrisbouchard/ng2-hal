@@ -1,5 +1,5 @@
 import {Component, Input, View} from 'angular2/angular2';
-import {Aspect, Character} from '../model/character';
+import {Aspect, Character} from 'app/model/character';
 
 @Component({ selector: 'fate-card' })
 @View({ template: require('./card.html') })
