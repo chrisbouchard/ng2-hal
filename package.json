@@ -5,7 +5,7 @@
   "repository": "chrisbouchard/fate-charsheet-2.0",
   "scripts": {
     "build": "webpack",
-    "start": "live-server --mount=/:content/ --mount=/semantic-ui:semantic/dist/ --mount=/jquery:node_modules/jquery/dist"
+    "start": "cd content; live-server --mount=/semantic-ui:../semantic/dist/"
   },
   "keywords": [],
   "author": "Chris Bouchard <chris@upliftinglemma.net>",
