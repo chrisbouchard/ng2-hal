@@ -9,7 +9,9 @@ import {Card} from './ui/card';
   directives: [Card],
   template: `
     <div class="ui very padded container">
-      <fate-card [(character)]="character"></fate-card>
+      <div class="ui cards">
+        <fate-card [(character)]="character"></fate-card>
+      </div>
     </div>
     `
 })
@@ -20,9 +22,9 @@ export class App {
     './img/placeholder.svg',
     'purple',
     new Set([
-      new Aspect('Graying Starfleet Devil', new Set<string>()),
-      new Aspect('Number One', new Set<string>()),
-      new Aspect('Captain', new Set<string>()),
+      new Aspect('Graying Starfleet Devil', new Set<string>(['high-concept'])),
+      new Aspect('Number One', new Set<string>(['trouble'])),
+      new Aspect('Captain', new Set<string>(['rank'])),
       new Aspect('To Boldly Go', new Set<string>()),
       new Aspect('Warp Core on Legs', new Set<string>()),
       new Aspect('Glint in the Eye', new Set<string>())

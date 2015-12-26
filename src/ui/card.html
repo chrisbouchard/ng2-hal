@@ -6,8 +6,14 @@
         <div class="blurring dimmable image">
           <div class="ui inverted dimmer">
             <div class="content">
-              <div class="header">{{character.name}}</div>
-              <div class="meta">{{highConcept()}}</div>
+              <div class="center">
+                <div class="ui medium header">
+                  {{character.name}}
+                  <div class="sub header">
+                    {{highConcept()}}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <img [src]="character.portrait">
