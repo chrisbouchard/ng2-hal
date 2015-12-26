@@ -1,9 +1,10 @@
 var path = require('path');
-
 var webpack = require('webpack');
+
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin;
 var ProvidePlugin = webpack.ProvidePlugin;
+var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
 module.exports = {
   devtool: 'source-map',
@@ -22,7 +23,7 @@ module.exports = {
       // Angular 2 Deps
       'zone.js',
       'reflect-metadata',
-      // to ensure these modules are grouped together in one file
+      // Ensure these modules are grouped together in one file
       'angular2/angular2',
       'angular2/core',
       'angular2/router',
@@ -62,7 +63,7 @@ module.exports = {
       },
       {
         test: /\.html$/,
-        loader: 'html?attrs=false'
+        loader: 'html?attrs=false&minimize=false'
       }
     ]
   },
@@ -70,7 +71,8 @@ module.exports = {
   plugins: [
     new CommonsChunkPlugin({ name: 'vendor', minChunks: Infinity }),
     new OccurenceOrderPlugin(),
-    new ProvidePlugin({ 'jQuery': 'jquery' })
+    new ProvidePlugin({ 'jQuery': 'jquery', '$': 'jquery' }),
+    new UglifyJsPlugin({ compress: { warnings: false } })
   ]
 }
 
