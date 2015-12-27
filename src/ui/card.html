@@ -1,37 +1,15 @@
-<div class="fate-card ui shape">
-  <div class="sides">
-
-    <div class="side active">
-      <div class="fate-card-front ui {{character.color}} card">
-        <div class="blurring dimmable image">
-          <div class="ui inverted dimmer">
-            <div class="content">
-              <div class="center">
-                <div class="ui medium header">
-                  {{character.name}}
-                  <div class="sub header">
-                    {{highConcept()}}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <img [src]="character.portrait">
-        </div>
-        <!--
-        <div class="content">
-          <a class="header">{{character.name}}</a>
-          <div class="ui small list">
-            <div class="item" *ngFor="#aspect of character.aspects">
-              <i class="{{aspect.icon}} icon"></i>
-              <div class="content">{{aspect.name}}</div>
-            </div>
-          </div>
-        </div>
-        -->
-      </div>
-    </div>
-
+<a class="fate-card ui {{character.color}} fluid card">
+  <div class="image">
+    <img [src]="character.portrait">
   </div>
-</div>
+  <div class="content">
+    <a class="right floated ui tiny red circular label">2</a>
+    <div class="header">
+      {{character.name}}
+    </div>
+    <div class="meta">
+      {{highConcept()}}
+    </div>
+  </div>
+</a>
 

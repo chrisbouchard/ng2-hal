@@ -1,7 +1,9 @@
 import {bootstrap, CORE_DIRECTIVES} from 'angular2/angular2';
 import {App} from './app';
+import {CharacterFacade} from './facade/character_facade';
 
-/* Load Semantic UI. */
+/* Load packages for side-effects. */
+import 'holderjs';
 import 'jquery';
 import 'semantic/semantic';
 
@@ -11,5 +13,5 @@ declare var $: any;
 /* Expose it to the window so we can see it for debugging. */
 window['$'] = $;
 
-$(() => bootstrap(App, [CORE_DIRECTIVES]));
+$(() => bootstrap(App, [CharacterFacade, CORE_DIRECTIVES]));
 

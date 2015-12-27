@@ -4,7 +4,7 @@
   "description": "An application to manage FATE character sheets.",
   "repository": "chrisbouchard/fate-charsheet-2.0",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --progress --watch",
     "start": "cd content; live-server --mount=/semantic-ui:../semantic/dist/"
   },
   "keywords": [],
@@ -16,6 +16,7 @@
     "babel-runtime": "*",
     "es6-promise": "*",
     "es6-shim": "*",
+    "holderjs": "*",
     "jquery": "*",
     "reflect-metadata": "*",
     "rxjs": "*",
