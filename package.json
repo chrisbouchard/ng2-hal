@@ -4,8 +4,8 @@
   "description": "An application to manage FATE character sheets.",
   "repository": "chrisbouchard/fate-charsheet-2.0",
   "scripts": {
-    "build": "webpack --progress --watch",
-    "start": "cd content; live-server --mount=/semantic-ui:../semantic/dist/"
+    "build": "grunt webpack:build",
+    "start": "grunt webpack-dev-server"
   },
   "keywords": [],
   "author": "Chris Bouchard <chris@upliftinglemma.net>",
