@@ -28,10 +28,17 @@
     "babel-loader": "*",
     "babel-plugin-transform-runtime": "*",
     "babel-preset-es2015": "*",
+    "css-loader": "^0.23.1",
+    "file-loader": "^0.8.5",
+    "grunt": "^0.4.5",
+    "grunt-webpack": "^1.0.11",
     "html-loader": "^0.4.0",
     "live-server": "*",
+    "style-loader": "^0.13.0",
     "ts-loader": "*",
     "typescript": "next",
-    "webpack": "*"
+    "url-loader": "^0.5.7",
+    "webpack": "*",
+    "webpack-dev-server": "^1.14.0"
   }
 }

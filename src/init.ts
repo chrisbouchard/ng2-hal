@@ -2,6 +2,9 @@ import {bootstrap, CORE_DIRECTIVES} from 'angular2/angular2';
 import {App} from './app';
 import {CharacterFacade} from './facade/character_facade';
 
+/* Load CSS stylesheets. */
+import 'semantic/semantic.css';
+
 /* Load packages for side-effects. */
 import 'holderjs';
 import 'jquery';

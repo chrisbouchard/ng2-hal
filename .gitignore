@@ -1,4 +1,4 @@
-content/js
+content/dist/
 node_modules/
 npm-debug.log
 semantic/dist/

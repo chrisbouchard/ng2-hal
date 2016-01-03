@@ -4,11 +4,8 @@ var webpack = require('webpack');
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin;
 var ProvidePlugin = webpack.ProvidePlugin;
-// var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
 module.exports = {
-  devtool: 'source-map',
-  debug: true,
   cache: true,
   verbose: true,
   displayErrorDetails: true,
@@ -32,7 +29,8 @@ module.exports = {
   },
 
   output: {
-    path: path.resolve(__dirname, 'content/js'),
+    path: path.resolve(__dirname, 'content/dist'),
+    publicPath: '',
     filename: '[name].js',
     sourceMapFilename: '[name].js.map'
   },
@@ -58,8 +56,16 @@ module.exports = {
         ]
       },
       {
+        test: /\.css$/,
+        loader: 'style!css'
+      },
+      {
         test: /\.html$/,
         loader: 'html?attrs=false&minimize=false'
+      },
+      {
+        test: /\.(eot|png|svg|ttf|woff|woff2)/,
+        loader: 'url?limit=5000&name=assets/[hash].[ext]'
       }
     ]
   },
@@ -67,8 +73,7 @@ module.exports = {
   plugins: [
     new CommonsChunkPlugin('vendor', 'vendor.js'),
     new OccurenceOrderPlugin(),
-    new ProvidePlugin({ 'jQuery': 'jquery', '$': 'jquery' }),
-    // new UglifyJsPlugin({ compress: { warnings: false } })
+    new ProvidePlugin({ 'jQuery': 'jquery', '$': 'jquery' })
   ]
 }
 
