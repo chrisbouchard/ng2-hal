@@ -1,5 +1,5 @@
 import {Component, View} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+import {RouteConfig, RouterOutlet} from 'angular2/router';
 
 import {CharacterPage} from './pages/character_page';
 import {GroupPage} from './pages/group_page';
@@ -9,7 +9,7 @@ import {AppFrame} from './ui/app_frame';
   selector: 'fate-app'
 })
 @View({
-  directives: [AppFrame, ROUTER_DIRECTIVES],
+  directives: [AppFrame, RouterOutlet],
   template: `
     <fate-app-frame>
       <router-outlet></router-outlet>
