@@ -1,4 +1,5 @@
 import {Component, View} from 'angular2/core';
+import {RouteParams} from 'angular2/router';
 
 import {CharacterFacade} from 'app/facade/character_facade';
 import {Character} from 'app/model/character';
@@ -13,9 +14,12 @@ import {List} from 'app/ui/list';
 })
 export class GroupPage {
 
+  id: string = undefined;
   characters: Character[] = [];
 
-  constructor(characterFacade: CharacterFacade) {
+  constructor(params: RouteParams, characterFacade: CharacterFacade) {
+    this.id = params.get('id');
+
     characterFacade.findAll().then(characters => {
       this.characters = characters;
     });

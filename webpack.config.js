@@ -16,16 +16,15 @@ module.exports = {
   },
 
   entry: {
+    'app': 'app/init',
     'vendor': [
-      'zone.js',
-      'reflect-metadata',
+      'angular2/bundles/angular2-polyfills',
       'angular2/common',
       'angular2/core',
-      'angular2/router',
       'angular2/http',
-      'babel-polyfill',
-    ],
-    'app': 'app/init'
+      'angular2/platform/browser',
+      'angular2/router'
+    ]
   },
 
   output: {
@@ -71,6 +70,9 @@ module.exports = {
         test: /\.(eot|png|svg|ttf|woff|woff2)/,
         loader: 'url?limit=5000&name=assets/[hash].[ext]'
       }
+    ],
+    noParse: [
+      path.join(__dirname, 'node_modules', 'angular2', 'bundles')
     ]
   },
 

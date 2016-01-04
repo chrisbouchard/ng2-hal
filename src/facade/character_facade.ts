@@ -2,7 +2,7 @@ import {Aspect, Character} from 'app/model/character';
 
 export class CharacterFacade {
 
-  fixedCharacters: Character[] = [
+  amaryllis: Character =
     new Character(
         '1',
         'Amaryllis Aster Jennings',
@@ -20,8 +20,7 @@ export class CharacterFacade {
           .set('Foo', 1)
           .set('Bar', 2)
           .set('Baz', 3)
-        )
-  ];
+        );
 
   fooBar: Character =
     new Character(
@@ -35,6 +34,12 @@ export class CharacterFacade {
         ]),
         new Map<string, number>()
         );
+
+  fixedCharacters: Character[] = [ this.amaryllis ];
+
+  find(id: string): Promise<Character> {
+    return new Promise<Character>((resolve, reject) => resolve(this.amaryllis));
+  }
 
   findAll(): Promise<Character[]> {
     return new Promise<Character[]>((resolve, reject) => {

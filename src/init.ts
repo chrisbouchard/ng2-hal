@@ -1,4 +1,4 @@
-import {bootstrap} from 'angular2/bootstrap';
+import {bootstrap} from 'angular2/platform/browser';
 import {provide} from 'angular2/core';
 import {HashLocationStrategy, LocationStrategy, ROUTER_PROVIDERS} from 'angular2/router';
 
@@ -12,6 +12,7 @@ import 'style!semantic/semantic.css';
 import 'holderjs';
 import 'jquery';
 import 'semantic/semantic';
+import 'angular2/bundles/angular2-polyfills';
 
 /* Hook into jQuery, which is injected by webpack. */
 declare var $: any;
@@ -23,10 +24,7 @@ $(() => {
   bootstrap(App, [
     CharacterFacade,
     ROUTER_PROVIDERS,
-    provide(
-      LocationStrategy,
-      { useClass: HashLocationStrategy }
-    )
+    provide(LocationStrategy, { useClass: HashLocationStrategy })
   ]).catch(err => console.error(err));
 });
 

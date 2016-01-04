@@ -1,4 +1,5 @@
 import {Component, View} from 'angular2/core';
+import {RouteParams} from 'angular2/router';
 
 import {CharacterFacade} from 'app/facade/character_facade';
 import {Character} from 'app/model/character';
@@ -7,7 +8,20 @@ import {Character} from 'app/model/character';
   selector: 'fate-character-page'
 })
 @View({
-  template: ``
+  template: require('./character_page.html')
 })
-export class CharacterPage {}
+export class CharacterPage {
+
+  id: string = undefined;
+  character: Character = undefined;
+
+  constructor(params: RouteParams, characterFacade: CharacterFacade) {
+    this.id = params.get('id');
+
+    characterFacade.find(this.id).then(character => {
+      this.character = character;
+    });
+  }
+
+}
 
