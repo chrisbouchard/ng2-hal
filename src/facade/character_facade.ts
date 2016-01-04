@@ -6,7 +6,7 @@ export class CharacterFacade {
     new Character(
         '1',
         'Amaryllis Aster Jennings',
-        'holder.js/400x300?auto=yes&textmode=exact',
+        'img/placeholder.svg',
         'purple',
         new Set([
           new Aspect('Graying Starfleet Devil', new Set<string>(['high-concept'])),
@@ -26,7 +26,7 @@ export class CharacterFacade {
     new Character(
         '2',
         'Foo Bar',
-        'holder.js/400x300?auto=yes&textmode=exact',
+        'img/placeholder.svg',
         'blue',
         new Set([
           new Aspect('Lorem Ipsum Dolor Sit Amen', new Set<string>(['high-concept'])),

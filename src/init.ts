@@ -9,7 +9,6 @@ import {App} from './app';
 import 'style!semantic/semantic.css';
 
 /* Load packages for side-effects. */
-import 'holderjs';
 import 'jquery';
 import 'semantic/semantic';
 import 'angular2/bundles/angular2-polyfills';

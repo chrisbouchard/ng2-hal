@@ -3,21 +3,17 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {CharacterPage} from './pages/character_page';
 import {GroupPage} from './pages/group_page';
+import {AppFrame} from './ui/app_frame';
 
 @Component({
   selector: 'fate-app'
 })
 @View({
-  directives: [ROUTER_DIRECTIVES, CharacterPage, GroupPage],
-  styles: [`
-    .fate-app {
-      padding-top: 20px;
-    }
-  `],
+  directives: [AppFrame, ROUTER_DIRECTIVES],
   template: `
-    <div class="fate-app">
+    <fate-app-frame>
       <router-outlet></router-outlet>
-    </div>
+    </fate-app-frame>
   `
 })
 @RouteConfig([

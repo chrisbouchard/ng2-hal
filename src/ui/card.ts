@@ -1,4 +1,4 @@
-import {Component, HostListener, Input, View} from 'angular2/core';
+import {Component, Input, View} from 'angular2/core';
 import {RouterLink} from 'angular2/router';
 
 import {Aspect, Character} from 'app/model/character';
