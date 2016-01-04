@@ -30,7 +30,7 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, 'content/dist'),
-    publicPath: '',
+    publicPath: 'dist',
     filename: '[name].js',
     sourceMapFilename: '[name].js.map'
   },
@@ -57,11 +57,15 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: 'style!css'
+        loader: 'css'
       },
       {
         test: /\.html$/,
         loader: 'html?attrs=false&minimize=false'
+      },
+      {
+        test: /\.less/,
+        loader: 'css!less'
       },
       {
         test: /\.(eot|png|svg|ttf|woff|woff2)/,
