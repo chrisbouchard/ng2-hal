@@ -5,6 +5,8 @@ var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin;
 var ProvidePlugin = webpack.ProvidePlugin;
 
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 module.exports = {
   cache: true,
   verbose: true,
@@ -51,23 +53,33 @@ module.exports = {
           /\.min\.js$/,
           /\.spec\.ts$/,
           /\.e2e\.ts$/,
-          /node_modules/
+          /node_modules\//
         ]
       },
       {
         test: /\.css$/,
-        loader: 'css'
+        loader: 'css',
+        include: [
+          path.join(__dirname, 'src')
+        ]
+      },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style', 'css'),
+        exclude: [
+          path.join(__dirname, 'src')
+        ]
       },
       {
         test: /\.html$/,
         loader: 'html?attrs=false&minimize=false'
       },
       {
-        test: /\.less/,
+        test: /\.less$/,
         loader: 'css!less'
       },
       {
-        test: /\.(eot|png|svg|ttf|woff|woff2)/,
+        test: /\.(eot|png|svg|ttf|woff|woff2)$/,
         loader: 'url?limit=5000&name=assets/[hash].[ext]'
       }
     ],
@@ -78,6 +90,7 @@ module.exports = {
 
   plugins: [
     new CommonsChunkPlugin('vendor', 'vendor.js'),
+    new ExtractTextPlugin('vendor.css'),
     new OccurenceOrderPlugin(),
     new ProvidePlugin({ 'jQuery': 'jquery', '$': 'jquery' })
   ]
