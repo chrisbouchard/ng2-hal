@@ -7,6 +7,7 @@ export class Aspect {
 
 export class Character {
   constructor(
+    public id: string,
     public name: string,
     public portrait: string,
     public color: string,

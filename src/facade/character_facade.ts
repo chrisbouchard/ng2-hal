@@ -4,6 +4,7 @@ export class CharacterFacade {
 
   fixedCharacters: Character[] = [
     new Character(
+        '1',
         'Amaryllis Aster Jennings',
         'holder.js/400x300?auto=yes&textmode=exact',
         'purple',
@@ -24,6 +25,7 @@ export class CharacterFacade {
 
   fooBar: Character =
     new Character(
+        '2',
         'Foo Bar',
         'holder.js/400x300?auto=yes&textmode=exact',
         'blue',

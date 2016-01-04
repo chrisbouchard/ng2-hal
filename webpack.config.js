@@ -19,7 +19,7 @@ module.exports = {
     'vendor': [
       'zone.js',
       'reflect-metadata',
-      'angular2/angular2',
+      'angular2/common',
       'angular2/core',
       'angular2/router',
       'angular2/http',

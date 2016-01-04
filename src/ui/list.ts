@@ -1,4 +1,6 @@
-import {Component, Input, View} from 'angular2/angular2';
+import {NgFor} from 'angular2/common';
+import {Component, Input, View} from 'angular2/core';
+
 import {Character} from 'app/model/character';
 import {Card} from './card';
 
@@ -6,7 +8,7 @@ import {Card} from './card';
   selector: 'fate-list'
 })
 @View({
-  directives: [Card],
+  directives: [Card, NgFor],
   template: require('./list.html')
 })
 export class List {

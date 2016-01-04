@@ -1,23 +1,17 @@
-import {Component, View} from 'angular2/angular2';
+import {Component, View} from 'angular2/core';
+
 import {CharacterFacade} from 'app/facade/character_facade';
 import {Character} from 'app/model/character';
-import {List} from './list';
+import {List} from 'app/ui/list';
 
 @Component({
-  selector: 'fate-app'
+  selector: 'fate-group-page'
 })
 @View({
   directives: [List],
-  styles: [
-    `.fate-app { padding-top: 20px; }`
-  ],
-  template: `
-    <div class="fate-app">
-      <fate-list [characters]="characters"></fate-list>
-    </div>
-  `
+  template: require('./group_page.html')
 })
-export class App {
+export class GroupPage {
 
   characters: Character[] = [];
 

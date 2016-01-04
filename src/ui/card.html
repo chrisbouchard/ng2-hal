@@ -1,4 +1,4 @@
-<a class="fate-card ui {{character.color}} fluid card">
+<a [routerLink]="['/Character', {id: character.id}]" class="fate-card ui {{character.color}} fluid card">
   <div class="image">
     <img [src]="character.portrait">
   </div>

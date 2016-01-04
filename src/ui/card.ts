@@ -1,8 +1,15 @@
-import {Component, HostListener, Input, View} from 'angular2/angular2';
+import {Component, HostListener, Input, View} from 'angular2/core';
+import {RouterLink} from 'angular2/router';
+
 import {Aspect, Character} from 'app/model/character';
 
-@Component({ selector: 'fate-card' })
-@View({ template: require('./card.html') })
+@Component({
+  selector: 'fate-card'
+})
+@View({
+  directives: [RouterLink],
+  template: require('./card.html')
+})
 export class Card {
   @Input() character: Character;
 
@@ -15,10 +22,4 @@ export class Card {
 
     return '';
   }
-
-  @HostListener('click', ['$event'])
-  handleClick(event: Event): void {
-    event.preventDefault();
-  }
-
 }
