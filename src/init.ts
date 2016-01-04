@@ -6,7 +6,7 @@ import {CharacterFacade} from './facade/character_facade';
 import {App} from './app';
 
 /* Load CSS stylesheets. */
-import 'style!semantic/semantic.css';
+import 'semantic/semantic.css';
 
 /* Load packages for side-effects. */
 import 'jquery';
