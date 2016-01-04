@@ -28,7 +28,7 @@ module.exports = {
   },
 
   output: {
-    path: path.resolve(__dirname, 'content/dist'),
+    path: path.join(__dirname, 'content/dist'),
     publicPath: 'dist',
     filename: '[name].js',
     sourceMapFilename: '[name].js.map'
@@ -36,8 +36,8 @@ module.exports = {
 
   resolve: {
     alias: {
-      'app': path.resolve(__dirname, 'src'),
-      'semantic': path.resolve(__dirname, 'semantic/dist')
+      'app': path.join(__dirname, 'src'),
+      'semantic': path.join(__dirname, 'semantic/dist')
     },
     extensions: ['', '.ts', '.js']
   },
