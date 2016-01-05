@@ -1,15 +1,14 @@
-import {Component, Input, View} from 'angular2/core';
+import {Component, View} from 'angular2/core';
 import {RouterLink} from 'angular2/router';
+
+import {AppMenu} from './app_menu';
 
 @Component({
   selector: 'fate-app-frame'
 })
 @View({
-  styles: [`
-    .fate-app-frame {
-      padding-top: 20px;
-    }
-  `],
+  directives: [AppMenu],
+  styles: [require('./app_frame.less')],
   template: require('./app_frame.html')
 })
 export class AppFrame {}

@@ -76,7 +76,7 @@ module.exports = {
       },
       {
         test: /\.less$/,
-        loader: 'css!less'
+        loader: 'raw!less'
       },
       {
         test: /\.(eot|png|svg|ttf|woff|woff2)$/,
