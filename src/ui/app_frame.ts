@@ -9,7 +9,7 @@ import {AppMenu} from './app_menu';
 @View({
   directives: [AppMenu],
   styles: [require('./app_frame.less')],
-  template: require('./app_frame.html')
+  template: require('./app_frame.html.haml')
 })
 export class AppFrame {}
 

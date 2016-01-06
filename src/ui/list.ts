@@ -8,7 +8,7 @@ import {Card} from './card';
 })
 @View({
   directives: [Card],
-  template: require('./list.html')
+  template: require('./list.html.haml')
 })
 export class List {
   @Input() characters: Character[];

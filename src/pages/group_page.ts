@@ -10,7 +10,7 @@ import {List} from 'app/ui/list';
 })
 @View({
   directives: [List],
-  template: require('./group_page.html')
+  template: require('./group_page.html.haml')
 })
 export class GroupPage {
 

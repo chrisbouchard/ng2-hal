@@ -8,7 +8,7 @@ import {Character} from 'app/model/character';
   selector: 'fate-character-page'
 })
 @View({
-  template: require('./character_page.html')
+  template: require('./character_page.html.haml')
 })
 export class CharacterPage {
 
