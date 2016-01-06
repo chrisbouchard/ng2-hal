@@ -8,7 +8,7 @@ import {Aspect, Character} from 'app/model/character';
 })
 @View({
   directives: [RouterLink],
-  template: require('./card.html')
+  template: require('./card.html.haml')
 })
 export class Card {
   @Input() character: Character;

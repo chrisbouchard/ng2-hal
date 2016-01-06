@@ -71,6 +71,10 @@ module.exports = {
         ]
       },
       {
+        test: /\.html.haml$/,
+        loader: 'haml-haml'
+      },
+      {
         test: /\.html$/,
         loader: 'html?attrs=false&minimize=false'
       },
