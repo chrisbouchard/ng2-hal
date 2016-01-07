@@ -5,6 +5,7 @@ import {RouterLink} from 'angular2/router';
   selector: 'fate-app-menu'
 })
 @View({
+  directives: [RouterLink],
   template: require('./app_menu.html.haml')
 })
 export class AppMenu {}

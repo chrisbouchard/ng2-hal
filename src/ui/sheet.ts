@@ -4,13 +4,12 @@ import {RouterLink} from 'angular2/router';
 import {Aspect, Character} from '../model/character';
 
 @Component({
-  selector: 'fate-card'
+  selector: 'fate-sheet'
 })
 @View({
-  directives: [RouterLink],
-  template: require('./card.html.haml')
+  template: require('./sheet.html.haml')
 })
-export class Card {
+export class Sheet {
   @Input() character: Character;
 
   highConcept(): string {

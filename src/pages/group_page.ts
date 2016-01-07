@@ -3,9 +3,9 @@ import {Component, View} from 'angular2/core';
 import {RouteParams} from 'angular2/router';
 import {Observable} from 'rxjs';
 
-import {CharacterFacade} from 'app/facade/character_facade';
-import {Character} from 'app/model/character';
-import {List} from 'app/ui/list';
+import {CharacterFacade} from '../facade/character_facade';
+import {Character} from '../model/character';
+import {List} from '../ui/list';
 
 @Component({
   selector: 'fate-group-page'
@@ -17,14 +17,10 @@ import {List} from 'app/ui/list';
 })
 export class GroupPage {
 
-  id: string = undefined;
-  characters: Observable<Character[]>;
+  characters: Observable<Array<Character>>;
 
-  constructor(private params: RouteParams, private characterFacade: CharacterFacade) {}
-
-  ngOnInit() {
-    this.id = this.params.get('id');
-    this.characters = this.characterFacade.findAll();
+  constructor(private params: RouteParams, private characterFacade: CharacterFacade) {
+    this.characters = characterFacade.findAll();
   }
 
 }

@@ -1,6 +1,6 @@
 import {Component, Input, View} from 'angular2/core';
 
-import {Character} from 'app/model/character';
+import {Character} from '../model/character';
 import {Card} from './card';
 
 @Component({
@@ -11,6 +11,6 @@ import {Card} from './card';
   template: require('./list.html.haml')
 })
 export class List {
-  @Input() characters: Character[];
+  @Input() characters: Array<Character>;
 }
 
