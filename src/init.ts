@@ -23,7 +23,9 @@ $(() => {
   bootstrap(App, [
     CharacterFacade,
     ROUTER_PROVIDERS,
-    provide(LocationStrategy, { useClass: HashLocationStrategy })
+    provide(LocationStrategy, {
+      useClass: HashLocationStrategy
+    })
   ]).catch(err => console.error(err));
 });
 

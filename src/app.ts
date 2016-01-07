@@ -10,11 +10,7 @@ import {AppFrame} from './ui/app_frame';
 })
 @View({
   directives: [AppFrame, RouterOutlet],
-  template: `
-    <fate-app-frame>
-      <router-outlet></router-outlet>
-    </fate-app-frame>
-  `
+  template: require('./app.html.haml')
 })
 @RouteConfig([
   { path: '/', component: GroupPage, name: 'Home' },

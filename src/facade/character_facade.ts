@@ -1,5 +1,5 @@
 import {Observable} from 'rxjs';
-import {Aspect, Character} from 'app/model/character';
+import {Aspect, Character, HIGH_CONCEPT_TAG, TROUBLE_TAG} from 'app/model/character';
 
 export class CharacterFacade {
 
@@ -9,13 +9,14 @@ export class CharacterFacade {
         'Amaryllis Aster Jennings',
         'img/placeholder.svg',
         'purple',
+        new Map<string, Aspect>()
+          .set(HIGH_CONCEPT_TAG, new Aspect('Graying Starfleet Devil'))
+          .set(TROUBLE_TAG, new Aspect('Number One'))
+          .set('rank', new Aspect('Captain')),
         new Set([
-          new Aspect('Graying Starfleet Devil', new Set<string>(['high-concept'])),
-          new Aspect('Number One', new Set<string>(['trouble'])),
-          new Aspect('Captain', new Set<string>(['rank'])),
-          new Aspect('To Boldly Go', new Set<string>()),
-          new Aspect('Warp Core on Legs', new Set<string>()),
-          new Aspect('Glint in the Eye', new Set<string>())
+          new Aspect('To Boldly Go'),
+          new Aspect('Warp Core on Legs'),
+          new Aspect('Glint in the Eye')
         ]),
         new Map<string, number>()
           .set('Foo', 1)
@@ -29,20 +30,20 @@ export class CharacterFacade {
         'Foo Bar',
         'img/placeholder.svg',
         'blue',
-        new Set([
-          new Aspect('Lorem Ipsum Dolor Sit Amen', new Set<string>(['high-concept'])),
-          new Aspect('Troubling Troubles', new Set<string>(['trouble']))
-        ]),
+        new Map<string, Aspect>()
+          .set(HIGH_CONCEPT_TAG, new Aspect('Lorem Ipsum Dolor Sit Amen'))
+          .set(TROUBLE_TAG, new Aspect('Troubling Troubles')),
+        new Set<Aspect>(),
         new Map<string, number>()
         );
 
-  fixedCharacters: Character[] = [ this.amaryllis ];
+  private fixedCharacters: Array<Character> = [ this.amaryllis ];
 
   find(id: string): Observable<Character> {
     return Observable.of(this.amaryllis).delay(1);
   }
 
-  findAll(): Observable<Character[]> {
+  findAll(): Observable<Array<Character>> {
     const fooBars = Array.from({length: 4}, () => this.fooBar);
     return Observable.of(this.fixedCharacters.concat(fooBars)).delay(1);
   }

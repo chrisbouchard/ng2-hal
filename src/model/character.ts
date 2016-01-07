@@ -1,9 +1,9 @@
 export class Aspect {
-  constructor(
-    public name: string,
-    public tags: Set<string>
-  ) {}
+  constructor(public name: string) {}
 }
+
+export const HIGH_CONCEPT_TAG = 'high-concept';
+export const TROUBLE_TAG = 'trouble';
 
 export class Character {
   constructor(
@@ -11,8 +11,26 @@ export class Character {
     public name: string,
     public portrait: string,
     public color: string,
-    public aspects: Set<Aspect>,
+    public namedAspects: Map<string, Aspect>,
+    public unnamedAspects: Set<Aspect>,
     public skills: Map<string, number>
   ) {}
+
+  public get aspects(): Set<Aspect> {
+    const aspects = new Set<Aspect>();
+
+    this.namedAspects.forEach(aspect => aspects.add(aspect));
+    this.unnamedAspects.forEach(aspect => aspects.add(aspect));
+
+    return aspects;
+  }
+
+  public get highConcept(): Aspect {
+    return this.namedAspects.get(HIGH_CONCEPT_TAG);
+  }
+
+  public get trouble(): Aspect {
+    return this.namedAspects.get(TROUBLE_TAG);
+  }
 }
 
