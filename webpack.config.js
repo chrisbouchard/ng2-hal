@@ -18,7 +18,7 @@ module.exports = {
   },
 
   entry: {
-    'app': 'app/init',
+    'app': './src/init',
     'vendor': [
       'angular2/bundles/angular2-polyfills',
       'angular2/common',
@@ -38,7 +38,6 @@ module.exports = {
 
   resolve: {
     alias: {
-      'app': path.join(__dirname, 'src'),
       'semantic': path.join(__dirname, 'semantic/dist')
     },
     extensions: ['', '.ts', '.js']
