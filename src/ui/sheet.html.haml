@@ -1,3 +1,24 @@
-%h1 {{character?.name}}
-%p {{character?.highConcept?.name}}
+.ui.very.padded.piled.segment
+  %h1.ui.huge.header
+    {{character?.name}}
+    .sub.header Played by {{character?.player}}
+
+  .ui.divider
+
+  .ui.stackable.two.column.grid
+    .column
+      .ui.list
+        .item(*ngFor="#entry of character?.namedAspects | entries")
+          .ui.sub.grey.header {{entry.key}}
+          {{entry.value.name}}
+      .ui.list
+        .item(*ngFor="#aspect of character?.unnamedAspects")
+          {{aspect.name}}
+    .column
+      %table.ui.very.basic.table
+        %tbody
+          %tr(*ngFor="#skillSet of character?.skills; #level = index")
+            %td +{{level}}
+            %td
+              %span(*ngFor="#skill of skillSet") {{skill.name}}
 

@@ -2,6 +2,10 @@ export class Aspect {
   constructor(public name: string) {}
 }
 
+export class Skill {
+  constructor(public name: string) {}
+}
+
 export const HIGH_CONCEPT_TAG = 'high-concept';
 export const TROUBLE_TAG = 'trouble';
 
@@ -9,11 +13,12 @@ export class Character {
   constructor(
     public id: string,
     public name: string,
+    public player: string,
     public portrait: string,
     public color: string,
     public namedAspects: Map<string, Aspect>,
     public unnamedAspects: Set<Aspect>,
-    public skills: Map<string, number>
+    public skills: Array<Set<Skill>>
   ) {}
 
   public get aspects(): Set<Aspect> {

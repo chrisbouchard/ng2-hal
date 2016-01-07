@@ -1,5 +1,5 @@
 import {Observable} from 'rxjs';
-import {Aspect, Character, HIGH_CONCEPT_TAG, TROUBLE_TAG} from '../model/character';
+import {Aspect, Character, HIGH_CONCEPT_TAG, Skill, TROUBLE_TAG} from '../model/character';
 
 export class CharacterFacade {
 
@@ -7,6 +7,7 @@ export class CharacterFacade {
     new Character(
         '1',
         'Amaryllis Aster Jennings',
+        'Mary',
         'img/placeholder.svg',
         'purple',
         new Map<string, Aspect>([
@@ -19,17 +20,18 @@ export class CharacterFacade {
           new Aspect('Warp Core on Legs'),
           new Aspect('Glint in the Eye')
         ]),
-        new Map<string, number>([
-          ['Foo', 1],
-          ['Bar', 2],
-          ['Baz', 3]
-        ])
+        [
+          new Set([new Skill('Foo')]),
+          new Set([new Skill('Bar')]),
+          new Set([new Skill('Baz')])
+        ]
         );
 
   private fooBar: Character =
     new Character(
         '2',
         'Foo Bar',
+        undefined,
         'img/placeholder.svg',
         'blue',
         new Map<string, Aspect>([
@@ -37,7 +39,7 @@ export class CharacterFacade {
           [TROUBLE_TAG, new Aspect('Troubling Troubles')]
         ]),
         new Set<Aspect>(),
-        new Map<string, number>()
+        []
         );
 
   private fixedCharacters: Array<Character> = [ this.amaryllis ];
