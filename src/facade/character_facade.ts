@@ -1,8 +1,9 @@
+import {Observable} from 'rxjs';
 import {Aspect, Character} from 'app/model/character';
 
 export class CharacterFacade {
 
-  amaryllis: Character =
+  private amaryllis: Character =
     new Character(
         '1',
         'Amaryllis Aster Jennings',
@@ -22,7 +23,7 @@ export class CharacterFacade {
           .set('Baz', 3)
         );
 
-  fooBar: Character =
+  private fooBar: Character =
     new Character(
         '2',
         'Foo Bar',
@@ -37,15 +38,13 @@ export class CharacterFacade {
 
   fixedCharacters: Character[] = [ this.amaryllis ];
 
-  find(id: string): Promise<Character> {
-    return new Promise<Character>((resolve, reject) => resolve(this.amaryllis));
+  find(id: string): Observable<Character> {
+    return Observable.of(this.amaryllis);
   }
 
-  findAll(): Promise<Character[]> {
-    return new Promise<Character[]>((resolve, reject) => {
-      var fooBars = Array.from({length: 4}, () => this.fooBar);
-      resolve(this.fixedCharacters.concat(fooBars));
-    });
+  findAll(): Observable<Character[]> {
+    var fooBars = Array.from({length: 4}, () => this.fooBar);
+    return Observable.of(this.fixedCharacters.concat(fooBars));
   }
 
 }

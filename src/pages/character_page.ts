@@ -1,5 +1,7 @@
+import {AsyncPipe} from 'angular2/common';
 import {Component, View} from 'angular2/core';
 import {RouteParams} from 'angular2/router';
+import {Observable} from 'rxjs';
 
 import {CharacterFacade} from 'app/facade/character_facade';
 import {Character} from 'app/model/character';
@@ -8,19 +10,19 @@ import {Character} from 'app/model/character';
   selector: 'fate-character-page'
 })
 @View({
+  pipes: [AsyncPipe],
   template: require('./character_page.html.haml')
 })
 export class CharacterPage {
 
   id: string = undefined;
-  character: Character = undefined;
+  character: Observable<Character>;
 
-  constructor(params: RouteParams, characterFacade: CharacterFacade) {
-    this.id = params.get('id');
+  constructor(private params: RouteParams, private characterFacade: CharacterFacade) {}
 
-    characterFacade.find(this.id).then(character => {
-      this.character = character;
-    });
+  ngOnInit() {
+    this.id = this.params.get('id');
+    this.character = this.characterFacade.find(this.id);
   }
 
 }
