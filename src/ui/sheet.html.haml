@@ -1,5 +1,5 @@
 .ui.very.padded.piled.segment
-  %h1.ui.huge.header
+  %h1.ui.header
     {{character?.name}}
     .sub.header Played by {{character?.player}}
 
@@ -7,18 +7,21 @@
 
   .ui.stackable.two.column.grid
     .column
+      %h2.ui.header Aspects
       .ui.list
         .item(*ngFor="#entry of character?.namedAspects | entries")
-          .ui.sub.grey.header {{entry.key}}
-          {{entry.value.name}}
+          .ui.grey.sub.header {{entry.key}}
+          %a.fate-aspect {{entry.value.name}}
       .ui.list
         .item(*ngFor="#aspect of character?.unnamedAspects")
-          {{aspect.name}}
+          %a.fate-aspect {{aspect.name}}
     .column
-      %table.ui.very.basic.table
+      %h2.ui.header Skills
+      %table.ui.very.basic.compact.table
         %tbody
-          %tr(*ngFor="#skillSet of character?.skills; #level = index")
-            %td +{{level}}
+          %tr(*ngFor="#entry of character?.skills | indexed | reversed")
+            %td.collapsing
+              %strong +{{entry.index}}
             %td
-              %span(*ngFor="#skill of skillSet") {{skill.name}}
+              %a.ui.basic.horizontal.label(*ngFor="#skill of entry.value") {{skill.name}}
 
