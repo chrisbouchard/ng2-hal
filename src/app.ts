@@ -15,7 +15,8 @@ import {AppFrame} from './ui/app_frame';
 @RouteConfig([
   { path: '/', component: GroupPage, name: 'Home' },
   { path: '/group/:id', component: GroupPage, name: 'Group' },
-  { path: '/character/:id', component: CharacterPage, name: 'Character' }
+  { path: '/character/:id', component: CharacterPage, name: 'Character' },
+  { path: '/player/:id', component: CharacterPage, name: 'Player' }
 ])
 export class App {}
 

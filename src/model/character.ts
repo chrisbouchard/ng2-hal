@@ -1,3 +1,4 @@
+import {Player} from './player.ts';
 import {CharacterTemplate} from './template.ts';
 
 export class Aspect {
@@ -16,7 +17,7 @@ export class Character {
     public id: string,
     public template: CharacterTemplate,
     public name: string,
-    public player: string,
+    public player: Player,
     public portrait: string,
     public color: string,
     public namedAspects: Map<string, Aspect>,

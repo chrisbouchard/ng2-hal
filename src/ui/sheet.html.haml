@@ -1,17 +1,20 @@
 .ui.very.padded.piled.segment([ngClass]="{loading: !character}")
   .ui.breadcrumb
     %a.section Home
-    %i.right.angle.icon.divider\
+    %i.right.angle.icon.divider/
     %a.section Star Trek: Fate
-    %i.right.angle.icon.divider\
+    %i.right.angle.icon.divider/
 
   %h1.ui.header
-    {{character?.name}}
-    .sub.header
-      Played by
-      %a([routerLink]="['/Home']")> {{character?.player}}
+    %a.ui.rounded.bordered.image
+      %img([src]="character?.portrait")/
+    .content
+      {{character?.name}}
+      .sub.header
+        Played by
+        %a([routerLink]="['/Player', {id: character?.player?.id}]")> {{character?.player?.name}}
 
-  .ui.clearing.divider
+  .ui.divider/
 
   .ui.stackable.two.column.grid
     .column

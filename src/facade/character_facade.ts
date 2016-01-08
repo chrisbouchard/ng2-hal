@@ -1,5 +1,6 @@
 import {Observable} from 'rxjs';
 import {Aspect, Character, HIGH_CONCEPT_TAG, Skill, TROUBLE_TAG} from '../model/character';
+import {Player} from '../model/player';
 import {CharacterTemplate, NamedAspectTemplate} from '../model/template';
 
 export class CharacterFacade {
@@ -18,7 +19,7 @@ export class CharacterFacade {
         '1',
         this.template,
         'Amaryllis Aster Jennings',
-        'Mary',
+        new Player('mbouchard', 'Mary Bouchard'),
         'img/placeholder.svg',
         'purple',
         new Map<string, Aspect>([
@@ -43,7 +44,7 @@ export class CharacterFacade {
         '2',
         this.template,
         'Foo Bar',
-        undefined,
+        new Player('jdoe', 'John Doe'),
         'img/placeholder.svg',
         'blue',
         new Map<string, Aspect>([
