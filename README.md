@@ -1,6 +1,7 @@
 # FATE Character Sheet 2.0
 
-An [Angular2](https://angular.io/) application to manage [FATE](http://www.evilhat.com/home/fate-core/) character sheets.
+An [Angular2](https://angular.io/) application to manage [FATE](http://www.evilhat.com/home/fate-core/) character
+sheets.
 
 ## Building
 
@@ -18,7 +19,9 @@ Once they're installed, you'll need to delete the contents of one of the Angular
 ```console
 $ echo >node_modules/angular2/typings/es6-shim/es6-shim.d.ts
 ```
-This is currently required due to [angular/angular#5973](//github.com/angular/angular/issues/5973). The typings for `es6-shim` that ship with Angular 2 conflict with the ones shipped with TypeScript when `tsc` is configured with `target` as `es6` (which we do).
+This is currently required due to [angular/angular#5973](//github.com/angular/angular/issues/5973). The typings for
+`es6-shim` that ship with Angular 2 conflict with the ones shipped with TypeScript when `tsc` is configured with
+`target` as `es6` (which we do).
 
 Finally, build the project with `gulp`.
 ```console
@@ -26,7 +29,8 @@ $ gulp build  # Production
 $ gulp server # Live development server
 ```
 
-The compiled bundles and assets will wind up in `content/dist`. The app may be run with any static http server with `content` as the webroot.
+The compiled bundles and assets will wind up in `content/dist`. The app may be run with any static http server with
+`content` as the webroot.
 
 # Related Projects
 * [Angular](//github.com/angular/angular) as the core framework to build components.
