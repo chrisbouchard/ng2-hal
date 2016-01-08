@@ -31,7 +31,7 @@ module.exports = {
 
   output: {
     path: path.join(__dirname, 'content/dist'),
-    publicPath: 'dist',
+    publicPath: '/dist',
     filename: '[name].js',
     sourceMapFilename: '[name].js.map'
   },
@@ -83,7 +83,7 @@ module.exports = {
       },
       {
         test: /\.(eot|png|svg|ttf|woff|woff2)$/,
-        loader: 'url?limit=5000&name=assets/[hash].[ext]'
+        loader: 'url?limit=5000&name=/assets/[hash].[ext]'
       }
     ],
     noParse: [

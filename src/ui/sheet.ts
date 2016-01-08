@@ -11,6 +11,7 @@ import {ReversedPipe} from '../pipes/reversed_pipe';
   selector: 'fate-sheet'
 })
 @View({
+  directives: [RouterLink],
   pipes: [EntriesPipe, IndexedPipe, ReversedPipe],
   styles: [require('./sheet.less')],
   template: require('./sheet.html.haml')

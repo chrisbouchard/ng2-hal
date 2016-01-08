@@ -1,11 +1,22 @@
 import {Observable} from 'rxjs';
 import {Aspect, Character, HIGH_CONCEPT_TAG, Skill, TROUBLE_TAG} from '../model/character';
+import {CharacterTemplate, NamedAspectTemplate} from '../model/template';
 
 export class CharacterFacade {
+
+  private template: CharacterTemplate =
+    new CharacterTemplate(
+        'StarTrek', [
+          new NamedAspectTemplate('high-concept', 'High Concept'),
+          new NamedAspectTemplate('trouble', 'Trouble'),
+          new NamedAspectTemplate('rank', 'Rank')
+        ]
+        );
 
   private amaryllis: Character =
     new Character(
         '1',
+        this.template,
         'Amaryllis Aster Jennings',
         'Mary',
         'img/placeholder.svg',
@@ -30,6 +41,7 @@ export class CharacterFacade {
   private fooBar: Character =
     new Character(
         '2',
+        this.template,
         'Foo Bar',
         undefined,
         'img/placeholder.svg',

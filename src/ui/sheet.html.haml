@@ -1,17 +1,25 @@
-.ui.very.padded.piled.segment
+.ui.very.padded.piled.segment([ngClass]="{loading: !character}")
+  .ui.breadcrumb
+    %a.section Home
+    %i.right.angle.icon.divider\
+    %a.section Star Trek: Fate
+    %i.right.angle.icon.divider\
+
   %h1.ui.header
     {{character?.name}}
-    .sub.header Played by {{character?.player}}
+    .sub.header
+      Played by
+      %a([routerLink]="['/Home']")> {{character?.player}}
 
-  .ui.divider
+  .ui.clearing.divider
 
   .ui.stackable.two.column.grid
     .column
       %h2.ui.header Aspects
       .ui.list
-        .item(*ngFor="#entry of character?.namedAspects | entries")
-          .ui.grey.sub.header {{entry.key}}
-          %a.fate-aspect {{entry.value.name}}
+        .item(*ngFor="#aspectTemplate of character?.template?.namedAspectTemplates")
+          .ui.grey.sub.header {{aspectTemplate.name}}
+          %a.fate-aspect {{character?.namedAspects?.get(aspectTemplate.field)?.name || 'Missing'}}
       .ui.list
         .item(*ngFor="#aspect of character?.unnamedAspects")
           %a.fate-aspect {{aspect.name}}

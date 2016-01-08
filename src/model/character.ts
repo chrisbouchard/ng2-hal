@@ -1,3 +1,5 @@
+import {CharacterTemplate} from './template.ts';
+
 export class Aspect {
   constructor(public name: string) {}
 }
@@ -12,6 +14,7 @@ export const TROUBLE_TAG = 'trouble';
 export class Character {
   constructor(
     public id: string,
+    public template: CharacterTemplate,
     public name: string,
     public player: string,
     public portrait: string,

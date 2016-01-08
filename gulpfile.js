@@ -46,7 +46,7 @@ gulp.task('webpack-dev-server', function (callback) {
   var server = new WebpackDevServer(compiler, {
     stats: { colors: true },
     contentBase: 'content',
-    publicPath: '/' + serverConfig.output.publicPath
+    publicPath: serverConfig.output.publicPath
   }).listen(8080, 'localhost', function (err) {
     if (err) throw new gulpUtil.PluginError('webpack-dev-server', err);
     gulpUtil.log('[webpack-dev-server]', 'http://localhost:8080/');
