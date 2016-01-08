@@ -9,9 +9,9 @@ First `cd` into the project root and install the node dependencies.
 $ npm install
 ```
 
-And the global node dependencies.
+And install `gulp` globally.
 ```console
-$ npm install --global gulp grunt-cli
+$ npm install --global gulp
 ```
 
 Once they're installed, you'll need to delete the contents of one of the Angular 2 typescript files.
@@ -20,18 +20,10 @@ $ echo >node_modules/angular2/typings/es6-shim/es6-shim.d.ts
 ```
 This is currently required due to [angular/angular#5973](//github.com/angular/angular/issues/5973). The typings for `es6-shim` that ship with Angular 2 conflict with the ones shipped with TypeScript when `tsc` is configured with `target` as `es6` (which we do).
 
-Next build Semantic-UI using `gulp`.
+Finally, build the project with `gulp`.
 ```console
-$ cd semantic
-$ gulp build
-$ cd ..
-```
-
-Finally, build the project itself with `grunt`.
-```console
-$ grunt webpack:build      # Production
-$ grunt webpack:build-dev  # Development
-$ grunt webpack-dev-server # Live development server
+$ gulp build  # Production
+$ gulp server # Live development server
 ```
 
 The compiled bundles and assets will wind up in `content/dist`. The app may be run with any static http server with `content` as the webroot.
