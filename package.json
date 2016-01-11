@@ -12,15 +12,15 @@
   "author": "Chris Bouchard <chris@upliftinglemma.net>",
   "license": "BSD-2-Clause",
   "dependencies": {
-    "angular2": "2.0.0-beta.0",
+    "angular2": "2.0.0-beta.1",
     "babel-polyfill": "6.3.14",
     "babel-runtime": "6.3.19",
     "es6-promise": "3.0.2",
-    "es6-shim": "0.33.13",
-    "jquery": "2.1.4",
+    "es6-shim": "0.33.3",
+    "jquery": "2.2.0",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.0",
-    "semantic-ui": "2.1.7",
+    "semantic-ui": "2.1.8",
     "zone.js": "0.5.10"
   },
   "devDependencies": {
@@ -41,7 +41,7 @@
     "ts-loader": "0.7.2",
     "typescript": "1.8.0-dev.20160103",
     "url-loader": "0.5.7",
-    "webpack": "1.12.10",
+    "webpack": "1.12.11",
     "webpack-dev-server": "1.14.0",
     "webpack-sources": "0.1.0"
   }
