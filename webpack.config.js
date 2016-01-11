@@ -2,6 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
+var DefinePlugin = webpack.DefinePlugin;
 var OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin;
 var ProvidePlugin = webpack.ProvidePlugin;
 
@@ -93,6 +94,9 @@ module.exports = {
 
   plugins: [
     new CommonsChunkPlugin('vendor', 'vendor.js'),
+    new DefinePlugin({
+        __PRODUCTION__: JSON.stringify(process.env.NODE_ENV === 'production')
+    }),
     new ExtractTextPlugin('vendor.css'),
     new OccurenceOrderPlugin(),
     new ProvidePlugin({ 'jQuery': 'jquery', '$': 'jquery' })

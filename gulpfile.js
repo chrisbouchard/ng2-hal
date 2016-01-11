@@ -24,7 +24,8 @@ gulp.task('webpack:build', ['semantic:build'], function (callback) {
 
   buildConfig.plugins = buildConfig.plugins.concat([
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.UglifyJsPlugin()
+    // TODO: Figure out how to enable this without breaking things.
+    // new webpack.optimize.UglifyJsPlugin()
   ]);
 
   webpack(buildConfig, function (err, stats) {

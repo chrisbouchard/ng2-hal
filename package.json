@@ -4,9 +4,10 @@
   "description": "An application to manage FATE character sheets.",
   "repository": "chrisbouchard/fate-charsheet-2.0",
   "scripts": {
-    "build": "gulp build",
-    "server": "gulp server",
-    "start": "gulp server"
+    "build-dev": "NODE_ENV=development gulp build",
+    "build-prod": "NODE_ENV=production gulp build",
+    "server": "NODE_ENV=development gulp server",
+    "start": "NODE_ENV=development gulp server"
   },
   "keywords": [],
   "author": "Chris Bouchard <chris@upliftinglemma.net>",
