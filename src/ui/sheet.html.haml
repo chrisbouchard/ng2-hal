@@ -54,7 +54,46 @@
                 %a.ui.basic.horizontal.label(*ngFor="#skill of entry.value") {{skill.name}}
       .column
         %h2.ui.header Stress
-
+        .ui.list
+          .item
+            .ui.grey.sub.header Physical
+            .ui.horizontal.list
+              .item
+                .ui.checkbox
+                  %input#physical-1(type="checkbox" checked=true)
+                  %label(for="physical-1") 1
+              .item
+                .ui.checkbox
+                  %input#physical-2(type="checkbox" checked=true)
+                  %label(for="physical-2") 2
+              .item
+                .ui.checkbox
+                  %input#physical-3(type="checkbox")
+                  %label(for="physical-3") 3
+              .item
+                .ui.checkbox
+                  %input#physical-4(type="checkbox")
+                  %label(for="physical-4") 4
+          .item
+            .ui.grey.sub.header Mental
+            .ui.horizontal.list
+              .item
+                .ui.checkbox
+                  %input#mental-1(type="checkbox")
+                  %label(for="mental-1") 1
+              .item
+                .ui.checkbox
+                  %input#mental-2(type="checkbox")
+                  %label(for="mental-2") 2
+              .item
+                .ui.checkbox
+                  %input#mental-3(type="checkbox" disabled=true)
+                  %label(for="mental-3") 3
+              .item
+                .ui.checkbox
+                  %input#mental-4(type="checkbox" disabled=true)
+                  %label(for="mental-4") 4
+        %h2.ui.header Consequences
       .column
         %h2.ui.header Stunts
 
