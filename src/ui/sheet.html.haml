@@ -1,38 +1,60 @@
 .ui.very.padded.piled.segment([ngClass]="{loading: !character}")
-  .ui.breadcrumb
-    %a.section Home
-    %i.right.angle.icon.divider/
-    %a.section Star Trek: Fate
-    %i.right.angle.icon.divider/
+  %div(*ngIf="character")
+    .ui.stackable.two.column.grid
+      .sixteen.wide.column
+        .ui.breadcrumb
+          %a.section Home
+          %i.right.angle.icon.divider/
+          %a.section Star Trek: Fate
+          %i.right.angle.icon.divider/
+      .column
+        %h1.ui.header
+          %a.ui.rounded.bordered.image
+            %img([src]="character?.portrait")/
+          .content
+            {{character?.name}}
+            .sub.header
+              Played by
+              %a([routerLink]="['/Player', {id: character?.player?.id}]")> {{character?.player?.name}}
+      .column
+        .ui.four.tiny.statistics
+          %a.statistic
+            .label Fate Points
+            .value 1
+          %a.statistic
+            .label Refresh
+            .value 2
+          %a.statistic
+            .label Skill Cap
+            .value +5
+          %a.statistic
+            .label Skill Points
+            .value 35
 
-  %h1.ui.header
-    %a.ui.rounded.bordered.image
-      %img([src]="character?.portrait")/
-    .content
-      {{character?.name}}
-      .sub.header
-        Played by
-        %a([routerLink]="['/Player', {id: character?.player?.id}]")> {{character?.player?.name}}
+    .ui.divider/
 
-  .ui.divider/
+    .ui.stackable.two.column.grid
+      .column
+        %h2.ui.header Aspects
+        .ui.list
+          .item(*ngFor="#aspectTemplate of character?.template?.namedAspectTemplates")
+            .ui.grey.sub.header {{aspectTemplate.name}}
+            %a.fate-aspect {{character?.namedAspects?.get(aspectTemplate.field)?.name || 'Missing'}}
+        .ui.list
+          .item(*ngFor="#aspect of character?.unnamedAspects")
+            %a.fate-aspect {{aspect.name}}
+      .column
+        %h2.ui.header Skills
+        %table.ui.very.basic.compact.table
+          %tbody
+            %tr(*ngFor="#entry of character?.skills | indexed | reversed")
+              %td.collapsing
+                %strong +{{entry.index}}
+              %td
+                %a.ui.basic.horizontal.label(*ngFor="#skill of entry.value") {{skill.name}}
+      .column
+        %h2.ui.header Stress
 
-  .ui.stackable.two.column.grid
-    .column
-      %h2.ui.header Aspects
-      .ui.list
-        .item(*ngFor="#aspectTemplate of character?.template?.namedAspectTemplates")
-          .ui.grey.sub.header {{aspectTemplate.name}}
-          %a.fate-aspect {{character?.namedAspects?.get(aspectTemplate.field)?.name || 'Missing'}}
-      .ui.list
-        .item(*ngFor="#aspect of character?.unnamedAspects")
-          %a.fate-aspect {{aspect.name}}
-    .column
-      %h2.ui.header Skills
-      %table.ui.very.basic.compact.table
-        %tbody
-          %tr(*ngFor="#entry of character?.skills | indexed | reversed")
-            %td.collapsing
-              %strong +{{entry.index}}
-            %td
-              %a.ui.basic.horizontal.label(*ngFor="#skill of entry.value") {{skill.name}}
+      .column
+        %h2.ui.header Stunts
 
