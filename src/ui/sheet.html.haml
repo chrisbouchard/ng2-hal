@@ -1,6 +1,6 @@
 .ui.padded.piled.segment([ngClass]="{loading: !character}")
   %div(*ngIf="character")
-    .ui.stackable.two.column.grid
+    .ui.stackable.bottom.aligned.two.column.grid
       .sixteen.wide.column
         .ui.breadcrumb
           %a.section Home
@@ -14,7 +14,7 @@
             Played by
             %a([routerLink]="['/Player', {id: character?.player?.id}]")> {{character?.player?.name}}
       .column
-        .ui.center.aligned.grid
+        .ui.bottom.aligned.center.aligned.grid
           .eight.wide.mobile.four.wide.tablet.four.wide.computer.column
             %a.ui.tiny.statistic
               .label Fate Points
