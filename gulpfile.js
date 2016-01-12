@@ -19,7 +19,7 @@ gulp.task('server', ['semantic:watch', 'webpack-dev-server']);
 gulp.task('semantic:build', semantic.build);
 gulp.task('semantic:watch', semantic.watch);
 
-gulp.task('webpack:build', ['semantic:build'], function (callback) {
+gulp.task('webpack:build', function (callback) {
   var buildConfig = Object.create(webpackConfig);
 
   buildConfig.plugins = buildConfig.plugins.concat([

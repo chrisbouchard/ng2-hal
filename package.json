@@ -6,6 +6,7 @@
   "scripts": {
     "build-dev": "NODE_ENV=development gulp build",
     "build-prod": "NODE_ENV=production gulp build",
+    "build-semantic": "NODE_ENV=production gulp semantic:build",
     "server": "NODE_ENV=development gulp server",
     "start": "NODE_ENV=development gulp server"
   },
