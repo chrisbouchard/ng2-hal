@@ -1,16 +1,19 @@
 import {Observable} from 'rxjs';
-import {Aspect, Character, HIGH_CONCEPT_TAG, Skill, TROUBLE_TAG} from '../model/character';
+import {Aspect, Character, HIGH_CONCEPT_TAG, MENTAL_TAG, PHYSICAL_TAG, Skill, StressTrack, TROUBLE_TAG} from '../model/character';
 import {Player} from '../model/player';
-import {CharacterTemplate, NamedAspectTemplate} from '../model/template';
+import {CharacterTemplate, NamedAspectTemplate, StressTrackTemplate} from '../model/template';
 
 export class CharacterFacade {
 
   private template: CharacterTemplate =
     new CharacterTemplate(
         'StarTrek', [
-          new NamedAspectTemplate('high-concept', 'High Concept'),
-          new NamedAspectTemplate('trouble', 'Trouble'),
+          new NamedAspectTemplate(HIGH_CONCEPT_TAG, 'High Concept'),
+          new NamedAspectTemplate(TROUBLE_TAG, 'Trouble'),
           new NamedAspectTemplate('rank', 'Rank')
+        ], [
+          new StressTrackTemplate(PHYSICAL_TAG, 'Physical', 4),
+          new StressTrackTemplate(MENTAL_TAG, 'Mental', 4),
         ]
         );
 
@@ -36,7 +39,11 @@ export class CharacterFacade {
           new Set([new Skill('Foo')]),
           new Set([new Skill('Bar')]),
           new Set([new Skill('Baz')])
-        ]
+        ],
+        new Map<string, StressTrack>([
+          [PHYSICAL_TAG, [true, true, false, false]],
+          [MENTAL_TAG, [false, false]]
+        ])
         );
 
   private fooBar: Character =
@@ -52,7 +59,11 @@ export class CharacterFacade {
           [TROUBLE_TAG, new Aspect('Troubling Troubles')]
         ]),
         new Set<Aspect>(),
-        []
+        [],
+        new Map<string, StressTrack>([
+          [PHYSICAL_TAG, [true, true, false, false]],
+          [MENTAL_TAG, [false, false]]
+        ])
         );
 
   private fixedCharacters: Array<Character> = [ this.amaryllis ];

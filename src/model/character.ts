@@ -9,8 +9,13 @@ export class Skill {
   constructor(public name: string) {}
 }
 
+export type StressTrack = Array<boolean>;
+
 export const HIGH_CONCEPT_TAG = 'high-concept';
 export const TROUBLE_TAG = 'trouble';
+
+export const PHYSICAL_TAG = 'physical';
+export const MENTAL_TAG = 'mental';
 
 export class Character {
   constructor(
@@ -22,7 +27,8 @@ export class Character {
     public color: string,
     public namedAspects: Map<string, Aspect>,
     public unnamedAspects: Set<Aspect>,
-    public skills: Array<Set<Skill>>
+    public skills: Array<Set<Skill>>,
+    public stressTracks: Map<string, StressTrack>
   ) {}
 
   public get aspects(): Set<Aspect> {

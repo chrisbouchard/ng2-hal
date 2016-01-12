@@ -1,4 +1,4 @@
-.ui.very.padded.piled.segment([ngClass]="{loading: !character}")
+.ui.padded.piled.segment([ngClass]="{loading: !character}")
   %div(*ngIf="character")
     .ui.stackable.two.column.grid
       .sixteen.wide.column
@@ -9,29 +9,30 @@
           %i.right.angle.icon.divider/
       .column
         %h1.ui.header
-          %a.ui.rounded.bordered.image
-            %img([src]="character?.portrait")/
-          .content
-            {{character?.name}}
-            .sub.header
-              Played by
-              %a([routerLink]="['/Player', {id: character?.player?.id}]")> {{character?.player?.name}}
+          {{character?.name}}
+          .sub.header
+            Played by
+            %a([routerLink]="['/Player', {id: character?.player?.id}]")> {{character?.player?.name}}
       .column
-        .ui.four.tiny.statistics
-          %a.statistic
-            .label Fate Points
-            .value 1
-          %a.statistic
-            .label Refresh
-            .value 2
-          %a.statistic
-            .label Skill Cap
-            .value +5
-          %a.statistic
-            .label Skill Points
-            .value 35
+        .ui.center.aligned.grid
+          .eight.wide.mobile.four.wide.tablet.four.wide.computer.column
+            %a.ui.tiny.statistic
+              .label Fate Points
+              .value 1
+          .eight.wide.mobile.four.wide.tablet.four.wide.computer.column
+            %a.ui.tiny.statistic
+              .label Refresh
+              .value 2
+          .eight.wide.mobile.four.wide.tablet.four.wide.computer.column
+            %a.ui.tiny.statistic
+              .label Skill Cap
+              .value +5
+          .eight.wide.mobile.four.wide.tablet.four.wide.computer.column
+            %a.ui.tiny.statistic
+              .label Skill Points
+              .value 35
 
-    .ui.divider/
+    .ui.section.divider/
 
     .ui.stackable.two.column.grid
       .column
@@ -45,54 +46,23 @@
             %a.fate-aspect {{aspect.name}}
       .column
         %h2.ui.header Skills
-        %table.ui.very.basic.compact.table
+        %table.ui.very.basic.compact.unstackable.table
           %tbody
             %tr(*ngFor="#entry of character?.skills | indexed | reversed")
               %td.collapsing
-                %strong +{{entry.index}}
+                .ui.small.header +{{entry.index}}
               %td
                 %a.ui.basic.horizontal.label(*ngFor="#skill of entry.value") {{skill.name}}
       .column
         %h2.ui.header Stress
         .ui.list
-          .item
-            .ui.grey.sub.header Physical
+          .item(*ngFor="#track of character?.template?.stressTracks")
+            .ui.grey.sub.header {{track.name}}
             .ui.horizontal.list
-              .item
+              .item(*ngFor="#box of track.cap | range")
                 .ui.checkbox
-                  %input#physical-1(type="checkbox" checked=true)
-                  %label(for="physical-1") 1
-              .item
-                .ui.checkbox
-                  %input#physical-2(type="checkbox" checked=true)
-                  %label(for="physical-2") 2
-              .item
-                .ui.checkbox
-                  %input#physical-3(type="checkbox")
-                  %label(for="physical-3") 3
-              .item
-                .ui.checkbox
-                  %input#physical-4(type="checkbox")
-                  %label(for="physical-4") 4
-          .item
-            .ui.grey.sub.header Mental
-            .ui.horizontal.list
-              .item
-                .ui.checkbox
-                  %input#mental-1(type="checkbox")
-                  %label(for="mental-1") 1
-              .item
-                .ui.checkbox
-                  %input#mental-2(type="checkbox")
-                  %label(for="mental-2") 2
-              .item
-                .ui.checkbox
-                  %input#mental-3(type="checkbox" disabled=true)
-                  %label(for="mental-3") 3
-              .item
-                .ui.checkbox
-                  %input#mental-4(type="checkbox" disabled=true)
-                  %label(for="mental-4") 4
+                  %input(type="checkbox" [id]="track.field + box" [(ngModel)]="stressBoxes(track.field)[box]" [disabled]="stressBoxes(track.field)[box] == undefined")
+                  %label([htmlFor]="track.field + box") {{box + 1}}
         %h2.ui.header Consequences
       .column
         %h2.ui.header Stunts
