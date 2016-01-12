@@ -19,14 +19,16 @@ declare var $: any;
 /* Declare the constant defined by webpack. */
 declare const __PRODUCTION__: boolean;
 
-/* Expose it to the window so we can see it for debugging. */
-window['$'] = $;
+if (__PRODUCTION__) {
+  /* Switch Angular to production mode. */
+  enableProdMode();
+}
+else {
+  /* Expose it to the window so we can see it for debugging. */
+  window['$'] = $;
+}
 
 $(() => {
-  if (__PRODUCTION__) {
-    enableProdMode();
-  }
-
   bootstrap(App, [
     CharacterFacade,
     ROUTER_PROVIDERS,
