@@ -11,11 +11,15 @@ export class Skill {
 
 export type StressTrack = Array<boolean>;
 
-export const HIGH_CONCEPT_TAG = 'high-concept';
-export const TROUBLE_TAG = 'trouble';
+export const COMMON_ASPECTS = {
+  HIGH_CONCEPT: 'high-concept',
+  TROUBLE: 'trouble'
+};
 
-export const PHYSICAL_TAG = 'physical';
-export const MENTAL_TAG = 'mental';
+export const COMMON_STRESS_TRACKS = {
+  PHYSICAL: 'physical',
+  MENTAL: 'mental'
+}
 
 export class Character {
   constructor(
@@ -41,11 +45,11 @@ export class Character {
   }
 
   public get highConcept(): Aspect {
-    return this.namedAspects.get(HIGH_CONCEPT_TAG);
+    return this.namedAspects.get(COMMON_ASPECTS.HIGH_CONCEPT);
   }
 
   public get trouble(): Aspect {
-    return this.namedAspects.get(TROUBLE_TAG);
+    return this.namedAspects.get(COMMON_ASPECTS.TROUBLE);
   }
 }
 

@@ -1,5 +1,5 @@
 import {Observable} from 'rxjs';
-import {Aspect, Character, HIGH_CONCEPT_TAG, MENTAL_TAG, PHYSICAL_TAG, Skill, StressTrack, TROUBLE_TAG} from '../model/character';
+import {Aspect, Character, COMMON_ASPECTS, COMMON_STRESS_TRACKS, Skill, StressTrack} from '../model/character';
 import {Player} from '../model/player';
 import {CharacterTemplate, NamedAspectTemplate, StressTrackTemplate} from '../model/template';
 
@@ -8,12 +8,12 @@ export class CharacterFacade {
   private template: CharacterTemplate =
     new CharacterTemplate(
         'StarTrek', [
-          new NamedAspectTemplate(HIGH_CONCEPT_TAG, 'High Concept'),
-          new NamedAspectTemplate(TROUBLE_TAG, 'Trouble'),
+          new NamedAspectTemplate(COMMON_ASPECTS.HIGH_CONCEPT, 'High Concept'),
+          new NamedAspectTemplate(COMMON_ASPECTS.TROUBLE, 'Trouble'),
           new NamedAspectTemplate('rank', 'Rank')
         ], [
-          new StressTrackTemplate(PHYSICAL_TAG, 'Physical', 4),
-          new StressTrackTemplate(MENTAL_TAG, 'Mental', 4),
+          new StressTrackTemplate(COMMON_STRESS_TRACKS.PHYSICAL, 'Physical', 4),
+          new StressTrackTemplate(COMMON_STRESS_TRACKS.MENTAL, 'Mental', 4),
         ]
         );
 
@@ -26,8 +26,8 @@ export class CharacterFacade {
         'img/placeholder.svg',
         'purple',
         new Map<string, Aspect>([
-          [HIGH_CONCEPT_TAG, new Aspect('Graying Starfleet Devil')],
-          [TROUBLE_TAG, new Aspect('Number One')],
+          [COMMON_ASPECTS.HIGH_CONCEPT, new Aspect('Graying Starfleet Devil')],
+          [COMMON_ASPECTS.TROUBLE, new Aspect('Number One')],
           ['rank', new Aspect('Captain')]
         ]),
         new Set([
@@ -41,8 +41,8 @@ export class CharacterFacade {
           new Set([new Skill('Baz')])
         ],
         new Map<string, StressTrack>([
-          [PHYSICAL_TAG, [true, true, false, false]],
-          [MENTAL_TAG, [false, false]]
+          [COMMON_STRESS_TRACKS.PHYSICAL, [true, true, false, false]],
+          [COMMON_STRESS_TRACKS.MENTAL, [false, false]]
         ])
         );
 
@@ -55,14 +55,14 @@ export class CharacterFacade {
         'img/placeholder.svg',
         'blue',
         new Map<string, Aspect>([
-          [HIGH_CONCEPT_TAG, new Aspect('Lorem Ipsum Dolor Sit Amen')],
-          [TROUBLE_TAG, new Aspect('Troubling Troubles')]
+          [COMMON_ASPECTS.HIGH_CONCEPT, new Aspect('Lorem Ipsum Dolor Sit Amen')],
+          [COMMON_ASPECTS.TROUBLE, new Aspect('Troubling Troubles')]
         ]),
         new Set<Aspect>(),
         [],
         new Map<string, StressTrack>([
-          [PHYSICAL_TAG, [true, true, false, false]],
-          [MENTAL_TAG, [false, false]]
+          [COMMON_STRESS_TRACKS.PHYSICAL, [true, true, false, false]],
+          [COMMON_STRESS_TRACKS.MENTAL, [false, false]]
         ])
         );
 
