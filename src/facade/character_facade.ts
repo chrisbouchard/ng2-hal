@@ -23,7 +23,7 @@ export class CharacterFacade {
         this.template,
         'Amaryllis Aster Jennings',
         new Player('mbouchard', 'Mary Bouchard'),
-        'img/placeholder.svg',
+        require('../assets/placeholder.svg'),
         'purple',
         new Map<string, Aspect>([
           [COMMON_ASPECTS.HIGH_CONCEPT, new Aspect('Graying Starfleet Devil')],
@@ -55,7 +55,7 @@ export class CharacterFacade {
         this.template,
         'Foo Bar',
         new Player('jdoe', 'John Doe'),
-        'img/placeholder.svg',
+        require('../assets/placeholder.svg'),
         'blue',
         new Map<string, Aspect>([
           [COMMON_ASPECTS.HIGH_CONCEPT, new Aspect('Lorem Ipsum Dolor Sit Amen')],

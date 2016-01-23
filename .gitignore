@@ -1,6 +1,5 @@
-content/dist/
-node_modules/
-npm-debug.log
-semantic/dist/
-typings/
-
+/dist
+/node_modules/
+/npm-debug.log
+/semantic/dist/
+/typings/

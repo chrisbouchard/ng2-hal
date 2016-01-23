@@ -7,6 +7,7 @@ var OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin;
 var ProvidePlugin = webpack.ProvidePlugin;
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   cache: true,
@@ -31,9 +32,9 @@ module.exports = {
   },
 
   output: {
-    path: path.join(__dirname, 'content/dist'),
-    publicPath: '/dist',
     filename: '[name].js',
+    path: path.join(__dirname, 'dist'),
+    publicPath: '',
     sourceMapFilename: '[name].js.map'
   },
 
@@ -95,9 +96,14 @@ module.exports = {
   plugins: [
     new CommonsChunkPlugin('vendor', 'vendor.js'),
     new DefinePlugin({
-        __PRODUCTION__: JSON.stringify(process.env.NODE_ENV === 'production')
+      __PRODUCTION__: JSON.stringify(process.env.NODE_ENV === 'production')
     }),
     new ExtractTextPlugin('vendor.css'),
+    new HtmlWebpackPlugin({
+      inject: 'head',
+      template: './src/assets/index.html.haml',
+      title: 'Fate Character Sheet'
+    }),
     new OccurenceOrderPlugin(),
     new ProvidePlugin({ 'jQuery': 'jquery', '$': 'jquery' })
   ]

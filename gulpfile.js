@@ -29,10 +29,14 @@ gulp.task('webpack:build', function (callback) {
   ]);
 
   webpack(buildConfig, function (err, stats) {
-    if (err) throw new gulpUtil.PluginError('webpack', err);
+    if (err) {
+      throw new gulpUtil.PluginError('webpack', err);
+    }
+
     gulpUtil.log('[webpack]', stats.toString({
       colors: true
     }));
+
     callback();
   });
 });
@@ -45,11 +49,18 @@ gulp.task('webpack-dev-server', function (callback) {
   var compiler = webpack(serverConfig);
 
   var server = new WebpackDevServer(compiler, {
-    stats: { colors: true },
-    contentBase: 'content',
-    publicPath: serverConfig.output.publicPath
-  }).listen(8080, 'localhost', function (err) {
-    if (err) throw new gulpUtil.PluginError('webpack-dev-server', err);
+    contentBase: 'dist',
+    publicPath: serverConfig.output.publicPath,
+    stats: {
+      colors: true
+    }
+  });
+
+  server.listen(8080, 'localhost', function (err) {
+    if (err) {
+      throw new gulpUtil.PluginError('webpack-dev-server', err);
+    }
+
     gulpUtil.log('[webpack-dev-server]', 'http://localhost:8080/');
   });
 });
