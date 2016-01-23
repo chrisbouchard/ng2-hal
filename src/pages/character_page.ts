@@ -8,9 +8,7 @@ import {Character} from '../model/character';
 import {Sheet} from '../ui/sheet';
 
 @Component({
-  selector: 'fate-character-page'
-})
-@View({
+  selector: 'fate-character-page',
   directives: [Sheet],
   pipes: [AsyncPipe],
   template: require('./character_page.html.haml')

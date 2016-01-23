@@ -4,9 +4,7 @@ import {Character} from '../model/character';
 import {Card} from './card';
 
 @Component({
-  selector: 'fate-list'
-})
-@View({
+  selector: 'fate-list',
   directives: [Card],
   template: require('./list.html.haml')
 })

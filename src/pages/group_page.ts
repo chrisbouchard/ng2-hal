@@ -8,9 +8,7 @@ import {Character} from '../model/character';
 import {List} from '../ui/list';
 
 @Component({
-  selector: 'fate-group-page'
-})
-@View({
+  selector: 'fate-group-page',
   directives: [List],
   pipes: [AsyncPipe],
   template: require('./group_page.html.haml')

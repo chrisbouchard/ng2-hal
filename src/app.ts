@@ -6,9 +6,7 @@ import {GroupPage} from './pages/group_page';
 import {AppFrame} from './ui/app_frame';
 
 @Component({
-  selector: 'fate-app'
-})
-@View({
+  selector: 'fate-app',
   directives: [AppFrame, RouterOutlet],
   template: require('./app.html.haml')
 })

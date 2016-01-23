@@ -4,9 +4,7 @@ import {RouterLink} from 'angular2/router';
 import {Character} from '../model/character';
 
 @Component({
-  selector: 'fate-card'
-})
-@View({
+  selector: 'fate-card',
   directives: [RouterLink],
   template: require('./card.html.haml')
 })

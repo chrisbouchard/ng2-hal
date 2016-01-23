@@ -9,9 +9,7 @@ import {RangePipe} from '../pipes/range_pipe';
 import {ReversedPipe} from '../pipes/reversed_pipe';
 
 @Component({
-  selector: 'fate-sheet'
-})
-@View({
+  selector: 'fate-sheet',
   directives: [RouterLink],
   pipes: [EntriesPipe, IndexedPipe, RangePipe, ReversedPipe],
   styles: [require('./sheet.less')],
