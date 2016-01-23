@@ -45,7 +45,9 @@ export class CharacterFacade {
           [COMMON_STRESS_TRACKS.MENTAL, [false, false]]
         ]),
         new Set([
-          new Stunt('Test Stunt', 'A stunt that tests stuff. Lorem ipsum blah blah blah. Lots of text.')
+          new Stunt('Test Stunt', 'A stunt that tests stuff. Lorem ipsum blah blah blah. Lots of text.'),
+          new Stunt('A B C', 'Foo bar.'),
+          new Stunt('X Y Z', 'Foo bar.')
         ])
         );
 

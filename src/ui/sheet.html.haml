@@ -66,4 +66,8 @@
         %h2.ui.header Consequences
       .column
         %h2.ui.header Stunts
+        .ui.relaxed.list
+          .item(*ngFor="#stunt of character?.stunts | sorted:'name'")
+            .header {{stunt.name}}
+            .description {{stunt.description}}
 
