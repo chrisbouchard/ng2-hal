@@ -1,5 +1,5 @@
 import {Observable} from 'rxjs';
-import {Aspect, Character, COMMON_ASPECTS, COMMON_STRESS_TRACKS, Skill, StressTrack} from '../model/character';
+import {Aspect, Character, COMMON_ASPECTS, COMMON_STRESS_TRACKS, Skill, StressTrack, Stunt} from '../model/character';
 import {Player} from '../model/player';
 import {CharacterTemplate, NamedAspectTemplate, StressTrackTemplate} from '../model/template';
 
@@ -43,6 +43,9 @@ export class CharacterFacade {
         new Map<string, StressTrack>([
           [COMMON_STRESS_TRACKS.PHYSICAL, [true, true, false, false]],
           [COMMON_STRESS_TRACKS.MENTAL, [false, false]]
+        ]),
+        new Set([
+          new Stunt('Test Stunt', 'A stunt that tests stuff. Lorem ipsum blah blah blah. Lots of text.')
         ])
         );
 
@@ -63,7 +66,8 @@ export class CharacterFacade {
         new Map<string, StressTrack>([
           [COMMON_STRESS_TRACKS.PHYSICAL, [true, true, false, false]],
           [COMMON_STRESS_TRACKS.MENTAL, [false, false]]
-        ])
+        ]),
+        new Set<Stunt>()
         );
 
   private fixedCharacters: Array<Character> = [ this.amaryllis ];

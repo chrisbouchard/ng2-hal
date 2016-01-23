@@ -11,6 +11,10 @@ export class Skill {
 
 export type StressTrack = Array<boolean>;
 
+export class Stunt {
+  constructor(public name: string, public description: string) {};
+}
+
 export const COMMON_ASPECTS = {
   HIGH_CONCEPT: 'high-concept',
   TROUBLE: 'trouble'
@@ -32,7 +36,8 @@ export class Character {
     public namedAspects: Map<string, Aspect>,
     public unnamedAspects: Set<Aspect>,
     public skills: Array<Set<Skill>>,
-    public stressTracks: Map<string, StressTrack>
+    public stressTracks: Map<string, StressTrack>,
+    public stunts: Set<Stunt>
   ) {}
 
   public get aspects(): Set<Aspect> {
