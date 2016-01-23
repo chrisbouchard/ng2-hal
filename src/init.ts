@@ -2,8 +2,8 @@ import {bootstrap} from 'angular2/platform/browser';
 import {enableProdMode, provide} from 'angular2/core';
 import {HashLocationStrategy, LocationStrategy, ROUTER_PROVIDERS} from 'angular2/router';
 
-import {CharacterFacade} from './facade/character_facade';
-import {App} from './app';
+import {CharacterFacade} from './common/character_facade';
+import {App} from './app/app';
 
 /* Load CSS stylesheets. */
 import 'semantic/semantic.css';

@@ -1,5 +1,5 @@
-import {Player} from './player.ts';
-import {CharacterTemplate} from './template.ts';
+import {Player} from './player';
+import {CharacterTemplate} from './template';
 
 export class Aspect {
   constructor(public name: string) {}

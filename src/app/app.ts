@@ -1,9 +1,9 @@
 import {Component, View} from 'angular2/core';
 import {RouteConfig, RouterOutlet} from 'angular2/router';
 
-import {CharacterPage} from './pages/character_page';
-import {GroupPage} from './pages/group_page';
-import {AppFrame} from './ui/app_frame';
+import {CharacterPage} from '../pages/character_page';
+import {GroupPage} from '../pages/group_page';
+import {AppFrame} from './app_frame';
 
 @Component({
   selector: 'fate-app',

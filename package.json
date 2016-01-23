@@ -26,9 +26,9 @@
     "zone.js": "0.5.10"
   },
   "devDependencies": {
-    "babel-core": "6.4.0",
+    "babel-core": "6.4.5",
     "babel-loader": "6.2.1",
-    "babel-plugin-transform-runtime": "6.4.0",
+    "babel-plugin-transform-runtime": "6.4.3",
     "babel-preset-es2015": "6.3.13",
     "css-loader": "0.23.1",
     "extract-text-webpack-plugin": "1.0.1",
@@ -41,11 +41,11 @@
     "less-loader": "2.2.2",
     "raw-loader": "0.5.1",
     "style-loader": "0.13.0",
-    "ts-loader": "0.7.2",
+    "ts-loader": "0.8.0",
     "typescript": "1.8.0-dev.20160103",
     "url-loader": "0.5.7",
     "webpack": "1.12.11",
-    "webpack-dev-server": "1.14.0",
+    "webpack-dev-server": "1.14.1",
     "webpack-sources": "0.1.0"
   }
 }

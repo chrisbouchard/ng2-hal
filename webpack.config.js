@@ -101,8 +101,7 @@ module.exports = {
     new ExtractTextPlugin('vendor.css'),
     new HtmlWebpackPlugin({
       inject: 'head',
-      template: './src/assets/index.html.haml',
-      title: 'Fate Character Sheet'
+      template: './src/index.html.haml'
     }),
     new OccurenceOrderPlugin(),
     new ProvidePlugin({ 'jQuery': 'jquery', '$': 'jquery' })

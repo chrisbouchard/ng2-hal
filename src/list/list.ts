@@ -1,7 +1,7 @@
 import {Component, Input, View} from 'angular2/core';
 
-import {Character} from '../model/character';
-import {Card} from './card';
+import {Character} from '../common/model';
+import {Card} from '../card/card';
 
 @Component({
   selector: 'fate-list',

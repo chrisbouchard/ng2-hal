@@ -3,9 +3,9 @@ import {Component, View} from 'angular2/core';
 import {RouteParams} from 'angular2/router';
 import {Observable} from 'rxjs';
 
-import {CharacterFacade} from '../facade/character_facade';
-import {Character} from '../model/character';
-import {Sheet} from '../ui/sheet';
+import {CharacterFacade} from '../common/character_facade';
+import {Character} from '../common/model';
+import {Sheet} from '../sheet/sheet';
 
 @Component({
   selector: 'fate-character-page',

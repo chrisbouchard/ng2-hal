@@ -1,7 +1,6 @@
 import {Observable} from 'rxjs';
-import {Aspect, Character, COMMON_ASPECTS, COMMON_STRESS_TRACKS, Skill, StressTrack, Stunt} from '../model/character';
-import {Player} from '../model/player';
-import {CharacterTemplate, NamedAspectTemplate, StressTrackTemplate} from '../model/template';
+import {Aspect, Character, CharacterTemplate, COMMON_ASPECTS, COMMON_STRESS_TRACKS, NamedAspectTemplate, Player, Skill,
+    StressTrack, StressTrackTemplate, Stunt} from './model';
 
 export class CharacterFacade {
 
