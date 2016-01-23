@@ -85,7 +85,7 @@ module.exports = {
       },
       {
         test: /\.(eot|png|svg|ttf|woff|woff2)$/,
-        loader: 'url?limit=5000&name=/assets/[hash].[ext]'
+        loader: 'url?limit=5000&name=assets/[name]-[hash].[ext]'
       }
     ],
     noParse: [

@@ -19,6 +19,14 @@ gulp.task('server', ['semantic:watch', 'webpack-dev-server']);
 gulp.task('semantic:build', semantic.build);
 gulp.task('semantic:watch', semantic.watch);
 
+var statsConfig = {
+  colors: true,
+  hash: false,
+  version: false,
+  chunks: false,
+  children: false
+};
+
 gulp.task('webpack:build', function (callback) {
   var buildConfig = Object.create(webpackConfig);
 
@@ -33,10 +41,7 @@ gulp.task('webpack:build', function (callback) {
       throw new gulpUtil.PluginError('webpack', err);
     }
 
-    gulpUtil.log('[webpack]', stats.toString({
-      colors: true
-    }));
-
+    gulpUtil.log('[webpack]', stats.toString(statsConfig));
     callback();
   });
 });
@@ -51,9 +56,7 @@ gulp.task('webpack-dev-server', function (callback) {
   var server = new WebpackDevServer(compiler, {
     contentBase: 'dist',
     publicPath: serverConfig.output.publicPath,
-    stats: {
-      colors: true
-    }
+    stats: statsConfig
   });
 
   server.listen(8080, 'localhost', function (err) {
