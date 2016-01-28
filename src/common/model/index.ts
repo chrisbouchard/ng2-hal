@@ -7,5 +7,5 @@ export * from './stunt';
 export * from './template';
 
 /* Babel can't handle a file with only imports/exports. */
-var makeBabelHappy;
+var makeBabelHappy: any;
 

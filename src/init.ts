@@ -21,7 +21,7 @@ if (__PRODUCTION__) {
   enableProdMode();
 }
 else {
-  window['jQuery'] = jQuery;
+  (window as any).jQuery = jQuery;
 }
 
 jQuery(() => {
