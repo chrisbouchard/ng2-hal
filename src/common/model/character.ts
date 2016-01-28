@@ -1,29 +1,9 @@
+import {Aspect, COMMON_ASPECTS} from './aspect';
 import {Player} from './player';
+import {Skill} from './skill';
+import {COMMON_STRESS_TRACKS, StressTrack} from './stress_track';
+import {Stunt} from './stunt';
 import {CharacterTemplate} from './template';
-
-export class Aspect {
-  constructor(public name: string) {}
-}
-
-export class Skill {
-  constructor(public name: string) {}
-}
-
-export type StressTrack = Array<boolean>;
-
-export class Stunt {
-  constructor(public name: string, public description: string) {};
-}
-
-export const COMMON_ASPECTS = {
-  HIGH_CONCEPT: 'high-concept',
-  TROUBLE: 'trouble'
-};
-
-export const COMMON_STRESS_TRACKS = {
-  PHYSICAL: 'physical',
-  MENTAL: 'mental'
-}
 
 export class Character {
   constructor(
