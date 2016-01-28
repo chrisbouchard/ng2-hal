@@ -9,9 +9,10 @@ import {App} from './app/app';
 import 'semantic/semantic.css';
 
 /* Load packages for side-effects. */
-import 'jquery';
-import 'semantic/semantic';
 import 'angular2/bundles/angular2-polyfills';
+import 'jquery';
+import 'rxjs/Rx';
+import 'semantic/semantic';
 
 /* Hook into jQuery, which is injected by webpack. */
 declare var $: any;
