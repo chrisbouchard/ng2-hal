@@ -1,4 +1,6 @@
-export class Stunt {
-  constructor(public name: string, public description: string) {};
+export interface Stunt {
+  id: string;
+  name: string;
+  description: string;
 }
 

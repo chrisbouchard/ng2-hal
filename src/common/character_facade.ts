@@ -1,75 +1,87 @@
 import {Observable} from 'rxjs';
-import {Aspect, Character, CharacterTemplate, COMMON_ASPECTS, COMMON_STRESS_TRACKS, NamedAspectTemplate, Player, Skill,
-    StressTrack, StressTrackTemplate, Stunt} from './model';
+import {Aspect, Character, COMMON_ASPECTS, COMMON_STRESS_TRACKS, Player, Skill, StressTrack, Stunt, Template} from './model';
 
 export class CharacterFacade {
 
-  private template: CharacterTemplate =
-    new CharacterTemplate(
-        'StarTrek', [
-          new NamedAspectTemplate(COMMON_ASPECTS.HIGH_CONCEPT, 'High Concept'),
-          new NamedAspectTemplate(COMMON_ASPECTS.TROUBLE, 'Trouble'),
-          new NamedAspectTemplate('rank', 'Rank')
-        ], [
-          new StressTrackTemplate(COMMON_STRESS_TRACKS.PHYSICAL, 'Physical', 4),
-          new StressTrackTemplate(COMMON_STRESS_TRACKS.MENTAL, 'Mental', 4),
-        ]
-        );
+  private mbouchard: Player = new Player({
+    id: 'mbouchard',
+    name: 'Mary Bouchard'
+  });
 
-  private amaryllis: Character =
-    new Character(
-        '1',
-        this.template,
-        'Amaryllis Aster Jennings',
-        new Player('mbouchard', 'Mary Bouchard'),
-        require('../assets/placeholder.svg'),
-        'purple',
-        new Map<string, Aspect>([
-          [COMMON_ASPECTS.HIGH_CONCEPT, new Aspect('Graying Starfleet Devil')],
-          [COMMON_ASPECTS.TROUBLE, new Aspect('Number One')],
-          ['rank', new Aspect('Captain')]
-        ]),
-        new Set([
-          new Aspect('To Boldly Go'),
-          new Aspect('Warp Core on Legs'),
-          new Aspect('Glint in the Eye')
-        ]),
-        [
-          new Set([new Skill('Foo')]),
-          new Set([new Skill('Bar')]),
-          new Set([new Skill('Baz')])
-        ],
-        new Map<string, StressTrack>([
-          [COMMON_STRESS_TRACKS.PHYSICAL, [true, true, false, false]],
-          [COMMON_STRESS_TRACKS.MENTAL, [false, false]]
-        ]),
-        new Set([
-          new Stunt('Test Stunt', 'A stunt that tests stuff. Lorem ipsum blah blah blah. Lots of text.'),
-          new Stunt('A B C', 'Foo bar.'),
-          new Stunt('X Y Z', 'Foo bar.')
-        ])
-        );
+  private jdoe: Player = new Player({
+    id: 'jdoe',
+    name: 'John Doe'
+  });
 
-  private fooBar: Character =
-    new Character(
-        '2',
-        this.template,
-        'Foo Bar',
-        new Player('jdoe', 'John Doe'),
-        require('../assets/placeholder.svg'),
-        'blue',
-        new Map<string, Aspect>([
-          [COMMON_ASPECTS.HIGH_CONCEPT, new Aspect('Lorem Ipsum Dolor Sit Amen')],
-          [COMMON_ASPECTS.TROUBLE, new Aspect('Troubling Troubles')]
-        ]),
-        new Set<Aspect>(),
-        [],
-        new Map<string, StressTrack>([
-          [COMMON_STRESS_TRACKS.PHYSICAL, [true, true, false, false]],
-          [COMMON_STRESS_TRACKS.MENTAL, [false, false]]
-        ]),
-        new Set<Stunt>()
-        );
+  private template: Template = new Template({
+    id: 'StarTrek',
+    namedAspectTemplates: [
+      { field: COMMON_ASPECTS.HIGH_CONCEPT, name: 'High Concept' },
+      { field: COMMON_ASPECTS.TROUBLE, name: 'Trouble' },
+      { field: 'rank', name: 'Rank' }
+    ],
+    stressTracks: [
+      { field: COMMON_STRESS_TRACKS.PHYSICAL, name: 'Physical', cap: 4 },
+      { field: COMMON_STRESS_TRACKS.MENTAL, name: 'Mental', cap: 4 }
+    ]
+  });
+
+  private amaryllis: Character = new Character({
+    id: '1',
+    template: this.template,
+    name: 'Amaryllis Aster Jennings',
+    player: this.mbouchard,
+    portrait: require('../assets/placeholder.svg'),
+    color: 'purple',
+    namedAspects: new Map<string, Aspect>([
+      [COMMON_ASPECTS.HIGH_CONCEPT, new Aspect('Graying Starfleet Devil')],
+      [COMMON_ASPECTS.TROUBLE, new Aspect('Number One')],
+      ['rank', new Aspect('Captain')]
+    ]),
+    unnamedAspects: new Set([
+      new Aspect('To Boldly Go'),
+      new Aspect('Warp Core on Legs'),
+      new Aspect('Glint in the Eye')
+    ]),
+    skills: [
+      new Set([new Skill('Foo')]),
+      new Set([new Skill('Bar')]),
+      new Set([new Skill('Baz')])
+    ],
+    stressTracks: new Map<string, StressTrack>([
+      [COMMON_STRESS_TRACKS.PHYSICAL, [true, true, false, false]],
+      [COMMON_STRESS_TRACKS.MENTAL, [false, false]]
+    ]),
+    stunts: new Set([
+      {
+        id: '1',
+        name: 'Test Stunt',
+        description: 'A stunt that tests stuff. Lorem ipsum blah blah blah. Lots of text.'
+      },
+      { id: '2', name: 'A B C', description: 'Foo bar.' },
+      { id: '3', name: 'X Y Z', description: 'Foo bar.' }
+    ])
+  });
+
+  private fooBar: Character = new Character({
+    id: '2',
+    template: this.template,
+    name: 'Foo Bar',
+    player: this.jdoe,
+    portrait: require('../assets/placeholder.svg'),
+    color: 'blue',
+    namedAspects: new Map<string, Aspect>([
+      [COMMON_ASPECTS.HIGH_CONCEPT, new Aspect('Lorem Ipsum Dolor Sit Amen')],
+      [COMMON_ASPECTS.TROUBLE, new Aspect('Troubling Troubles')]
+    ]),
+    unnamedAspects: new Set<Aspect>(),
+    skills: [],
+    stressTracks: new Map<string, StressTrack>([
+      [COMMON_STRESS_TRACKS.PHYSICAL, [true, true, false, false]],
+      [COMMON_STRESS_TRACKS.MENTAL, [false, false]]
+    ]),
+    stunts: new Set<Stunt>()
+  });
 
   private fixedCharacters: Array<Character> = [ this.amaryllis ];
 

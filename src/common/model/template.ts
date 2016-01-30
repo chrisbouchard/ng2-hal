@@ -1,24 +1,30 @@
-export class NamedAspectTemplate {
-  constructor(
-    public field: string,
-    public name: string
-  ) {}
+export interface NamedAspectTemplate {
+  field: string;
+  name: string;
 }
 
-export class StressTrackTemplate {
-  constructor(
-    public field: string,
-    public name: string,
-    public cap: number
-  ) {}
+export interface StressTrackTemplate {
+  field: string;
+  name: string;
+  cap: number;
 }
 
-export class CharacterTemplate {
-  constructor(
-    public id: string,
-    public namedAspectTemplates: Array<NamedAspectTemplate>,
-    public stressTracks: Array<StressTrackTemplate>
-  ) {}
+module Template {
+  export interface Options {
+    id: string;
+    namedAspectTemplates: Array<NamedAspectTemplate>;
+    stressTracks: Array<StressTrackTemplate>;
+  }
+}
+
+export class Template implements Template.Options {
+  id: string;
+  namedAspectTemplates: Array<NamedAspectTemplate>;
+  stressTracks: Array<StressTrackTemplate>;
+
+  constructor(options: Template.Options) {
+    Object.assign(this, options);
+  }
 }
 
 

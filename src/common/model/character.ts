@@ -3,22 +3,40 @@ import {Player} from './player';
 import {Skill} from './skill';
 import {COMMON_STRESS_TRACKS, StressTrack} from './stress_track';
 import {Stunt} from './stunt';
-import {CharacterTemplate} from './template';
+import {Template} from './template';
 
-export class Character {
-  constructor(
-    public id: string,
-    public template: CharacterTemplate,
-    public name: string,
-    public player: Player,
-    public portrait: string,
-    public color: string,
-    public namedAspects: Map<string, Aspect>,
-    public unnamedAspects: Set<Aspect>,
-    public skills: Array<Set<Skill>>,
-    public stressTracks: Map<string, StressTrack>,
-    public stunts: Set<Stunt>
-  ) {}
+module Character {
+  export interface Options {
+    id: string;
+    color: string;
+    name: string;
+    namedAspects: Map<string, Aspect>;
+    player: Player;
+    portrait: string;
+    skills: Array<Set<Skill>>;
+    stressTracks: Map<string, StressTrack>;
+    stunts: Set<Stunt>;
+    template: Template;
+    unnamedAspects: Set<Aspect>;
+  }
+}
+
+export class Character implements Character.Options {
+  id: string;
+  color: string;
+  name: string;
+  namedAspects: Map<string, Aspect>;
+  player: Player;
+  portrait: string;
+  skills: Array<Set<Skill>>;
+  stressTracks: Map<string, StressTrack>;
+  stunts: Set<Stunt>;
+  template: Template;
+  unnamedAspects: Set<Aspect>;
+
+  constructor(options: Character.Options) {
+    Object.assign(this, options);
+  }
 
   public get aspects(): Set<Aspect> {
     const aspects = new Set<Aspect>();
