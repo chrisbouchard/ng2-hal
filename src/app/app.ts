@@ -1,14 +1,14 @@
 import {Component, View} from 'angular2/core';
-import {RouteConfig, RouterOutlet} from 'angular2/router';
+import {RouteConfig, RouterLink, RouterOutlet} from 'angular2/router';
 
 import {CharacterPage} from '../character/character_page';
 import {GroupPage} from '../group/group_page';
-import {AppFrame} from './app_frame';
 
 @Component({
-  selector: 'fate-app',
-  directives: [AppFrame, RouterOutlet],
-  template: require('./app.html.haml')
+  selector: 'body',
+  directives: [RouterLink, RouterOutlet],
+  styles: [require('./app.less')],
+  template: require('./app.html.haml'),
 })
 @RouteConfig([
   { path: '/', component: GroupPage, name: 'Home' },

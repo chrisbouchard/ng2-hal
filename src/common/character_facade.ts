@@ -49,8 +49,16 @@ export class CharacterFacade {
       new Set([new Skill('Baz')])
     ],
     stressTracks: new Map<string, StressTrack>([
-      [COMMON_STRESS_TRACKS.PHYSICAL, [true, true, false, false]],
-      [COMMON_STRESS_TRACKS.MENTAL, [false, false]]
+      [COMMON_STRESS_TRACKS.PHYSICAL, [
+        { enabled: true, marked: true },
+        { enabled: true, marked: true },
+        { enabled: true, marked: false },
+        { enabled: true, marked: false }
+      ]],
+      [COMMON_STRESS_TRACKS.MENTAL, [
+        { enabled: true, marked: false },
+        { enabled: true, marked: false }
+      ]]
     ]),
     stunts: new Set([
       {
@@ -77,8 +85,16 @@ export class CharacterFacade {
     unnamedAspects: new Set<Aspect>(),
     skills: [],
     stressTracks: new Map<string, StressTrack>([
-      [COMMON_STRESS_TRACKS.PHYSICAL, [true, true, false, false]],
-      [COMMON_STRESS_TRACKS.MENTAL, [false, false]]
+      [COMMON_STRESS_TRACKS.PHYSICAL, [
+        { enabled: true, marked: true },
+        { enabled: true, marked: true },
+        { enabled: true, marked: false },
+        { enabled: true, marked: false }
+      ]],
+      [COMMON_STRESS_TRACKS.MENTAL, [
+        { enabled: true, marked: false },
+        { enabled: true, marked: false }
+      ]]
     ]),
     stunts: new Set<Stunt>()
   });

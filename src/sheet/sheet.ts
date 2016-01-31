@@ -1,7 +1,7 @@
 import {Component, Input, View} from 'angular2/core';
 import {RouterLink} from 'angular2/router';
 
-import {Character, StressTrack, Stunt} from '../common/model';
+import {Character, StressBox, Stunt} from '../common/model';
 import {COMMON_PIPES} from '../common/pipes';
 
 @Component({
@@ -14,8 +14,6 @@ import {COMMON_PIPES} from '../common/pipes';
 export class Sheet {
   @Input() character: Character;
 
-  stressBoxes(field: string): StressTrack {
-    if (!this.character) return [];
-    return this.character.stressTracks.get(field) || [];
-  }
+  emptyStressBox: StressBox = { enabled: false, marked: false };
 }
+

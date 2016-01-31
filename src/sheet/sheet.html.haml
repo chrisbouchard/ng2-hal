@@ -1,4 +1,4 @@
-.ui.padded.piled.segment([ngClass]="{loading: !character}")
+.ui.padded.piled.segment
   %div(*ngIf="character")
     .ui.stackable.bottom.aligned.two.column.grid
       .sixteen.wide.column
@@ -59,10 +59,10 @@
           .item(*ngFor="#track of character?.template?.stressTracks")
             .ui.grey.sub.header {{track.name}}
             .ui.horizontal.list
-              .item(*ngFor="#box of track.cap | range")
+              .item(*ngFor="#box of character?.stressTracks.get(track.field) | padded:track.cap:emptyStressBox; #i = index")
                 .ui.checkbox
-                  %input(type="checkbox" [id]="track.field + box" [(ngModel)]="stressBoxes(track.field)[box]" [disabled]="stressBoxes(track.field)[box] == undefined")
-                  %label([htmlFor]="track.field + box") {{box + 1}}
+                  %input(type="checkbox" [id]="track.field + i" [(ngModel)]="box.marked" [disabled]="!box.enabled")
+                  %label([htmlFor]="track.field + i") {{i + 1}}
         %h2.ui.header Consequences
       .column
         %h2.ui.header Stunts

@@ -27,4 +27,3 @@ export class Template implements Template.Options {
   }
 }
 
-

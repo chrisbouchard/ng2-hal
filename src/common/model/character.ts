@@ -8,31 +8,41 @@ import {Template} from './template';
 module Character {
   export interface Options {
     id: string;
-    color: string;
     name: string;
-    namedAspects: Map<string, Aspect>;
+
     player: Player;
-    portrait: string;
-    skills: Array<Set<Skill>>;
-    stressTracks: Map<string, StressTrack>;
-    stunts: Set<Stunt>;
     template: Template;
+
+    color: string;
+    portrait: string;
+
+    namedAspects: Map<string, Aspect>;
     unnamedAspects: Set<Aspect>;
+
+    skills: Array<Set<Skill>>;
+    stunts: Set<Stunt>;
+
+    stressTracks: Map<string, StressTrack>;
   }
 }
 
 export class Character implements Character.Options {
   id: string;
-  color: string;
   name: string;
-  namedAspects: Map<string, Aspect>;
+
   player: Player;
-  portrait: string;
-  skills: Array<Set<Skill>>;
-  stressTracks: Map<string, StressTrack>;
-  stunts: Set<Stunt>;
   template: Template;
+
+  color: string;
+  portrait: string;
+
+  namedAspects: Map<string, Aspect>;
   unnamedAspects: Set<Aspect>;
+
+  skills: Array<Set<Skill>>;
+  stunts: Set<Stunt>;
+
+  stressTracks: Map<string, StressTrack>;
 
   constructor(options: Character.Options) {
     Object.assign(this, options);
