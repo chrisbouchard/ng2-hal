@@ -1,26 +1,34 @@
-export interface NamedAspectTemplate {
+export interface StressTrackSlot {
   field: string;
-  name: string;
-}
-
-export interface StressTrackTemplate {
-  field: string;
-  name: string;
   cap: number;
 }
 
 module Template {
   export interface Options {
     id: string;
-    namedAspectTemplates: Array<NamedAspectTemplate>;
-    stressTracks: Array<StressTrackTemplate>;
+    name: string;
+
+    aspectNames: Map<string, string>;
+    consequenceNames: Map<string, string>;
+    stressTrackNames: Map<string, string>;
+
+    aspectSlots: Array<string>;
+    consequenceSlots: Array<string>;
+    stressTrackSlots: Array<StressTrackSlot>;
   }
 }
 
 export class Template implements Template.Options {
   id: string;
-  namedAspectTemplates: Array<NamedAspectTemplate>;
-  stressTracks: Array<StressTrackTemplate>;
+  name: string;
+
+  aspectNames: Map<string, string>;
+  consequenceNames: Map<string, string>;
+  stressTrackNames: Map<string, string>;
+
+  aspectSlots: Array<string>;
+  consequenceSlots: Array<string>;
+  stressTrackSlots: Array<StressTrackSlot>;
 
   constructor(options: Template.Options) {
     Object.assign(this, options);

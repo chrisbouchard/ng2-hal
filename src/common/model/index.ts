@@ -1,5 +1,6 @@
 export * from './aspect';
 export * from './character';
+export * from './consequence';
 export * from './player';
 export * from './skill';
 export * from './stress_track';

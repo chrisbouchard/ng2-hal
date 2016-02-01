@@ -1,5 +1,6 @@
 import {Observable} from 'rxjs';
-import {Aspect, Character, COMMON_ASPECTS, COMMON_STRESS_TRACKS, Player, Skill, StressTrack, Stunt, Template} from './model';
+import {Aspect, Character, Consequence, COMMON_ASPECTS, COMMON_CONSEQUENCES, COMMON_STRESS_TRACKS, Player, Skill,
+    StressTrack, Stunt, Template} from './model';
 
 export class CharacterFacade {
 
@@ -14,15 +15,38 @@ export class CharacterFacade {
   });
 
   private template: Template = new Template({
-    id: 'StarTrek',
-    namedAspectTemplates: [
-      { field: COMMON_ASPECTS.HIGH_CONCEPT, name: 'High Concept' },
-      { field: COMMON_ASPECTS.TROUBLE, name: 'Trouble' },
-      { field: 'rank', name: 'Rank' }
+    id: '1',
+    name: 'Star Trek',
+    aspectNames: new Map<string, string>([
+      [ COMMON_ASPECTS.HIGH_CONCEPT, 'High Concept' ],
+      [ COMMON_ASPECTS.TROUBLE, 'Trouble' ],
+      [ 'rank', 'Rank' ]
     ],
-    stressTracks: [
-      { field: COMMON_STRESS_TRACKS.PHYSICAL, name: 'Physical', cap: 4 },
-      { field: COMMON_STRESS_TRACKS.MENTAL, name: 'Mental', cap: 4 }
+    consequenceNames: [
+      [ COMMON_CONSEQUENCES.MILD, 'Mild' ],
+      [ COMMON_CONSEQUENCES.MODERATE, 'Moderate' ],
+      [ COMMON_CONSEQUENCES.SEVERE, 'Severe' ],
+      [ COMMON_CONSEQUENCES.EXTREME, 'Extreme' ]
+    ],
+    stressTrackNames: [
+      [ COMMON_STRESS_TRACKS.PHYSICAL, 'Physical' ],
+      [ COMMON_STRESS_TRACKS.MENTAL, 'Mental' ]
+    ],
+
+    aspectSlots: [
+      COMMON_ASPECTS.HIGH_CONCEPT,
+      COMMON_ASPECTS.TROUBLE,
+      'rank'
+    ],
+    consequenceSlots: [
+      COMMON_CONSEQUENCES.MILD,
+      COMMON_CONSEQUENCES.MODERATE,
+      COMMON_CONSEQUENCES.SEVERE,
+      COMMON_CONSEQUENCES.EXTREME
+    ],
+    stressTrackSlots: [
+      { field: COMMON_STRESS_TRACKS.PHYSICAL, cap: 4 },
+      { field: COMMON_STRESS_TRACKS.MENTAL, cap: 4 }
     ]
   });
 
@@ -60,6 +84,14 @@ export class CharacterFacade {
         { enabled: true, marked: false }
       ]]
     ]),
+    consequences: new Map<string, Set<Consequence>>([
+      [COMMON_CONSEQUENCES.MILD, new Set([
+        {}, {type: COMMON_STRESS_TRACKS.PHYSICAL}, {type: COMMON_STRESS_TRACKS.MENTAL}
+      ])],
+      [COMMON_CONSEQUENCES.MODERATE, new Set([ {} ])],
+      [COMMON_CONSEQUENCES.SEVERE, new Set([ {} ])],
+      [COMMON_CONSEQUENCES.EXTREME, new Set([ {} ])],
+    ]),
     stunts: new Set([
       {
         id: '1',
@@ -95,6 +127,12 @@ export class CharacterFacade {
         { enabled: true, marked: false },
         { enabled: true, marked: false }
       ]]
+    ]),
+    consequences: new Map<string, Set<Consequence>>([
+      [COMMON_CONSEQUENCES.MILD, new Set([ {} ])],
+      [COMMON_CONSEQUENCES.MODERATE, new Set([ {} ])],
+      [COMMON_CONSEQUENCES.SEVERE, new Set([ {} ])],
+      [COMMON_CONSEQUENCES.EXTREME, new Set([ {} ])],
     ]),
     stunts: new Set<Stunt>()
   });

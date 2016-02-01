@@ -1,4 +1,5 @@
 import {Aspect, COMMON_ASPECTS} from './aspect';
+import {Consequence} from './consequence';
 import {Player} from './player';
 import {Skill} from './skill';
 import {COMMON_STRESS_TRACKS, StressTrack} from './stress_track';
@@ -23,6 +24,8 @@ module Character {
     stunts: Set<Stunt>;
 
     stressTracks: Map<string, StressTrack>;
+
+    consequences: Map<string, Set<Consequence>>;
   }
 }
 
@@ -43,6 +46,8 @@ export class Character implements Character.Options {
   stunts: Set<Stunt>;
 
   stressTracks: Map<string, StressTrack>;
+
+  consequences: Map<string, Set<Consequence>>;
 
   constructor(options: Character.Options) {
     Object.assign(this, options);
