@@ -5,6 +5,7 @@ import {Http, RequestOptionsArgs, Response} from 'angular/http';
 const HAL_FACTORY_METADATA_KEY = Symbol('halFactoryMetadataKey');
 const HAL_RESOURCE = Symbol('halResource');
 
+
 interface HalFactoryMethod<T> {
   (json: any): T;
 }
@@ -18,13 +19,12 @@ class HalFactoryMetadata {
 }
 
 
-interface HalLink {
-  href: string;
+export interface AnyConstructor<T> {
+  new(...args: Array<any>): T;
 }
 
 
 export interface HalResource<T> {
-  embedded: T;
   url: string;
 
   delete(): Observable<T>;
@@ -34,7 +34,8 @@ export interface HalResource<T> {
 }
 
 
-export function HalFactory<TFunction extends Function>(target: TFunction, key?: string | symbol, description?: TypedPropertyDescriptor<any>): void {
+export function HalFactory<TFunction extends Function>(target: TFunction, key?: string | symbol,
+    description?: TypedPropertyDescriptor<any>): void {
   let metadata: HalFactoryMetadata;
 
   if (key) {
@@ -47,22 +48,36 @@ export function HalFactory<TFunction extends Function>(target: TFunction, key?: 
   Reflect.defineMetadata(HAL_FACTORY_METADATA_KEY, metadata, target);
 }
 
-export function HalLink(target: Object, key: string | symbol): void {
+
+export function HalLink(ctor: AnyConstructor<T>): PropertyDecorator {
+  return function(target, key): void {
+    delete target[key];
+
+    Object.defineProperty(target, key, {
+      configurable: true,
+      get: function () {
+      }
+    });
+  };
 }
 
-export function createFromHal<T>(json: any, ctor: { new(...args: Array<any>): T }): T {
+
+export function createFromHal<T>(http: Http, response: Response, ctor: AnyConstructor<T>): T {
+  let url = response.url;
+  let json = response.json();
+
   let obj: T;
 
   if (Reflect.hasOwnMetadata(HAL_FACTORY_METADATA_KEY, ctor)) {
     let metadata: HalFactoryMetadata = Reflect.getOwnMetadata(HAL_FACTORY_METADATA_KEY, ctor);
 
     switch (metadata.type) {
-    case HalFactoryType.CONSTRUCTOR:
-      obj = new ctor(json);
-      break;
-    case HalFactoryType.METHOD:
-      obj = ctor[metadata.method](json);
-      break;
+      case HalFactoryType.CONSTRUCTOR:
+        obj = new ctor(json);
+        break;
+      case HalFactoryType.METHOD:
+        obj = ctor[metadata.method](json);
+        break;
     }
   }
   else {
@@ -72,3 +87,4 @@ export function createFromHal<T>(json: any, ctor: { new(...args: Array<any>): T 
 
   return obj;
 }
+
