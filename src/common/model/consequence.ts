@@ -7,7 +7,7 @@ export interface Consequence {
 
 export const COMMON_CONSEQUENCES = {
   MILD: 'mild',
-  MODERAGE: 'moderate',
+  MODERATE: 'moderate',
   SEVERE: 'severe',
   EXTREME: 'extreme'
 };

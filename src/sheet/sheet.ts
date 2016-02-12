@@ -8,8 +8,8 @@ import {COMMON_PIPES} from '../common/pipes';
   selector: 'fate-sheet',
   directives: [RouterLink],
   pipes: [COMMON_PIPES],
-  styles: [require('./sheet.less')],
-  template: require('./sheet.html.haml')
+  styles: [require<string>('./sheet.less')],
+  template: require<string>('./sheet.html.haml')
 })
 export class Sheet {
   @Input() character: Character;

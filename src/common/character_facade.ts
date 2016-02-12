@@ -17,21 +17,21 @@ export class CharacterFacade {
   private template: Template = new Template({
     id: '1',
     name: 'Star Trek',
-    aspectNames: new Map<string, string>([
+    aspectNames: new Map([
       [ COMMON_ASPECTS.HIGH_CONCEPT, 'High Concept' ],
       [ COMMON_ASPECTS.TROUBLE, 'Trouble' ],
       [ 'rank', 'Rank' ]
-    ],
-    consequenceNames: [
+    ]),
+    consequenceNames: new Map([
       [ COMMON_CONSEQUENCES.MILD, 'Mild' ],
       [ COMMON_CONSEQUENCES.MODERATE, 'Moderate' ],
       [ COMMON_CONSEQUENCES.SEVERE, 'Severe' ],
       [ COMMON_CONSEQUENCES.EXTREME, 'Extreme' ]
-    ],
-    stressTrackNames: [
+    ]),
+    stressTrackNames: new Map([
       [ COMMON_STRESS_TRACKS.PHYSICAL, 'Physical' ],
       [ COMMON_STRESS_TRACKS.MENTAL, 'Mental' ]
-    ],
+    ]),
 
     aspectSlots: [
       COMMON_ASPECTS.HIGH_CONCEPT,
@@ -55,7 +55,7 @@ export class CharacterFacade {
     template: this.template,
     name: 'Amaryllis Aster Jennings',
     player: this.mbouchard,
-    portrait: require('../assets/placeholder.svg'),
+    portrait: require<string>('../assets/placeholder.svg'),
     color: 'purple',
     namedAspects: new Map<string, Aspect>([
       [COMMON_ASPECTS.HIGH_CONCEPT, new Aspect('Graying Starfleet Devil')],
@@ -108,7 +108,7 @@ export class CharacterFacade {
     template: this.template,
     name: 'Foo Bar',
     player: this.jdoe,
-    portrait: require('../assets/placeholder.svg'),
+    portrait: require<string>('../assets/placeholder.svg'),
     color: 'blue',
     namedAspects: new Map<string, Aspect>([
       [COMMON_ASPECTS.HIGH_CONCEPT, new Aspect('Lorem Ipsum Dolor Sit Amen')],

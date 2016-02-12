@@ -11,7 +11,7 @@ import {List} from '../list/list';
   selector: 'fate-group-page',
   directives: [List],
   pipes: [AsyncPipe],
-  template: require('./group_page.html.haml')
+  template: require<string>('./group_page.html.haml')
 })
 export class GroupPage {
 

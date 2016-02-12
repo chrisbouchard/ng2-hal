@@ -7,8 +7,8 @@ import {GroupPage} from '../group/group_page';
 @Component({
   selector: 'body',
   directives: [RouterLink, RouterOutlet],
-  styles: [require('./app.less')],
-  template: require('./app.html.haml'),
+  styles: [require<string>('./app.less')],
+  template: require<string>('./app.html.haml'),
 })
 @RouteConfig([
   { path: '/', component: GroupPage, name: 'Home' },

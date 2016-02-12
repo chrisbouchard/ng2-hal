@@ -5,6 +5,8 @@ import {HashLocationStrategy, LocationStrategy, ROUTER_PROVIDERS} from 'angular2
 import {CharacterFacade} from './common/character_facade';
 import {App} from './app/app';
 
+import {HAL_PROVIDERS} from './hal';
+
 import {__PRODUCTION__} from './globals.ts';
 
 /* Load CSS stylesheets. */
@@ -27,6 +29,7 @@ else {
 jQuery(() => {
   bootstrap(App, [
     CharacterFacade,
+    HAL_PROVIDERS,
     ROUTER_PROVIDERS,
     provide(LocationStrategy, {
       useClass: HashLocationStrategy

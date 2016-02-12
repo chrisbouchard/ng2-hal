@@ -1,10 +1,14 @@
-function getMetadataPropertyMap<T>(key: any, target: any): Map<string | symbol, T> {
+export function getMetadataPropertyMap<T>(key: any, target: any): Map<string | symbol, T> {
+  let map: Map<string | symbol, T>;
+
   if (Reflect.hasOwnMetadata(key, target)) {
-    return Reflect.getOwnMetadata(key, target);
+    map = Reflect.getOwnMetadata(key, target);
+  }
+  else {
+    map = Reflect.getMetadata(key, target) || new Map();
+    Reflect.defineMetadata(key, map, target);
   }
 
-  let links = new Map<string | symbol, T>();
-  Reflect.defineMetadata(key, links, target);
-  return links;
+  return map;
 }
 

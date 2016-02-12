@@ -6,7 +6,7 @@ import {Card} from '../card/card';
 @Component({
   selector: 'fate-list',
   directives: [Card],
-  template: require('./list.html.haml')
+  template: require<string>('./list.html.haml')
 })
 export class List {
   @Input() characters: Array<Character>;
