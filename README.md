@@ -21,12 +21,16 @@ $ gulp build  # Production
 $ gulp server # Live development server
 ```
 
-The compiled bundles and assets will wind up in `content/dist`. The app may be run with any static http server with
-`content` as the webroot.
+The compiled bundles and assets will wind up in `dist`. The app may be run with any static http server with `dist` as
+the webroot.
 
-# Related Projects
+## Related Projects
+
+The following projects are used by FATE Character Sheet:
+
 * [Angular](//github.com/angular/angular) as the core framework to build components.
 * [Babel](//github.com/babel/babel) to transpile ES6 output from `tsc` down to ES5.
+* [Gulp](//github.com/gulpjs/gulp) to manage the build process.
 * [Haml](//github.com/haml/haml) to write templates more succinctly.
 * [Less](//github.com/less/less.js) to write styles more succinctly.
 * [Semantic-UI](//github.com/Semantic-Org/Semantic-UI) as the main style and layout library.
