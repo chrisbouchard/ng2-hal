@@ -15,14 +15,6 @@ And install `gulp` globally.
 $ npm install --global gulp
 ```
 
-Once they're installed, you'll need to delete the contents of one of the Angular 2 typescript files.
-```console
-$ echo >node_modules/angular2/typings/es6-shim/es6-shim.d.ts
-```
-This is currently required due to [angular/angular#5973](//github.com/angular/angular/issues/5973). The typings for
-`es6-shim` that ship with Angular 2 conflict with the ones shipped with TypeScript when `tsc` is configured with
-`target` as `es6` (which we do).
-
 Finally, build the project with `gulp`.
 ```console
 $ gulp build  # Production
@@ -40,3 +32,4 @@ The compiled bundles and assets will wind up in `content/dist`. The app may be r
 * [Semantic-UI](//github.com/Semantic-Org/Semantic-UI) as the main style and layout library.
 * [Typescript](//github.com/Microsoft/TypeScript) to write type-aware JavaScript for components and services.
 * [Webpack](//github.com/webpack/webpack) to bundle everything and run all the compilers/transpilers.
+
