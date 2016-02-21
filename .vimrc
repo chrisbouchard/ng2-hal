@@ -4,3 +4,5 @@ set expandtab
 
 set textwidth=120
 
+set suffixesadd+=.ts,.js
+

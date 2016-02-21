@@ -22,19 +22,19 @@ export class HalClient {
 class HalResourceImpl<T> implements HalResource<T> {
   constructor(public url: string, private http: Http, private ctor: AnyConstructor<T>) {}
 
-  delete(): Observable<T> {
-    return undefined;
-  }
-
   get(): Observable<T> {
+    return this.http.get(this.url).map(response => createFromHal(this.http, new HalObject(response.json()), this.ctor));
+  }
+
+  delete(): Observable<void> {
     return undefined;
   }
 
-  post<U>(body: U): Observable<U> {
+  post(body: any): Observable<void> {
     return undefined;
   }
 
-  put(body: T): Observable<T> {
+  put(body: T): Observable<void> {
     return undefined;
   }
 }
@@ -66,6 +66,7 @@ function createFromHal<T>(http: Http, halObj: HalObject, ctor: AnyConstructor<T>
     obj, ctor.prototype, embeddedProps, halObj.embedded,
     (propCtor: AnyConstructor<any>) => (subobject: any) => createFromHal(http, subobject, propCtor)
   );
+
   mapHalSubobjects<HalLinkObject>(
     obj, ctor.prototype, linksProps, halObj.links,
     (propCtor: AnyConstructor<any>) => (subobject: any) => new HalResourceImpl(subobject.href, http, propCtor)

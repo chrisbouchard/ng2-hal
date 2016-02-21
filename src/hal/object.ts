@@ -3,26 +3,26 @@ export interface HalLinkObject {
 }
 
 export class HalObject {
-  embedded: Map<string | symbol, Array<HalObject>>;
-  links: Map<string | symbol, Array<HalLinkObject>>;
+  embedded: Map<string | symbol, HalObject[]>;
+  links: Map<string | symbol, HalLinkObject[]>;
   resource: any;
 
   constructor(halJson: any) {
     this.resource = {};
 
-    for (let [key, value] of halJson.entries()) {
+    for (let [key, value] of Object.entries(halJson)) {
       switch (key) {
         case '_embedded':
           /* Propagate HalObject into the embedded objects. We need to make sure we wind up with an Array. */
-          this.embedded = new Map<string | symbol, Array<HalObject>>(
-            value.entries().map(([k, v]) => [k, Array.isArray(v) ? v.map((x: any) => new HalObject(x)) : [new HalObject(v)]])
+          this.embedded = new Map<string | symbol, HalObject[]>(
+            Object.entries(value).map(([k, v]): [string, HalObject[]] => [k, Array.isArray(v) ? v.map((x: any) => new HalObject(x)) : [new HalObject(v)]])
           );
           break;
 
         case '_links':
           /* We need to make sure we wind up with an Array. */
-          this.links = new Map<string | symbol, Array<HalLinkObject>>(
-            value.entries().map(([k, v]) => [k, Array.isArray(v) ? v : [v]])
+          this.links = new Map<string | symbol, HalLinkObject[]>(
+            Object.entries(value).map(([k, v]): [string, HalLinkObject[]] => [k, Array.isArray(v) ? v : [v]])
           );
           break;
 
