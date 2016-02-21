@@ -79,9 +79,17 @@ function mapHalSubobjects<T>(target: any, prototype: any, props: Map<string | sy
     map: Map<string | symbol, Array<T>>, factory: (ctor: AnyConstructor<any>) => (subobject: T) => any) {
   for (let prop of props.keys()) {
     let propCtor = props.get(prop);
-    let propArray = map.get(prop).map(factory(propCtor));
-    let type = Reflect.getOwnMetadata('design:type', prototype, prop);
-    target[prop] = projectArray(propArray, type);
+    let objectArray = map.get(prop);
+
+    /* If we have HalObjects to use, use them. Otherwise leave the property undefined. */
+    if (objectArray) {
+      let array = objectArray.map(factory(propCtor));
+      let type = Reflect.getOwnMetadata('design:type', prototype, prop);
+      target[prop] = projectArray(array, type);
+    }
+    else {
+      target[prop] = undefined;
+    }
   }
 }
 
