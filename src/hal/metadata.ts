@@ -5,7 +5,7 @@ export function getMetadataPropertyMap<T>(key: any, target: any): Map<string | s
     map = Reflect.getOwnMetadata(key, target);
   }
   else {
-    map = Reflect.getMetadata(key, target) || new Map();
+    map = new Map<string | symbol, T>(Reflect.getMetadata(key, target));
     Reflect.defineMetadata(key, map, target);
   }
 

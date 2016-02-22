@@ -7,7 +7,10 @@ export interface HalResource<T> {
   get(): Observable<T>;
 
   delete(): Observable<void>;
-  post(body: any): Observable<void>;
-  put(body: T): Observable<void>;
+
+  post<U>(body: U): Observable<HalResource<U>>;
+  post<U>(body: any, ctor: AnyConstructor<U>): Observable<HalResource<U>>;
+
+  put(body: T): Observable<HalResource<T>>;
 }
 
