@@ -1,29 +1,22 @@
+import {AnyConstructor} from '../common/core';
+
 import {HAL_FACTORY_METADATA_KEY} from './symbols';
 
-export interface HalFactoryMethod<T> {
-  (json: any): T;
+export interface HalFactoryMethod {
+  (json: any): any;
 }
 
-export enum HalFactoryType {
-  CONSTRUCTOR, METHOD
-}
-
-export class HalFactoryMetadata {
-  constructor(public type: HalFactoryType, public method?: string | symbol) {}
-}
-
-
-export function HalFactory<TFunction extends Function>(target: TFunction, key?: string | symbol,
-    description?: TypedPropertyDescriptor<any>): void {
-  let metadata: HalFactoryMetadata;
+export function HalFactory(target: any, key?: string | symbol, description?: TypedPropertyDescriptor<any>): void {
+  let method: HalFactoryMethod;
 
   if (key) {
-    metadata = new HalFactoryMetadata(HalFactoryType.METHOD, key);
+    method = (json: any) => target[key](json);
   }
   else {
-    metadata = new HalFactoryMetadata(HalFactoryType.CONSTRUCTOR);
+    let ctor = target as AnyConstructor<any>;
+    method = (json: any) => new ctor(json);
   }
 
-  Reflect.defineMetadata(HAL_FACTORY_METADATA_KEY, metadata, target);
+  Reflect.defineMetadata(HAL_FACTORY_METADATA_KEY, method, target);
 }
 

@@ -6,11 +6,10 @@ import {Observable} from 'rxjs';
 import {AnyConstructor, construct, projectArray} from '../common/core';
 
 import {HalError} from './error';
-import {HalFactoryMetadata, HalFactoryType} from './factory';
-import {getMetadataPropertyMap} from './metadata';
+import {HalFactoryMethod} from './factory';
 import {HalLinkObject, HalObject} from './object';
 import {HalResource} from './resource';
-import {HAL_EMBEDDED_METADATA_KEY, HAL_FACTORY_METADATA_KEY, HAL_LINKS_METADATA_KEY} from './symbols';
+import {HAL_DECORATOR_METADATA_KEY, HAL_FACTORY_METADATA_KEY} from './symbols';
 
 /**
  *
@@ -105,6 +104,13 @@ export class HalClientResource<T> implements HalResource<T> {
 /**
  *
  */
+export interface HalDecoratorTransformation {
+  apply(instance: any, object: HalObject, client: HalClient): void;
+}
+
+/**
+ *
+ */
 export interface HalSubobjectFactory<T, U> {
   from(object: T): U;
 }
@@ -122,17 +128,7 @@ export class HalObjectFactory<T> implements HalSubobjectFactory<HalObject, T> {
     }
 
     let instance = this.createInstance(object.resource);
-
-    /* Map the embedded objects. */
-    Object.assign(instance, this.mapHalSubobjects(
-      HAL_EMBEDDED_METADATA_KEY, object.embedded, construct(HalObjectFactory, this.client)
-    ));
-
-    /* Map the links. */
-    Object.assign(instance, this.mapHalSubobjects(
-      HAL_LINKS_METADATA_KEY, object.links, construct(HalLinkFactory, this.client)
-    ));
-
+    this.applyDecorators(this.ctor.prototype, instance, object);
     return instance;
   }
 
@@ -141,16 +137,8 @@ export class HalObjectFactory<T> implements HalSubobjectFactory<HalObject, T> {
 
     /* We don't search the prototype chain for a factory, because the class should deside how it's constructed. */
     if (Reflect.hasOwnMetadata(HAL_FACTORY_METADATA_KEY, this.ctor)) {
-      let metadata: HalFactoryMetadata = Reflect.getOwnMetadata(HAL_FACTORY_METADATA_KEY, this.ctor);
-
-      switch (metadata.type) {
-        case HalFactoryType.CONSTRUCTOR:
-          instance = new this.ctor(resource);
-        break;
-        case HalFactoryType.METHOD:
-          instance = (this.ctor as any)[metadata.method](resource);
-        break;
-      }
+      let method: HalFactoryMethod = Reflect.getOwnMetadata(HAL_FACTORY_METADATA_KEY, this.ctor);
+      instance = method(resource);
     }
     else {
       instance = new this.ctor();
@@ -160,26 +148,19 @@ export class HalObjectFactory<T> implements HalSubobjectFactory<HalObject, T> {
     return instance;
   }
 
-  private mapHalSubobjects<U, V>(propsKey: any, subobjectMap: Map<string | symbol, Array<U>>,
-      factory: (ctor: AnyConstructor<any>) => HalSubobjectFactory<U, V>): ({ [prop: string]: V }) {
-    let subobjects: { [prop: string]: V } = {};
-    let decoratedProps = getMetadataPropertyMap<AnyConstructor<any>>(propsKey, this.ctor.prototype);
-
-    for (let [prop, propCtor] of decoratedProps.entries()) {
-      let objectArray = subobjectMap.get(prop);
-
-      /* If we have HalObjects to use, use them. Otherwise leave the property undefined. */
-      if (objectArray) {
-        let array = objectArray.map(factory(propCtor).from);
-        let type = Reflect.getOwnMetadata('design:type', this.ctor.prototype, prop);
-        subobjects[prop] = projectArray(array, type);
-      }
-      else {
-        subobjects[prop] = undefined;
-      }
+  private applyDecorators(prototype: any, instance: T, object: HalObject): void {
+    if (!Reflect.hasOwnMetadata(HAL_DECORATOR_METADATA_KEY, prototype)) {
+      return;
     }
 
-    return subobjects;
+    /* First apply the superclass's decorators. */
+    this.applyDecorators(Object.getPrototypeOf(prototype), instance, object);
+
+    let transformations: HalDecoratorTransformation[] = Reflect.getOwnMetadata(HAL_DECORATOR_METADATA_KEY, prototype);
+
+    for (let transformation of transformations) {
+      transformation.apply(instance, object, this.client);
+    }
   }
 }
 

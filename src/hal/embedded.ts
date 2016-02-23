@@ -1,11 +1,28 @@
-import {AnyConstructor} from '../common/core';
+import {AnyConstructor, projectArray} from '../common/core';
 
-import {getMetadataPropertyMap} from './metadata';
-import {HAL_EMBEDDED_METADATA_KEY} from './symbols';
+import {HalClient, HalDecoratorTransformation, HalObjectFactory} from './client';
+import {withOwnMetadata} from './metadata';
+import {HAL_DECORATOR_METADATA_KEY} from './symbols';
 
 export function HalEmbedded<T>(ctor: AnyConstructor<T>): PropertyDecorator {
   return function(target, key): void {
-    getMetadataPropertyMap<AnyConstructor<T>>(HAL_EMBEDDED_METADATA_KEY, target).set(key, ctor);
+    withOwnMetadata(HAL_DECORATOR_METADATA_KEY, target, [], (transformations: HalDecoratorTransformation[]) => {
+      transformations.push({
+        apply: (instance, object, client) => {
+          let embeddedObjects = object.embedded.get(key);
+
+          if (!embeddedObjects) {
+            return;
+          }
+
+          let embeddedInstances = embeddedObjects.map(new HalObjectFactory(ctor, client).from);
+          let type = Reflect.getOwnMetadata('design:type', target, key);
+          instance[key] = projectArray(embeddedInstances, type);
+        }
+      });
+
+      return transformations;
+    });
   };
 }
 
