@@ -3,8 +3,9 @@ import {Http, RequestOptionsArgs, Response} from 'angular2/http';
 import {autobind} from 'core-decorators';
 import {Observable} from 'rxjs';
 
-import {AnyConstructor} from '../common/core';
+import {AnyConstructor, construct, projectArray} from '../common/core';
 
+import {HalError} from './error';
 import {HalFactoryMetadata, HalFactoryType} from './factory';
 import {getMetadataPropertyMap} from './metadata';
 import {HalLinkObject, HalObject} from './object';
@@ -19,14 +20,17 @@ export class HalClient {
   constructor(private http: Http) {}
 
   resource<T>(url: string, ctor: AnyConstructor<T>): HalResource<T> {
-    return new HalResourceImpl(url, ctor, this);
+    return new HalClientResource(url, ctor, this);
   }
 
   get<T>(url: string, ctor: AnyConstructor<T>, options?: RequestOptionsArgs): Observable<T> {
+    let factory = new HalObjectFactory(ctor, this);
+
     return this.http
         .get(url, options)
+        .map(HalClient.mapErrorResponse)
         .map(HalClient.mapGetResponse)
-        .map(new HalObjectTransformer(ctor, this).transform);
+        .map(factory.from);
   }
 
   delete(url: string, options?: RequestOptionsArgs): Observable<void> {
@@ -41,37 +45,40 @@ export class HalClient {
     return undefined;
   }
 
-  private static mapGetResponse(response: Response): HalObject {
+  private static mapErrorResponse(response: Response): Response {
     if (!response.ok) {
       throw new HalError(response.status, response.text());
     }
 
-    if (response.status === 200) {
-      return new HalObject(response.json());
+    return response;
+  }
+
+  private static mapGetResponse(response: Response): HalObject {
+    /* No Content */
+    if (response.status === 204) {
+      return undefined;
+    }
+
+    return new HalObject(response.json());
+  }
+
+  private static mapDeleteResponse(response: Response): void {
+    return undefined;
+  }
+
+  private static mapUpdateResponse(response: Response): HalLinkObject {
+    if (response.headers.has('Location')) {
+      return { href: response.headers.get('Location') };
     }
 
     return undefined;
   }
-
-  private static mapDeleteResponse(response: Response): void {
-  }
-
-  private static mapUpdateResponse(response: Response): HalLinkObject {
-    return undefined;
-  }
 }
 
 /**
  *
  */
-export class HalError {
-  constructor(public status: number, public message: string) {}
-}
-
-/**
- *
- */
-class HalResourceImpl<T> implements HalResource<T> {
+export class HalClientResource<T> implements HalResource<T> {
   constructor(public url: string, private ctor: AnyConstructor<T>, private client: HalClient) {}
 
   get(): Observable<T> {
@@ -98,103 +105,97 @@ class HalResourceImpl<T> implements HalResource<T> {
 /**
  *
  */
-class HalObjectTransformer<T> {
+export interface HalSubobjectFactory<T, U> {
+  from(object: T): U;
+}
+
+/**
+ *
+ */
+export class HalObjectFactory<T> implements HalSubobjectFactory<HalObject, T> {
   constructor(private ctor: AnyConstructor<T>, private client: HalClient) {}
 
   @autobind
-  toResource(link: HalLinkObject): HalResource<T> {
-    if (!link) {
+  from(object: HalObject): T {
+    if (!object) {
       return undefined;
     }
 
-    return new HalResourceImpl(link.href, this.ctor, this.client);
-  }
-
-  @autobind
-  toInstance(halObj: HalObject): T {
-    if (!halObject) {
-      return undefined;
-    }
-
-    let obj = this.createBaseObject(halObj.resource);
-
-    let embeddedProps = getMetadataPropertyMap<AnyConstructor<any>>(HAL_EMBEDDED_METADATA_KEY, ctor.prototype);
-    let linksProps = getMetadataPropertyMap<AnyConstructor<any>>(HAL_LINKS_METADATA_KEY, ctor.prototype);
+    let instance = this.createInstance(object.resource);
 
     /* Map the embedded objects. */
-    mapHalSubobjects<HalObject>(
-      obj, ctor.prototype, embeddedProps, halObj.embedded,
-      (propCtor: AnyConstructor<any>) => new HalObjectTransformer(propCtor, this.client).toInstance
-    );
+    Object.assign(instance, this.mapHalSubobjects(
+      HAL_EMBEDDED_METADATA_KEY, object.embedded, construct(HalObjectFactory, this.client)
+    ));
 
     /* Map the links. */
-    mapHalSubobjects<HalLinkObject>(
-      obj, ctor.prototype, linksProps, halObj.links,
-      (propCtor: AnyConstructor<any>) => new HalObjectTransformer(propCtor, this.client).toResource
-    );
+    Object.assign(instance, this.mapHalSubobjects(
+      HAL_LINKS_METADATA_KEY, object.links, construct(HalLinkFactory, this.client)
+    ));
 
-    return obj;
+    return instance;
   }
 
-  private createBaseObject(resource: any): T {
-    let obj: T;
+  private createInstance(resource: any): T {
+    let instance: T;
 
     /* We don't search the prototype chain for a factory, because the class should deside how it's constructed. */
-    if (Reflect.hasOwnMetadata(HAL_FACTORY_METADATA_KEY, ctor)) {
+    if (Reflect.hasOwnMetadata(HAL_FACTORY_METADATA_KEY, this.ctor)) {
       let metadata: HalFactoryMetadata = Reflect.getOwnMetadata(HAL_FACTORY_METADATA_KEY, this.ctor);
 
       switch (metadata.type) {
         case HalFactoryType.CONSTRUCTOR:
-          obj = new this.ctor(resource);
+          instance = new this.ctor(resource);
         break;
         case HalFactoryType.METHOD:
-          obj = (this.ctor as any)[metadata.method](resource);
+          instance = (this.ctor as any)[metadata.method](resource);
         break;
       }
     }
     else {
-      obj = new this.ctor();
-      Object.assign(obj, resource);
+      instance = new this.ctor();
+      Object.assign(instance, resource);
     }
 
-    return obj;
+    return instance;
+  }
+
+  private mapHalSubobjects<U, V>(propsKey: any, subobjectMap: Map<string | symbol, Array<U>>,
+      factory: (ctor: AnyConstructor<any>) => HalSubobjectFactory<U, V>): ({ [prop: string]: V }) {
+    let subobjects: { [prop: string]: V } = {};
+    let decoratedProps = getMetadataPropertyMap<AnyConstructor<any>>(propsKey, this.ctor.prototype);
+
+    for (let [prop, propCtor] of decoratedProps.entries()) {
+      let objectArray = subobjectMap.get(prop);
+
+      /* If we have HalObjects to use, use them. Otherwise leave the property undefined. */
+      if (objectArray) {
+        let array = objectArray.map(factory(propCtor).from);
+        let type = Reflect.getOwnMetadata('design:type', this.ctor.prototype, prop);
+        subobjects[prop] = projectArray(array, type);
+      }
+      else {
+        subobjects[prop] = undefined;
+      }
+    }
+
+    return subobjects;
   }
 }
 
 /**
  *
  */
-function mapHalSubobjects<T>(target: any, prototype: any, props: Map<string | symbol, AnyConstructor<any>>,
-    map: Map<string | symbol, Array<T>>, factory: (ctor: AnyConstructor<any>) => (subobject: T) => any) {
-  for (let prop of props.keys()) {
-    let propCtor = props.get(prop);
-    let objectArray = map.get(prop);
+export class HalLinkFactory<T> implements HalSubobjectFactory<HalLinkObject, HalResource<T>> {
+  constructor(private ctor: AnyConstructor<T>, private client: HalClient) {}
 
-    /* If we have HalObjects to use, use them. Otherwise leave the property undefined. */
-    if (objectArray) {
-      let array = objectArray.map(factory(propCtor));
-      let type = Reflect.getOwnMetadata('design:type', prototype, prop);
-      target[prop] = projectArray(array, type);
+  @autobind
+  from(link: HalLinkObject): HalResource<T> {
+    if (!link) {
+      return undefined;
     }
-    else {
-      target[prop] = undefined;
-    }
-  }
-}
 
-/**
- *
- */
-function projectArray<T>(array: Array<T>, type: any): any {
-  switch (type) {
-    case Array:
-      return array;
-    case Map:
-      return new Map(array.entries());
-    case Set:
-      return new Set(array);
+    return new HalClientResource(link.href, this.ctor, this.client);
   }
-
-  return array[0];
 }
 
