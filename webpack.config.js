@@ -47,15 +47,21 @@ module.exports = {
   },
 
   module: {
+    preLoaders: [
+      {
+        test: /\.ts$/,
+        loader: 'tslint',
+        exclude: [
+          /node_modules/
+        ]
+      }
+    ],
     loaders: [
       {
         test: /\.ts$/,
         loader: 'babel!ts',
         exclude: [
-          /\.min\.js$/,
-          /\.spec\.ts$/,
-          /\.e2e\.ts$/,
-          /node_modules\//
+          /node_modules/
         ]
       },
       {
@@ -106,6 +112,27 @@ module.exports = {
     }),
     new OccurenceOrderPlugin(),
     new ProvidePlugin({ 'jQuery': 'jquery', '$': 'jquery' })
-  ]
+  ],
+
+  tslint: {
+    configuration: {
+      rules: {
+        'class-name': true,
+        'comment-format': [true, 'check-space', 'check-uppercase'],
+        'curly': true,
+        'eofline': true,
+        'indent': [true, 'spaces'],
+        'no-trailing-whitespace': true,
+        'one-line': [true, 'check-open-brace'],
+        'quotemark': [true, 'single', 'avoid-escape'],
+        'radix': true,
+        'semicolon': [true, 'always'],
+        'triple-equals': true,
+        'typedef': [true, 'call-signature', 'parameter', 'property-declaration'],
+        'variable-name': [true, 'check-format'],
+        'whitespace': true
+      }
+    }
+  }
 }
 

@@ -41,6 +41,8 @@
     "raw-loader": "0.5.1",
     "style-loader": "0.13.0",
     "ts-loader": "0.8.1",
+    "tslint": "3.5.0-dev.1",
+    "tslint-loader": "2.1.0",
     "typescript": "1.8.0-dev.20160103",
     "url-loader": "0.5.7",
     "webpack": "1.12.13",
