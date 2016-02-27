@@ -12,7 +12,7 @@
           {{character?.name}}
           .sub.header
             Played by
-            %a([routerLink]="['/Player', {id: character?.player?.id}]")> {{character?.player?.name}}
+            %a([routerLink]="['/Player', {id: character?.player.id}]")> {{character?.player?.name}}
       .column
         .ui.bottom.aligned.center.aligned.grid
           .eight.wide.mobile.four.wide.tablet.four.wide.computer.column
@@ -38,9 +38,9 @@
       .column
         %h2.ui.header Aspects
         .ui.list
-          .item(*ngFor="#aspectTemplate of character?.template?.namedAspectTemplates")
-            .ui.grey.sub.header {{aspectTemplate.name}}
-            %a.fate-aspect {{character?.namedAspects?.get(aspectTemplate.field)?.name || 'Missing'}}
+          .item(*ngFor="#aspectName of character?.template.aspectSlots")
+            .ui.grey.sub.header {{character.template.aspectNames.get(aspectName)}}
+            %a.fate-aspect {{character?.namedAspects.get(aspectName)?.name || 'Missing'}}
         .ui.list
           .item(*ngFor="#aspect of character?.unnamedAspects")
             %a.fate-aspect {{aspect.name}}
@@ -56,8 +56,8 @@
       .column
         %h2.ui.header Stress
         .ui.list
-          .item(*ngFor="#track of character?.template?.stressTrackSlots")
-            .ui.grey.sub.header {{track.name}}
+          .item(*ngFor="#track of character?.template.stressTrackSlots")
+            .ui.grey.sub.header {{character.template.stressTrackNames.get(track.field)}}
             .ui.horizontal.list
               .item(*ngFor="#box of character?.stressTracks.get(track.field) | padded:track.cap:emptyStressBox; #i = index")
                 .ui.checkbox

@@ -2,6 +2,8 @@ import {Observable} from 'rxjs';
 import {Aspect, Character, Consequence, COMMON_ASPECTS, COMMON_CONSEQUENCES, COMMON_STRESS_TRACKS, Player, Skill,
     StressTrack, Stunt, Template} from './model';
 
+const RANK_ASPECT_NAME = 'rank';
+
 export class CharacterFacade {
 
   private mbouchard: Player = new Player({
@@ -20,7 +22,7 @@ export class CharacterFacade {
     aspectNames: new Map([
       [ COMMON_ASPECTS.HIGH_CONCEPT, 'High Concept' ],
       [ COMMON_ASPECTS.TROUBLE, 'Trouble' ],
-      [ 'rank', 'Rank' ]
+      [ RANK_ASPECT_NAME, 'Rank']
     ]),
     consequenceNames: new Map([
       [ COMMON_CONSEQUENCES.MILD, 'Mild' ],
@@ -36,7 +38,7 @@ export class CharacterFacade {
     aspectSlots: [
       COMMON_ASPECTS.HIGH_CONCEPT,
       COMMON_ASPECTS.TROUBLE,
-      'rank'
+      RANK_ASPECT_NAME
     ],
     consequenceSlots: [
       COMMON_CONSEQUENCES.MILD,
@@ -60,7 +62,7 @@ export class CharacterFacade {
     namedAspects: new Map<string, Aspect>([
       [COMMON_ASPECTS.HIGH_CONCEPT, new Aspect('Graying Starfleet Devil')],
       [COMMON_ASPECTS.TROUBLE, new Aspect('Number One')],
-      ['rank', new Aspect('Captain')]
+      [RANK_ASPECT_NAME, new Aspect('Captain')]
     ]),
     unnamedAspects: new Set([
       new Aspect('To Boldly Go'),
