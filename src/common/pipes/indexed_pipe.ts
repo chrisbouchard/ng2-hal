@@ -9,7 +9,10 @@ export interface Entry<E> {
 export class IndexedPipe implements PipeTransform {
 
   transform<E>(value: Iterable<E>): Array<Entry<E>> {
-    if (!value) return [];
+    if (!value) {
+      return [];
+    }
+
     return Array.from(value).map((value, index) => ({ index, value }));
   }
 

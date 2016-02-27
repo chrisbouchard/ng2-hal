@@ -4,7 +4,9 @@ import {Pipe, PipeTransform} from 'angular2/core';
 export class SortedPipe implements PipeTransform {
 
   transform<T>(value: Iterable<T>, args: Array<any>): Array<T> {
-    if (!value) return [];
+    if (!value) {
+      return [];
+    }
 
     let array = Array.from(value);
 
@@ -15,10 +17,14 @@ export class SortedPipe implements PipeTransform {
 
     if (key) {
       array.sort((a: any, b: any) => {
-        if (a[key] < b[key])
+        if (a[key] < b[key]) {
           return reversed ? 1 : -1;
-        if (a[key] > b[key])
+        }
+
+        if (a[key] > b[key]) {
           return reversed ? -1 : 1;
+        }
+
         return 0;
       });
     }

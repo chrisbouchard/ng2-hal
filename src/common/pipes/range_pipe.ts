@@ -4,7 +4,10 @@ import {Pipe, PipeTransform} from 'angular2/core';
 export class RangePipe implements PipeTransform {
 
   transform(value: number): Array<number> {
-    if (!value) return [];
+    if (!value) {
+      return [];
+    }
+
     return Array.from({length: value}).map((value, index) => index);
   }
 
