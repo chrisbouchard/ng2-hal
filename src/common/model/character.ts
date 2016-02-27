@@ -20,7 +20,7 @@ module Character {
     namedAspects: Map<string, Aspect>;
     unnamedAspects: Set<Aspect>;
 
-    skills: Array<Set<Skill>>;
+    skills: Set<Skill>[];
     stunts: Set<Stunt>;
 
     stressTracks: Map<string, StressTrack>;
@@ -42,7 +42,7 @@ export class Character implements Character.Options {
   namedAspects: Map<string, Aspect>;
   unnamedAspects: Set<Aspect>;
 
-  skills: Array<Set<Skill>>;
+  skills: Set<Skill>[];
   stunts: Set<Stunt>;
 
   stressTracks: Map<string, StressTrack>;

@@ -12,9 +12,9 @@ module Template {
     consequenceNames: Map<string, string>;
     stressTrackNames: Map<string, string>;
 
-    aspectSlots: Array<string>;
-    consequenceSlots: Array<string>;
-    stressTrackSlots: Array<StressTrackSlot>;
+    aspectSlots: string[];
+    consequenceSlots: string[];
+    stressTrackSlots: StressTrackSlot[];
   }
 }
 
@@ -26,9 +26,9 @@ export class Template implements Template.Options {
   consequenceNames: Map<string, string>;
   stressTrackNames: Map<string, string>;
 
-  aspectSlots: Array<string>;
-  consequenceSlots: Array<string>;
-  stressTrackSlots: Array<StressTrackSlot>;
+  aspectSlots: string[];
+  consequenceSlots: string[];
+  stressTrackSlots: StressTrackSlot[];
 
   constructor(options: Template.Options) {
     Object.assign(this, options);

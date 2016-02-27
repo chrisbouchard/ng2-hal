@@ -8,7 +8,7 @@ import {GroupPage} from '../group/group_page';
 
 class Foo {
   foo: number;
-  bar: Array<string>;
+  bar: string[];
   baz: string;
 
   @HalLinked(Foo)

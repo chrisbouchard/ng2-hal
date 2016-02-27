@@ -137,13 +137,13 @@ export class CharacterFacade {
     stunts: new Set<Stunt>()
   });
 
-  private fixedCharacters: Array<Character> = [ this.amaryllis ];
+  private fixedCharacters: Character[] = [ this.amaryllis ];
 
   find(id: string): Observable<Character> {
     return Observable.of(this.amaryllis).delay(1);
   }
 
-  findAll(): Observable<Array<Character>> {
+  findAll(): Observable<Character[]> {
     const fooBars = Array.from({length: 4}, () => this.fooBar);
     return Observable.of(this.fixedCharacters.concat(fooBars)).delay(1);
   }

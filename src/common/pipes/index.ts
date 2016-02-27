@@ -7,5 +7,5 @@ import {SortedPipe} from './sorted_pipe';
 
 export {EntriesPipe, IndexedPipe, PaddedPipe, RangePipe, ReversedPipe, SortedPipe};
 
-export const COMMON_PIPES: Array<any> = [ EntriesPipe, IndexedPipe, PaddedPipe, RangePipe, ReversedPipe, SortedPipe ];
+export const COMMON_PIPES: any[] = [ EntriesPipe, IndexedPipe, PaddedPipe, RangePipe, ReversedPipe, SortedPipe ];
 

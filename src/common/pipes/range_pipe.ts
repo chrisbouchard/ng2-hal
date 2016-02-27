@@ -3,7 +3,7 @@ import {Pipe, PipeTransform} from 'angular2/core';
 @Pipe({ name: 'range', pure: true })
 export class RangePipe implements PipeTransform {
 
-  transform(value: number): Array<number> {
+  transform(value: number): number[] {
     if (!value) {
       return [];
     }

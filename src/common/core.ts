@@ -14,7 +14,7 @@ export function construct<T>(ctor: AnyConstructor<T>, ...fixedArgs: any[]): (...
   return (...args: any[]) => new ctor(...args, ...fixedArgs);
 }
 
-export function projectArray<T>(array: Array<T>, type: any): any {
+export function projectArray<T>(array: T[], type: any): any {
   switch (type) {
     case Array:
       return array;

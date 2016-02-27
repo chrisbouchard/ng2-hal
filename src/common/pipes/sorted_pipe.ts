@@ -3,7 +3,7 @@ import {Pipe, PipeTransform} from 'angular2/core';
 @Pipe({ name: 'sorted', pure: true })
 export class SortedPipe implements PipeTransform {
 
-  transform<T>(value: Iterable<T>, args: Array<any>): Array<T> {
+  transform<T>(value: Iterable<T>, args: any[]): T[] {
     if (!value) {
       return [];
     }

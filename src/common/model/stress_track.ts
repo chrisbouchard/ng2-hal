@@ -3,7 +3,7 @@ export interface StressBox {
   marked: boolean
 }
 
-export type StressTrack = Array<StressBox>;
+export type StressTrack = StressBox[];
 
 export const COMMON_STRESS_TRACKS = {
   PHYSICAL: 'physical',

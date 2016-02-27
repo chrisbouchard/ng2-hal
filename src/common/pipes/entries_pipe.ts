@@ -8,7 +8,7 @@ export interface Entry<K, V> {
 @Pipe({ name: 'entries', pure: true })
 export class EntriesPipe implements PipeTransform {
 
-  transform<K, V>(value: Map<K, V>): Array<Entry<K, V>> {
+  transform<K, V>(value: Map<K, V>): Entry<K, V>[] {
     if (!value) {
       return [];
     }

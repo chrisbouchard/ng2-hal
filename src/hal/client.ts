@@ -45,8 +45,12 @@ export class HalClient {
   }
 
   private static mapErrorResponse(response: Response): Response {
-    if (!response.ok) {
-      throw new HalError(response.status, response.text());
+    let status = response.status;
+
+    /* This is probably a little over-zealous, but it corresponds to !response.ok (which doesn't work with the current
+     * Angular 2 beta. */
+    if (status < 200 || status >= 300) {
+      throw new HalError(status, response.text());
     }
 
     return response;

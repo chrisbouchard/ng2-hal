@@ -8,7 +8,7 @@ export interface Entry<E> {
 @Pipe({ name: 'indexed', pure: true })
 export class IndexedPipe implements PipeTransform {
 
-  transform<E>(value: Iterable<E>): Array<Entry<E>> {
+  transform<E>(value: Iterable<E>): Entry<E>[] {
     if (!value) {
       return [];
     }
