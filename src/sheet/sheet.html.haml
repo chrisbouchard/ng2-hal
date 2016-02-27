@@ -56,7 +56,7 @@
       .column
         %h2.ui.header Stress
         .ui.list
-          .item(*ngFor="#track of character?.template?.stressTracks")
+          .item(*ngFor="#track of character?.template?.stressTrackSlots")
             .ui.grey.sub.header {{track.name}}
             .ui.horizontal.list
               .item(*ngFor="#box of character?.stressTracks.get(track.field) | padded:track.cap:emptyStressBox; #i = index")
