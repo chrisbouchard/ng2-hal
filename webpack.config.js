@@ -3,8 +3,11 @@ var webpack = require('webpack');
 
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var DefinePlugin = webpack.DefinePlugin;
-var OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin;
 var ProvidePlugin = webpack.ProvidePlugin;
+
+var DedupePlugin = webpack.optimize.DedupePlugin;
+var OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin;
+var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -12,6 +15,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   verbose: true,
   displayErrorDetails: true,
+  devtool: devtool(),
 
   stats: {
     colors: true,
@@ -93,16 +97,8 @@ module.exports = {
   },
 
   plugins: [
-    new CommonsChunkPlugin('vendor', 'vendor.js'),
-    new DefinePlugin({
-      __PRODUCTION__: JSON.stringify(process.env.NODE_ENV === 'production')
-    }),
-    new ExtractTextPlugin('vendor.css'),
-    new HtmlWebpackPlugin({
-      inject: 'head',
-      template: './src/index.html.haml'
-    }),
-    new ProvidePlugin({ 'jQuery': 'jquery', '$': 'jquery' })
+    ...commonPlugins(),
+    ...productionPlugins()
   ],
 
   tslint: {
@@ -125,5 +121,45 @@ module.exports = {
       }
     }
   }
+}
+
+function devtool() {
+  if (!isProduction()) {
+    return undefined;
+  }
+
+  return '#cheap-module-eval-source-map';
+}
+
+function commonPlugins() {
+  return [
+    new CommonsChunkPlugin('vendor', 'vendor.js'),
+    new DefinePlugin({
+      __PRODUCTION__: JSON.stringify(isProduction())
+    }),
+    new ExtractTextPlugin('vendor.css'),
+    new HtmlWebpackPlugin({
+      inject: 'head',
+      template: './src/index.html.haml'
+    }),
+    new ProvidePlugin({ 'jQuery': 'jquery', '$': 'jquery' }),
+  ];
+}
+
+function productionPlugins() {
+  if (!isProduction()) {
+    return [];
+  }
+
+  return [
+    new DedupePlugin(),
+    new OccurenceOrderPlugin(),
+    // TODO: Figure out how to enable this without breaking things.
+    new UglifyJsPlugin()
+  ];
+}
+
+function isProduction() {
+  return process.env.NODE_ENV === 'production';
 }
 

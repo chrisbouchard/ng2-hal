@@ -30,13 +30,6 @@ var statsConfig = {
 gulp.task('webpack:build', function (callback) {
   var buildConfig = Object.create(webpackConfig);
 
-  buildConfig.plugins = buildConfig.plugins.concat([
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    // TODO: Figure out how to enable this without breaking things.
-    new webpack.optimize.UglifyJsPlugin()
-  ]);
-
   webpack(buildConfig, function (err, stats) {
     if (err) {
       throw new gulpUtil.PluginError('webpack', err);
@@ -49,8 +42,6 @@ gulp.task('webpack:build', function (callback) {
 
 gulp.task('webpack-dev-server', function (callback) {
   var serverConfig = Object.create(webpackConfig);
-  serverConfig.devtool = '#cheap-module-eval-source-map';
-
   var compiler = webpack(serverConfig);
 
   var server = new WebpackDevServer(compiler, {
