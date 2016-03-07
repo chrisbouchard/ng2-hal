@@ -38,9 +38,9 @@
       .column
         %h2.ui.header Aspects
         .ui.list
-          .item(*ngFor="#aspectName of character?.template.aspectSlots")
-            .ui.grey.sub.header {{character.template.aspectNames.get(aspectName)}}
-            %a.fate-aspect {{character?.namedAspects.get(aspectName)?.name || 'Missing'}}
+          .item(*ngFor="#aspect of character?.template.aspectSlots | map:namedAspect")
+            .ui.grey.sub.header {{aspect.title}}
+            %a.fate-aspect {{aspect.name || 'Missing'}}
         .ui.list
           .item(*ngFor="#aspect of character?.unnamedAspects")
             %a.fate-aspect {{aspect.name}}

@@ -15,5 +15,12 @@ export class Sheet {
   @Input() character: Character;
 
   emptyStressBox: StressBox = { enabled: false, marked: false };
+
+  namedAspect(slot: string): {title: string, name: string} {
+    return {
+      title: this.character.template.aspectNames.get(slot),
+      name: this.character.namedAspects.get(slot).name
+    };
+  }
 }
 
