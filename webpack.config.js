@@ -3,16 +3,19 @@ var webpack = require('webpack');
 
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var DefinePlugin = webpack.DefinePlugin;
-var OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin;
 var ProvidePlugin = webpack.ProvidePlugin;
+
+var DedupePlugin = webpack.optimize.DedupePlugin;
+var OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin;
+var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  cache: true,
   verbose: true,
   displayErrorDetails: true,
+  devtool: devtool(),
 
   stats: {
     colors: true,
@@ -28,7 +31,8 @@ module.exports = {
       'angular2/http',
       'angular2/platform/browser',
       'angular2/router',
-      'babel-polyfill'
+      'babel-polyfill',
+      'jquery'
     ]
   },
 
@@ -51,32 +55,24 @@ module.exports = {
       {
         test: /\.ts$/,
         loader: 'tslint',
-        exclude: [
-          /node_modules/
-        ]
+        exclude: [/node_modules/]
       }
     ],
     loaders: [
       {
         test: /\.ts$/,
         loader: 'babel!ts',
-        exclude: [
-          /node_modules/
-        ]
+        exclude: [/node_modules/]
       },
       {
         test: /\.css$/,
         loader: 'css',
-        include: [
-          path.join(__dirname, 'src')
-        ]
+        include: [path.join(__dirname, 'src')]
       },
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract('style', 'css'),
-        exclude: [
-          path.join(__dirname, 'src')
-        ]
+        exclude: [path.join(__dirname, 'src')]
       },
       {
         test: /\.html.haml$/,
@@ -101,17 +97,8 @@ module.exports = {
   },
 
   plugins: [
-    new CommonsChunkPlugin('vendor', 'vendor.js'),
-    new DefinePlugin({
-      __PRODUCTION__: JSON.stringify(process.env.NODE_ENV === 'production')
-    }),
-    new ExtractTextPlugin('vendor.css'),
-    new HtmlWebpackPlugin({
-      inject: 'head',
-      template: './src/index.html.haml'
-    }),
-    new OccurenceOrderPlugin(),
-    new ProvidePlugin({ 'jQuery': 'jquery', '$': 'jquery' })
+    ...commonPlugins(),
+    ...productionPlugins()
   ],
 
   tslint: {
@@ -134,5 +121,45 @@ module.exports = {
       }
     }
   }
+}
+
+function devtool() {
+  if (!isProduction()) {
+    return undefined;
+  }
+
+  return '#cheap-module-eval-source-map';
+}
+
+function commonPlugins() {
+  return [
+    new CommonsChunkPlugin('vendor', 'vendor.js'),
+    new DefinePlugin({
+      __PRODUCTION__: JSON.stringify(isProduction())
+    }),
+    new ExtractTextPlugin('vendor.css'),
+    new HtmlWebpackPlugin({
+      inject: 'head',
+      template: './src/index.html.haml'
+    }),
+    new ProvidePlugin({ 'jQuery': 'jquery', '$': 'jquery' }),
+  ];
+}
+
+function productionPlugins() {
+  if (!isProduction()) {
+    return [];
+  }
+
+  return [
+    new DedupePlugin(),
+    new OccurenceOrderPlugin(),
+    // TODO: Figure out how to enable this without breaking things.
+    new UglifyJsPlugin()
+  ];
+}
+
+function isProduction() {
+  return process.env.NODE_ENV === 'production';
 }
 
