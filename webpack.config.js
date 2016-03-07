@@ -102,7 +102,6 @@ module.exports = {
       inject: 'head',
       template: './src/index.html.haml'
     }),
-    new OccurenceOrderPlugin(),
     new ProvidePlugin({ 'jQuery': 'jquery', '$': 'jquery' })
   ],
 
