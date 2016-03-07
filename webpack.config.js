@@ -10,7 +10,6 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  cache: true,
   verbose: true,
   displayErrorDetails: true,
 
@@ -28,7 +27,8 @@ module.exports = {
       'angular2/http',
       'angular2/platform/browser',
       'angular2/router',
-      'babel-polyfill'
+      'babel-polyfill',
+      'jquery'
     ]
   },
 
@@ -51,32 +51,24 @@ module.exports = {
       {
         test: /\.ts$/,
         loader: 'tslint',
-        exclude: [
-          /node_modules/
-        ]
+        exclude: [/node_modules/]
       }
     ],
     loaders: [
       {
         test: /\.ts$/,
         loader: 'babel!ts',
-        exclude: [
-          /node_modules/
-        ]
+        exclude: [/node_modules/]
       },
       {
         test: /\.css$/,
         loader: 'css',
-        include: [
-          path.join(__dirname, 'src')
-        ]
+        include: [path.join(__dirname, 'src')]
       },
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract('style', 'css'),
-        exclude: [
-          path.join(__dirname, 'src')
-        ]
+        exclude: [path.join(__dirname, 'src')]
       },
       {
         test: /\.html.haml$/,
