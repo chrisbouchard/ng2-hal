@@ -2,6 +2,7 @@ import {Injectable} from 'angular2/core';
 import {Http, RequestOptionsArgs, Response} from 'angular2/http';
 import {autobind} from 'core-decorators';
 import {Observable} from 'rxjs';
+import {UriTemplate} from 'uri-templates';
 
 import {AnyConstructor, construct, projectArray} from '../common/core';
 
