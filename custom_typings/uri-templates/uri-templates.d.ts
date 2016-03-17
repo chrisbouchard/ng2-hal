@@ -1,28 +1,17 @@
 declare module 'uri-templates' {
-    export interface FlatObject {
-        [key: string]: string;
-    }
+    export type ValueType = string | string[] | { [key: string]: string };
+    export type MappingType = {} | { [key: string]: ValueType }
 
-    export interface VariablesObject {
-        [key: string]: string | string[] | FlatObject;
-    }
+    export class UriTemplate {
+        constructor(template: string);
 
-    export interface UriTemplate {
-        fill(obj: VariablesObject): string;
+        fill(obj: MappingType): string;
         fill(fn: (varName: string) => string): string;
-        fillFromObject(obj: VariablesObject): string;
-        fromUri(uri: string): VariablesObject;
+        fillFromObject(obj: MappingType): string;
+        fromUri(uri: string): MappingType;
         toString(): string;
 
         varNames: string[];
     }
-
-    export interface UriTemplateStatic {
-        (path: string): UriTemplate;
-        new (path: string): UriTemplate;
-    }
-
-    const UriTemplate: UriTemplateStatic;
-    export default UriTemplate;
 }
 

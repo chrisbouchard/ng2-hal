@@ -2,9 +2,9 @@ import {Injectable} from 'angular2/core';
 import {Http, RequestOptionsArgs, Response} from 'angular2/http';
 import {autobind} from 'core-decorators';
 import {Observable} from 'rxjs';
-import {UriTemplate} from 'uri-templates';
+import {UriTemplate, ValueType as UriValueType} from 'uri-templates';
 
-import {AnyConstructor, construct, projectArray} from '../common/core';
+import {AnyConstructor, construct, mapToObject, projectArray} from '../common/core';
 
 import {HalError} from './error';
 import {HalFactoryMethod} from './factory';
@@ -28,8 +28,8 @@ export class HalClient {
 
     return this.http
         .get(url, options)
-        .map(HalClient.mapErrorResponse)
-        .map(HalClient.mapGetResponse)
+        .map(responseMappers.mapError)
+        .map(responseMappers.mapGet)
         .map(factory.from);
   }
 
@@ -44,8 +44,10 @@ export class HalClient {
   put<T>(url:string, body: any, ctor: AnyConstructor<T>, options?: RequestOptionsArgs): Observable<HalResource<T>> {
     return undefined;
   }
+}
 
-  private static mapErrorResponse(response: Response): Response {
+const responseMappers = {
+  mapError(response: Response): Response {
     let status = response.status;
 
     /* This is probably a little over-zealous, but it corresponds to !response.ok (which doesn't work with the current
@@ -55,22 +57,22 @@ export class HalClient {
     }
 
     return response;
-  }
+  },
 
-  private static mapGetResponse(response: Response): HalObject {
+  mapGet(response: Response): HalObject {
     /* No Content */
     if (response.status === 204) {
       return undefined;
     }
 
     return new HalObject(response.json());
-  }
+  },
 
-  private static mapDeleteResponse(response: Response): void {
+  mapDelete(response: Response): void {
     return undefined;
-  }
+  },
 
-  private static mapUpdateResponse(response: Response): HalLinkObject {
+  mapUpdate(response: Response): HalLinkObject {
     if (response.headers.has('Location')) {
       return { href: response.headers.get('Location') };
     }
@@ -85,24 +87,31 @@ export class HalClient {
 export class HalClientResource<T> implements HalResource<T> {
   constructor(public url: string, private ctor: AnyConstructor<T>, private client: HalClient) {}
 
-  get(): Observable<T> {
-    return this.client.get(this.url, this.ctor);
+  get(params?: Map<string, UriValueType>): Observable<T> {
+    return this.client.get(this.filledUrl(params), this.ctor);
   }
 
-  delete(): Observable<void> {
-    return this.client.delete(this.url);
+  delete(params?: Map<string, UriValueType>): Observable<void> {
+    return this.client.delete(this.filledUrl(params));
   }
 
-  post<U>(body: any, ctor?: AnyConstructor<any>): Observable<HalResource<U>> {
+  post<U>(body: any, params?: Map<string, UriValueType>, ctor?: AnyConstructor<any>): Observable<HalResource<U>> {
     if (!ctor) {
       ctor = body.constructor;
     }
 
-    return this.client.post(this.url, body, ctor);
+    return this.client.post(this.filledUrl(params), body, ctor);
   }
 
-  put(body: T): Observable<HalResource<T>> {
-    return this.client.put(this.url, body, (body as any).constructor);
+  put(body: T, params?: Map<string, UriValueType>): Observable<HalResource<T>> {
+    return this.client.put(this.filledUrl(params), body, (body as any).constructor);
+  }
+
+  private filledUrl(params: Map<string, UriValueType>): string {
+    const paramsObj = params ? mapToObject(params) : {};
+    const template = new UriTemplate(this.url);
+
+    return template.fill(paramsObj);
   }
 }
 

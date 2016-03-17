@@ -14,6 +14,16 @@ export function construct<T>(ctor: AnyConstructor<T>, ...fixedArgs: any[]): (...
   return (...args: any[]) => new ctor(...args, ...fixedArgs);
 }
 
+export function mapToObject<T>(map: Map<string, T>): { [key: string]: T } {
+  let obj: { [key: string]: T } = {};
+
+  for (let [key, value] of map) {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
 export function projectArray<T>(array: T[], type: any): any {
   switch (type) {
     case Array:
