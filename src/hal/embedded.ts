@@ -9,14 +9,14 @@ export function HalEmbedded<T>(ctor: AnyConstructor<T>): PropertyDecorator {
     withOwnMetadata(HAL_DECORATOR_METADATA_KEY, target, [], (transformations: HalDecoratorTransformation[]) => {
       transformations.push({
         apply: (instance, object, client) => {
-          let embeddedObjects = object.embedded.get(key);
+          const embeddedObjects = object.embedded.get(key);
 
           if (!embeddedObjects) {
             return;
           }
 
-          let embeddedInstances = embeddedObjects.map(new HalObjectFactory(ctor, client).from);
-          let type = Reflect.getOwnMetadata('design:type', target, key);
+          const embeddedInstances = embeddedObjects.map(new HalObjectFactory(ctor, client).from);
+          const type = Reflect.getOwnMetadata('design:type', target, key);
           instance[key] = projectArray(embeddedInstances, type);
         }
       });

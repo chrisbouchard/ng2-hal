@@ -9,14 +9,14 @@ export function HalLinked<T>(ctor: AnyConstructor<T>): PropertyDecorator {
     withOwnMetadata(HAL_DECORATOR_METADATA_KEY, target, [], (transformations: HalDecoratorTransformation[]) => {
       transformations.push({
         apply: (instance, object, client) => {
-          let linkedObjects = object.links.get(key);
+          const linkedObjects = object.links.get(key);
 
           if (!linkedObjects) {
             return;
           }
 
-          let linkedInstances = linkedObjects.map(new HalLinkFactory(ctor, client).from);
-          let type = Reflect.getOwnMetadata('design:type', target, key);
+          const linkedInstances = linkedObjects.map(new HalLinkFactory(ctor, client).from);
+          const type = Reflect.getOwnMetadata('design:type', target, key);
           instance[key] = projectArray(linkedInstances, type);
         }
       });

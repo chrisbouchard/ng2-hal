@@ -24,7 +24,7 @@ export class HalClient {
   }
 
   get<T>(url: string, ctor: AnyConstructor<T>, options?: RequestOptionsArgs): Observable<T> {
-    let factory = new HalObjectFactory(ctor, this);
+    const factory = new HalObjectFactory(ctor, this);
 
     return this.http
         .get(url, options)
@@ -48,7 +48,7 @@ export class HalClient {
 
 const responseMappers = {
   mapError(response: Response): Response {
-    let status = response.status;
+    const status = response.status;
 
     /* This is probably a little over-zealous, but it corresponds to !response.ok (which doesn't work with the current
      * Angular 2 beta. */
@@ -141,7 +141,7 @@ export class HalObjectFactory<T> implements HalSubobjectFactory<HalObject, T> {
       return undefined;
     }
 
-    let instance = this.createInstance(object.resource);
+    const instance = this.createInstance(object.resource);
     this.applyDecorators(this.ctor.prototype, instance, object);
     return instance;
   }
@@ -170,7 +170,7 @@ export class HalObjectFactory<T> implements HalSubobjectFactory<HalObject, T> {
     /* First apply the superclass's decorators. */
     this.applyDecorators(Object.getPrototypeOf(prototype), instance, object);
 
-    let transformations: HalDecoratorTransformation[] = Reflect.getOwnMetadata(HAL_DECORATOR_METADATA_KEY, prototype);
+    const transformations: HalDecoratorTransformation[] = Reflect.getOwnMetadata(HAL_DECORATOR_METADATA_KEY, prototype);
 
     for (let transformation of transformations) {
       transformation.apply(instance, object, this.client);
