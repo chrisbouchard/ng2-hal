@@ -23,7 +23,9 @@ module.exports = {
   },
 
   entry: {
-    'app': './src/init',
+    'app': [
+      './src'
+    ],
     'vendor': [
       'angular2/bundles/angular2-polyfills',
       'angular2/common',
@@ -99,28 +101,7 @@ module.exports = {
   plugins: [
     ...commonPlugins(),
     ...productionPlugins()
-  ],
-
-  tslint: {
-    configuration: {
-      rules: {
-        'class-name': true,
-        'comment-format': [true, 'check-space', 'check-uppercase'],
-        'curly': true,
-        'eofline': true,
-        'indent': [true, 'spaces'],
-        'no-trailing-whitespace': true,
-        'one-line': [true, 'check-open-brace'],
-        'quotemark': [true, 'single', 'avoid-escape'],
-        'radix': true,
-        'semicolon': [true, 'always'],
-        'triple-equals': true,
-        'typedef': [true, 'call-signature', 'parameter', 'property-declaration'],
-        'variable-name': [true, 'check-format'],
-        'whitespace': true
-      }
-    }
-  }
+  ]
 }
 
 function devtool() {

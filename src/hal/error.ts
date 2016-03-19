@@ -7,7 +7,7 @@ export class HalError {
   constructor(public status: number, public message: string) {}
 
   @override
-  toString() {
+  toString(): string {
     return `${this.status}: ${this.message}`;
   }
 }

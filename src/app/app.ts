@@ -33,8 +33,8 @@ class Foo {
 export class App implements OnInit {
   constructor(private client: HalClient) {}
 
-  ngOnInit() {
-    let resource: HalResource<Foo> = this.client.resource("http://localhost:8080/test.json", Foo);
+  ngOnInit(): void {
+    let resource: HalResource<Foo> = this.client.resource('http://localhost:8080/test.json', Foo);
     resource.get().subscribe(foo => {
       console.log(foo);
       foo.blah.get().subscribe(foo2 => {

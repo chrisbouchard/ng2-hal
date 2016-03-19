@@ -79,7 +79,7 @@ const responseMappers = {
 
     return undefined;
   }
-}
+};
 
 /**
  *

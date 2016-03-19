@@ -1,14 +1,15 @@
 import {AnyConstructor, projectArray} from '../common/core';
+import {withOwnMetadata} from '../common/metadata';
 
 import {HalClient, HalDecoratorTransformation, HalObjectFactory} from './client';
-import {withOwnMetadata} from './metadata';
 import {HAL_DECORATOR_METADATA_KEY} from './symbols';
+import {HalObject} from './object';
 
 export function HalEmbedded<T>(ctor: AnyConstructor<T>): PropertyDecorator {
-  return function(target, key): void {
+  return (target, key) =>
     withOwnMetadata(HAL_DECORATOR_METADATA_KEY, target, [], (transformations: HalDecoratorTransformation[]) => {
       transformations.push({
-        apply: (instance, object, client) => {
+        apply(instance: any, object: HalObject, client: HalClient): void {
           const embeddedObjects = object.embedded.get(key);
 
           if (!embeddedObjects) {
@@ -23,6 +24,5 @@ export function HalEmbedded<T>(ctor: AnyConstructor<T>): PropertyDecorator {
 
       return transformations;
     });
-  };
 }
 
