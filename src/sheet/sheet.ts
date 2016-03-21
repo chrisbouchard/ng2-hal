@@ -1,8 +1,8 @@
 import {Component, Input, View} from 'angular2/core';
 import {RouterLink} from 'angular2/router';
 
-import {Character, StressBox, Stunt} from '../common/model';
 import {COMMON_PIPES} from '../common/pipes';
+import {Character, StressBox, Stunt} from '../model';
 
 @Component({
   selector: 'fate-sheet',

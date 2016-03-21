@@ -1,7 +1,7 @@
 import {Component, Input, View} from 'angular2/core';
 import {RouterLink} from 'angular2/router';
 
-import {Character} from '../common/model';
+import {Character} from '../model';
 
 @Component({
   selector: 'fate-card',

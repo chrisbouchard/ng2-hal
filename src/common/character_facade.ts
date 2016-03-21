@@ -1,6 +1,6 @@
 import {Observable} from 'rxjs';
 import {Aspect, Character, Consequence, COMMON_ASPECTS, COMMON_CONSEQUENCES, COMMON_STRESS_TRACKS, Player, Skill,
-    StressTrack, Stunt, Template} from './model';
+    StressTrack, Stunt, Template} from '../model';
 
 const RANK_ASPECT_NAME = 'rank';
 

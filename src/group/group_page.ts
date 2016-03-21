@@ -4,8 +4,8 @@ import {RouteParams} from 'angular2/router';
 import {Observable} from 'rxjs';
 
 import {CharacterFacade} from '../common/character_facade';
-import {Character} from '../common/model';
 import {List} from '../list/list';
+import {Character} from '../model';
 
 @Component({
   selector: 'fate-group-page',

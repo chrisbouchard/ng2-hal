@@ -4,7 +4,7 @@ import {RouteParams} from 'angular2/router';
 import {Observable} from 'rxjs';
 
 import {CharacterFacade} from '../common/character_facade';
-import {Character} from '../common/model';
+import {Character} from '../model';
 import {Sheet} from '../sheet/sheet';
 
 @Component({
