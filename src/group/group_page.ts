@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 
 import {CharacterFacade} from '../common/character_facade';
 import {List} from '../list/list';
-import {Character} from '../model';
+import {Character} from '../model/character';
 
 @Component({
   selector: 'fate-group-page',

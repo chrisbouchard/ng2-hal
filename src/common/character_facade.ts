@@ -1,6 +1,13 @@
 import {Observable} from 'rxjs';
-import {Aspect, Character, Consequence, COMMON_ASPECTS, COMMON_CONSEQUENCES, COMMON_STRESS_TRACKS, Player, Skill,
-    StressTrack, Stunt, Template} from '../model';
+
+import {Aspect, COMMON_ASPECTS} from '../model/aspect';
+import {Character} from '../model/character';
+import {Consequence, COMMON_CONSEQUENCES} from '../model/consequence';
+import {Player} from '../model/player';
+import {Skill} from '../model/skill';
+import {COMMON_STRESS_TRACKS, StressTrack} from '../model/stress_track';
+import {Stunt} from '../model/stunt';
+import {Template} from '../model/template';
 
 const RANK_ASPECT_NAME = 'rank';
 
