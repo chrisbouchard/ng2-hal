@@ -8,9 +8,10 @@ import {AnyConstructor, construct, mapToObject, projectArray} from '../common/co
 
 import {HalError} from './error';
 import {HalFactoryMethod} from './factory';
+import {HalFieldMapping, HalFieldMetadata} from './field';
 import {HalLinkObject, HalObject} from './object';
 import {HalResource} from './resource';
-import {HAL_DECORATOR_METADATA_KEY, HAL_FACTORY_METADATA_KEY} from './symbols';
+import {HAL_DECORATOR_METADATA_KEY, HAL_FACTORY_METADATA_KEY, HAL_FIELD_METADATA_KEY} from './symbols';
 
 /**
  *
@@ -146,8 +147,31 @@ export class HalObjectFactory<T> implements HalSubobjectFactory<HalObject, T> {
     return instance;
   }
 
-  private createInstance(resource: any): T {
+  private createInstance(rawResource: any): T {
+    let resource: any = {};
     let instance: T;
+
+    let fieldMappingMap: Map<string | symbol, HalFieldMapping> =
+      Reflect.getMetadata(HAL_FIELD_METADATA_KEY, this.ctor) || new Map();
+
+    for (let [rawKey, rawValue] of Object.entries(rawResource)) {
+      const fieldMapping = fieldMappingMap.get(rawKey);
+      let key: string | symbol = rawKey;
+      let value: any = rawValue;
+
+      if (fieldMapping) {
+        key = fieldMapping.fieldName;
+
+        if (fieldMapping.metadata.factory) {
+          value = fieldMapping.metadata.factory(rawValue);
+        }
+        else if (fieldMapping.metadata.constructorFn) {
+          value = new fieldMapping.metadata.constructorFn(rawValue);
+        }
+      }
+
+      resource[key] = value;
+    }
 
     /* We don't search the prototype chain for a factory, because the class should deside how it's constructed. */
     if (Reflect.hasOwnMetadata(HAL_FACTORY_METADATA_KEY, this.ctor)) {

@@ -6,6 +6,7 @@ export {HalClient};
 export {HalEmbedded} from './embedded';
 export {HalError} from './error';
 export {HalFactory} from './factory';
+export {HalFieldMetadata, HalField} from './field';
 export {HalLinked} from './linked';
 export {HalResource} from './resource';
 
