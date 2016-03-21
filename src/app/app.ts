@@ -1,4 +1,4 @@
-import {Component, OnInit, View} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 import {RouteConfig, RouterLink, RouterOutlet} from 'angular2/router';
 
 import {HalClient, HalEmbedded, HalLinked, HalResource} from '../hal';

@@ -1,5 +1,5 @@
 import {AsyncPipe} from 'angular2/common';
-import {Component, View} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {RouteParams} from 'angular2/router';
 import {Observable} from 'rxjs';
 
