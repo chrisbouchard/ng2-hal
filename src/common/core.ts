@@ -2,6 +2,8 @@ export interface AnyConstructor<T> {
   new(...args: any[]): T;
 }
 
+export type IdentifierType = string | symbol;
+
 export function arrayify(value: any): any[] {
   if (Array.isArray(value)) {
     return Array.from(value);
@@ -11,7 +13,7 @@ export function arrayify(value: any): any[] {
 }
 
 export function construct<T>(ctor: AnyConstructor<T>, ...fixedArgs: any[]): (...args: any[]) => T {
-  return (...args: any[]) => new ctor(...args, ...fixedArgs);
+  return (...args: any[]) => new ctor(...fixedArgs, ...args);
 }
 
 export function mapToObject<T>(map: Map<string, T>): { [key: string]: T } {

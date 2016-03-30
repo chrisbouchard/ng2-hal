@@ -1,22 +1,40 @@
-import {AnyConstructor} from '../common/core';
+import {construct, IdentifierType} from '../common/core';
 
-import {HAL_FACTORY_METADATA_KEY} from './symbols';
+const HAL_FACTORY_METADATA_KEY = Symbol('halFactoryMetadataKey');
 
-export interface HalFactoryMethod {
-  (json: any): any;
+export class HalFactoryMetadata {
+  factory: Function;
 }
 
-export function HalFactory(target: any, key?: string | symbol, description?: TypedPropertyDescriptor<any>): void {
-  let method: HalFactoryMethod;
+export class HalFactoryDescription {
+  public factory: Function;
+}
 
-  if (key) {
-    method = (json: any) => target[key](json);
-  }
-  else {
-    let ctor = target as AnyConstructor<any>;
-    method = (json: any) => new ctor(json);
-  }
+export function HalFactory(metadata?: HalFactoryMetadata): ClassDecorator & MethodDecorator {
+  return (target, key?, description?) => {
+    let description: HalFactoryDescription = new HalFactoryDescription();
 
-  Reflect.defineMetadata(HAL_FACTORY_METADATA_KEY, method, target);
+    if (key) {
+      if (metadata && metadata.factory) {
+        throw new TypeError('HalFactory cannot be used as a method decorator when a factory function is specified.');
+      }
+
+      description.factory = target[key].bind(target);
+    }
+    else {
+      if (metadata && metadata.factory) {
+        description.factory = metadata.factory;
+      }
+      else {
+        description.factory = construct(target);
+      }
+    }
+
+    Reflect.defineMetadata(HAL_FACTORY_METADATA_KEY, description, target);
+  };
+}
+
+export function getOwnFactoryDescription(target: any): HalFactoryDescription {
+  return Reflect.getOwnMetadata(HAL_FACTORY_METADATA_KEY, target);
 }
 
