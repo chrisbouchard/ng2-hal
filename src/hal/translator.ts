@@ -1,5 +1,4 @@
 import {OpaqueToken} from 'angular2/core';
-
 import {AnyConstructor} from '../common/core';
 import {HalObject} from './object';
 

@@ -1,14 +1,14 @@
 export {ValueType as UriValueType} from 'uri-templates';
 
-import {HalClient} from './client';
-export {HalClient};
-
-export {HalEmbedded} from './embedded';
+export {HalClient} from './client';
 export {HalError} from './error';
-export {HalFactory} from './factory';
-export {HalFieldMetadata, HalField} from './field';
-export {HalLinked} from './linked';
+export {HalEmbedded, HalField, HalFieldMetadata, HalFieldSection, HalFieldTypeMetadata, HalLink} from './field';
+export {HalHttp} from './http';
+export {HalInstanceFactory} from './instance_factory';
+export {HAL_PROVIDERS} from './providers';
 export {HalResource} from './resource';
+export {HalResourceFactory} from './resource_factory';
+export {HalCollectionTranslator, HalObjectTranslator, HalTranslator, HAL_COLLECTION_TRANSLATORS, HAL_OBJECT_TRANSLATORS} from './translators';
 
-export const HAL_PROVIDERS: any[] = [ HalClient ];
+var keepBabelHappy: any = false;
 

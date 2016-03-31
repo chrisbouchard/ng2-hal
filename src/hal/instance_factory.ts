@@ -3,7 +3,7 @@ import * as wu from 'wu';
 
 import {AnyConstructor} from '../common/core';
 
-import {getFieldDescription, HalFieldDescription, HalFieldSection, HalFieldTypeDescription} from './field';
+import {getCookedFieldDescription, getRawFieldDescription, HalFieldDescription, HalFieldSection, HalFieldTypeDescription} from './field';
 import {HalLinkObject, HalObject, HalObjectSerializer} from './object';
 import {HalResource} from './resource';
 import {HalResourceFactory} from './resource_factory';
@@ -12,13 +12,13 @@ import {HalCollectionTranslator, HAL_COLLECTION_TRANSLATORS, HalObjectTranslator
 
 @Injectable()
 export class HalInstanceFactory {
-  constructor(
-      private resourceFactory: HalResourceFactory,
-      private objectSerializer: HalObjectSerializer,
-      @Inject(HAL_COLLECTION_TRANSLATORS) private collectionTranslators: HalCollectionTranslator[],
-      @Inject(HAL_OBJECT_TRANSLATORS) private objectTranslators: HalObjectTranslator[]) {}
 
-  createInstance(value: any, typeDescription: HalFieldTypeDescription): any {
+  constructor(
+    @Inject(HAL_COLLECTION_TRANSLATORS) private collectionTranslators: HalCollectionTranslator[],
+    @Inject(HAL_OBJECT_TRANSLATORS) private objectTranslators: HalObjectTranslator[]
+  ) {}
+
+  createInstance(value: any, typeDescription: HalFieldTypeDescription, resourceFactory: HalResourceFactory): any {
     /* If the field is a collection... */
     if (typeDescription.collection) {
       /* The value must be an array. */
@@ -28,7 +28,7 @@ export class HalInstanceFactory {
       else {
         /* Create instance of all the elements. */
         const elementTypeDescription = typeDescription.getElementTypeDescription();
-        const instanceArray = value.map(element => this.createInstance(element, elementTypeDescription));
+        const instanceArray = value.map(element => this.createInstance(element, elementTypeDescription, resourceFactory));
 
         /* Then translate the array into a collection instance. */
         return findApplicableCollectionTranslator(this.collectionTranslators, typeDescription.collection)
@@ -45,7 +45,7 @@ export class HalInstanceFactory {
       else {
         /* Create instances for each value using the corresponding tuple type to build a type descriptor. */
         return Array.from(wu.zipWith(
-          (element, elementCtor) => this.createInstance(element, new HalFieldTypeDescription(elementCtor)),
+          (element, elementCtor) => this.createInstance(element, new HalFieldTypeDescription(elementCtor), resourceFactory),
           value, typeDescription.type
         );
       }
@@ -92,19 +92,21 @@ export class HalInstanceFactory {
     }
   }
 
-  private fillInstance(target: any, source: any, ctor: AnyConstructor<any>, section: HalFieldSection): void {
+  private fillInstance(target: any, source: any, ctor: AnyConstructor<any>, section: HalFieldSection,
+      resourceFactory: HalResourceFactory): void {
     for ([key, value] of Object.entries(source)) {
       /* Look up a field description using the raw name. */
-      const fieldDescription = getFieldDescription(ctor, key);
+      const fieldDescription = getRawFieldDescription(ctor, key);
 
       /* If the field belongs in this section... */
       if (fieldDescription.section === section) {
         /* Create an instance from the value, then assign it using the cooked name. */
         /* TODO: Should we throw an exception if a field is reassigned? */
-        target[fieldDescription.cookedName] = this.createInstance(value, fieldDescription.typeDescription);
+        target[fieldDescription.cookedName] = this.createInstance(value, fieldDescription.typeDescription, resourceFactory);
       }
     }
   }
+
 }
 
 

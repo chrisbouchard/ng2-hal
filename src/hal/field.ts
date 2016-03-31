@@ -1,6 +1,7 @@
 import {AnyConstructor, IdentifierType} from '../common/core';
 
-const HAL_FIELD_METADATA_KEY = Symbol('halFieldMetadataKey');
+const HAL_COOKED_FIELD_METADATA_KEY = Symbol('halCookedFieldMetadataKey');
+const HAL_RAW_FIELD_METADATA_KEY = Symbol('halRawFieldMetadataKey');
 
 export enum HalFieldSection {
   EMBEDDED, LINKS, RESOURCE
@@ -81,7 +82,8 @@ export class HalFieldTypeDescription {
 export function HalField(arg: string | AnyConstructor<any> | HalFieldMetadata): PropertyDecorator {
   return (target, key) => {
     let description = new HalFieldDescription(key, arg);
-    Reflect.defineMetadata(HAL_FIELD_METADATA_KEY, description, target, description.rawName);
+    Reflect.defineMetadata(HAL_COOKED_FIELD_METADATA_KEY, description, target, description.cookedName);
+    Reflect.defineMetadata(HAL_RAW_FIELD_METADATA_KEY, description, target, description.rawName);
   };
 }
 
@@ -89,7 +91,8 @@ export function HalEmbedded(arg: string | AnyConstructor<any> | HalFieldMetadata
   return (target, key) => {
     let description = new HalFieldDescription(key, arg);
     description.section = HalSection.EMBEDDED;
-    Reflect.defineMetadata(HAL_FIELD_METADATA_KEY, description, target, description.rawName);
+    Reflect.defineMetadata(HAL_COOKED_FIELD_METADATA_KEY, description, target, description.cookedName);
+    Reflect.defineMetadata(HAL_RAW_FIELD_METADATA_KEY, description, target, description.rawName);
   };
 }
 
@@ -97,12 +100,17 @@ export function HalLink(arg: string | AnyConstructor<any> | HalFieldMetadata): P
   return (target, key) => {
     let description = new HalFieldDescription(key, arg);
     description.section = HalSection.LINKS;
-    Reflect.defineMetadata(HAL_FIELD_METADATA_KEY, description, target, description.rawName);
+    Reflect.defineMetadata(HAL_COOKED_FIELD_METADATA_KEY, description, target, description.cookedName);
+    Reflect.defineMetadata(HAL_RAW_FIELD_METADATA_KEY, description, target, description.rawName);
   };
 }
 
 
-export function getFieldDescription(target: any, key: string): HalFieldDescription {
-  return Reflect.getMetadata(HAL_FIELD_METADATA_KEY, target, key) || new HalFieldDescription(key, undefined);
+export function getCookedFieldDescription(target: any, key: string): HalFieldDescription {
+  return Reflect.getMetadata(HAL_COOKED_FIELD_METADATA_KEY, target, key) || new HalFieldDescription(key, undefined);
+}
+
+export function getRawFieldDescription(target: any, key: string): HalFieldDescription {
+  return Reflect.getMetadata(HAL_RAW_FIELD_METADATA_KEY, target, key) || new HalFieldDescription(key, undefined);
 }
 

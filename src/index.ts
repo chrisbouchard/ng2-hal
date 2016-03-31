@@ -8,7 +8,7 @@ import {App} from './app/app';
 
 import {HAL_PROVIDERS} from './hal';
 
-import {__PRODUCTION__} from './globals.ts';
+import {__PRODUCTION__} from './globals';
 
 /* Load CSS stylesheets. */
 import 'semantic/semantic.css';
