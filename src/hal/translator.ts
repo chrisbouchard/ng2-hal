@@ -7,13 +7,13 @@ export interface HalTranslator {
 }
 
 export interface HalObjectTranslator extends HalTranslator {
-  toObject<T>(value: T, ctor: AnyConstructor<T>): any;
-  fromObject<T>(object: any, ctor: AnyConstructor<T>): T;
+  toObject(value: any, ctor: AnyConstructor<any>): any;
+  fromObject(object: any, ctor: AnyConstructor<any>): any;
 }
 
 export interface HalCollectionTranslator extends HalTranslator {
-  toArray<T>(value: T, ctor: AnyConstructor<T>): any[];
-  fromArray<T>(array: any[], ctor: AnyConstructor<T>): T;
+  toArray(value: any, ctor: AnyConstructor<any>): any[];
+  fromArray(array: any[], ctor: AnyConstructor<any>): any;
 }
 
 export const HAL_OBJECT_TRANSLATORS = new OpaqueToken('halObjectTranslators');

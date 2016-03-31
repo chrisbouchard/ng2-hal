@@ -23,7 +23,7 @@ export class HalFieldDescription {
 
   typeDescription: HalFieldTypeDescription;
 
-  section: HalFieldSection = HalSection.RESOURCE;
+  section: HalFieldSection = HalFieldSection.RESOURCE;
 
   constructor(key: string, arg: string | AnyConstructor<any> | HalFieldMetadata) {
     this.rawName = key;
@@ -44,7 +44,7 @@ export class HalFieldDescription {
       }
 
       if (metadata.section !== undefined) {
-        this.section = section;
+        this.section = metadata.section;
       }
 
       this.typeDescription = new HalFieldTypeDescription(metadata);
@@ -81,27 +81,42 @@ export class HalFieldTypeDescription {
 
 export function HalField(arg: string | AnyConstructor<any> | HalFieldMetadata): PropertyDecorator {
   return (target, key) => {
-    let description = new HalFieldDescription(key, arg);
-    Reflect.defineMetadata(HAL_COOKED_FIELD_METADATA_KEY, description, target, description.cookedName);
-    Reflect.defineMetadata(HAL_RAW_FIELD_METADATA_KEY, description, target, description.rawName);
+    if (typeof key === 'string') {
+      let description = new HalFieldDescription(key, arg);
+      Reflect.defineMetadata(HAL_COOKED_FIELD_METADATA_KEY, description, target, description.cookedName);
+      Reflect.defineMetadata(HAL_RAW_FIELD_METADATA_KEY, description, target, description.rawName);
+    }
+    else {
+      throw new TypeError('The @HalField decorator can only be applied to a field whose name is a String');
+    }
   };
 }
 
 export function HalEmbedded(arg: string | AnyConstructor<any> | HalFieldMetadata): PropertyDecorator {
   return (target, key) => {
-    let description = new HalFieldDescription(key, arg);
-    description.section = HalSection.EMBEDDED;
-    Reflect.defineMetadata(HAL_COOKED_FIELD_METADATA_KEY, description, target, description.cookedName);
-    Reflect.defineMetadata(HAL_RAW_FIELD_METADATA_KEY, description, target, description.rawName);
+    if (typeof key === 'string') {
+      let description = new HalFieldDescription(key, arg);
+      description.section = HalFieldSection.EMBEDDED;
+      Reflect.defineMetadata(HAL_COOKED_FIELD_METADATA_KEY, description, target, description.cookedName);
+      Reflect.defineMetadata(HAL_RAW_FIELD_METADATA_KEY, description, target, description.rawName);
+    }
+    else {
+      throw new TypeError('The @HalEmbedded decorator can only be applied to a field whose name is a String');
+    }
   };
 }
 
 export function HalLink(arg: string | AnyConstructor<any> | HalFieldMetadata): PropertyDecorator {
   return (target, key) => {
-    let description = new HalFieldDescription(key, arg);
-    description.section = HalSection.LINKS;
-    Reflect.defineMetadata(HAL_COOKED_FIELD_METADATA_KEY, description, target, description.cookedName);
-    Reflect.defineMetadata(HAL_RAW_FIELD_METADATA_KEY, description, target, description.rawName);
+    if (typeof key === 'string') {
+      let description = new HalFieldDescription(key, arg);
+      description.section = HalFieldSection.LINKS;
+      Reflect.defineMetadata(HAL_COOKED_FIELD_METADATA_KEY, description, target, description.cookedName);
+      Reflect.defineMetadata(HAL_RAW_FIELD_METADATA_KEY, description, target, description.rawName);
+    }
+    else {
+      throw new TypeError('The @HalLink decorator can only be applied to a field whose name is a String');
+    }
   };
 }
 

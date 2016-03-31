@@ -1,5 +1,4 @@
 import {Inject, Injectable} from 'angular2/core';
-import * as wu from 'wu';
 
 import {AnyConstructor} from '../common/core';
 
@@ -28,7 +27,7 @@ export class HalInstanceFactory {
       else {
         /* Create instance of all the elements. */
         const elementTypeDescription = typeDescription.getElementTypeDescription();
-        const instanceArray = value.map(element => this.createInstance(element, elementTypeDescription, resourceFactory));
+        const instanceArray = value.map((element: any) => this.createInstance(element, elementTypeDescription, resourceFactory));
 
         /* Then translate the array into a collection instance. */
         return findApplicableCollectionTranslator(this.collectionTranslators, typeDescription.collection)
@@ -45,9 +44,9 @@ export class HalInstanceFactory {
       else {
         /* Create instances for each value using the corresponding tuple type to build a type descriptor. */
         return Array.from(wu.zipWith(
-          (element, elementCtor) => this.createInstance(element, new HalFieldTypeDescription(elementCtor), resourceFactory),
+          (element: any, elementCtor: AnyConstructor<any>) => this.createInstance(element, new HalFieldTypeDescription(elementCtor), resourceFactory),
           value, typeDescription.type
-        );
+        ));
       }
     }
 
@@ -62,9 +61,9 @@ export class HalInstanceFactory {
 
       /* Copy fields from the links and embedded sections, then all other fields. The order matters -- fields in later
        * sections will overwrite earlier sections. */
-      this.fillInstance(rawInstance, value.links, ctor, HalFieldSection.LINKS);
-      this.fillInstance(rawInstance, value.embedded, ctor, HalFieldSection.EMBEDDED);
-      this.fillInstance(rawInstance, value.resource, ctor, HalFieldSection.RESOURCE);
+      this.fillInstance(rawInstance, value.links, ctor, HalFieldSection.LINKS, resourceFactory);
+      this.fillInstance(rawInstance, value.embedded, ctor, HalFieldSection.EMBEDDED, resourceFactory);
+      this.fillInstance(rawInstance, value.resource, ctor, HalFieldSection.RESOURCE, resourceFactory);
 
       /* Translate the raw instance into a cooked instance. */
       return findApplicableObjectTranslator(this.objectTranslators, ctor).fromObject(rawInstance, ctor);
@@ -72,7 +71,7 @@ export class HalInstanceFactory {
 
     /* If the value is a HAL link... */
     else if (value instanceof HalLinkObject) {
-      return this.resourceFactory.createResource(value, typeDescription);
+      return resourceFactory.createResource(value, typeDescription);
     }
 
     /* If the value is anything else... */
@@ -85,7 +84,7 @@ export class HalInstanceFactory {
       const rawInstance = {};
 
       /* Copy fields from the value. We treat all the fields as if they were in the resource section. */
-      this.fillInstance(rawInstance, value, ctor, HalFieldSection.RESOURCE);
+      this.fillInstance(rawInstance, value, ctor, HalFieldSection.RESOURCE, resourceFactory);
 
       /* Translate the raw instance into a cooked instance. */
       return findApplicableObjectTranslator(this.objectTranslators, ctor).fromObject(rawInstance, ctor);
@@ -94,7 +93,7 @@ export class HalInstanceFactory {
 
   private fillInstance(target: any, source: any, ctor: AnyConstructor<any>, section: HalFieldSection,
       resourceFactory: HalResourceFactory): void {
-    for ([key, value] of Object.entries(source)) {
+    for (let [key, value] of Object.entries(source)) {
       /* Look up a field description using the raw name. */
       const fieldDescription = getRawFieldDescription(ctor, key);
 
@@ -149,7 +148,7 @@ function findApplicableTranslator<T extends HalTranslator>(translators: T[], cto
     }
 
     /* If we find exactly one translator, we can return it. */
-    if (applicable.length == 1) {
+    if (applicable.length === 1) {
       return applicable[0];
     }
 

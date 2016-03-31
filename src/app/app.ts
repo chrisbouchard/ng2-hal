@@ -1,7 +1,7 @@
 import {Component, OnInit} from 'angular2/core';
 import {RouteConfig, RouterLink, RouterOutlet} from 'angular2/router';
 
-import {HalClient, HalEmbedded, HalLinked, HalResource} from '../hal';
+import {HalClient, HalEmbedded, HalLink, HalResource} from '../hal';
 
 import {CharacterPage} from '../character/character_page';
 import {GroupPage} from '../group/group_page';
@@ -11,7 +11,7 @@ class Foo {
   bar: string[];
   baz: string;
 
-  @HalLinked(Foo)
+  @HalLink(Foo)
   blah: HalResource<Foo>;
 
   @HalEmbedded(Foo)

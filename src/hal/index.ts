@@ -8,7 +8,7 @@ export {HalInstanceFactory} from './instance_factory';
 export {HAL_PROVIDERS} from './providers';
 export {HalResource} from './resource';
 export {HalResourceFactory} from './resource_factory';
-export {HalCollectionTranslator, HalObjectTranslator, HalTranslator, HAL_COLLECTION_TRANSLATORS, HAL_OBJECT_TRANSLATORS} from './translators';
+export {HalCollectionTranslator, HalObjectTranslator, HalTranslator, HAL_COLLECTION_TRANSLATORS, HAL_OBJECT_TRANSLATORS} from './translator';
 
 var keepBabelHappy: any = false;
 

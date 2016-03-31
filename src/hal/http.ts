@@ -56,7 +56,7 @@ function handleErrorResponse(response: Response): Response {
 
 function mapUpdate(response: Response): HalLinkObject {
   if (response.headers.has('Location')) {
-    return { href: response.headers.get('Location') };
+    return new HalLinkObject(response.headers.get('Location'), false);
   }
 
   return undefined;

@@ -15,14 +15,14 @@ export class HalDefaultObjectTranslator implements HalObjectTranslator {
     return !ctor;
   }
 
-  toObject<T>(value: T, ctor: AnyConstructor<T>): any {
+  toObject(value: any, ctor: AnyConstructor<any>): any {
     const instance: any = {};
     Object.assign(instance, value);
     return instance;
   }
 
-  fromObject<T>(value: any, ctor: AnyConstructor<T>): T {
-    const instance: T = new ctor();
+  fromObject(value: any, ctor: AnyConstructor<any>): any {
+    const instance: any = new ctor();
     Object.assign(instance, value);
     return instance;
   }

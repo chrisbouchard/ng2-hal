@@ -15,7 +15,7 @@ export class HalClient {
   constructor(private resourceFactory: HalResourceFactory) {}
 
   resource<T>(url: string, metadata: AnyConstructor<T> | HalFieldTypeMetadata): HalResource<T> {
-    return this.resourceFatory.createResource(new HalLinkObject(url, false), new HalFieldTypeDescription(metadata));
+    return this.resourceFactory.createResource(new HalLinkObject(url, false), new HalFieldTypeDescription(metadata));
   }
 }
 

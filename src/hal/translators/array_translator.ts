@@ -15,11 +15,15 @@ export class HalArrayTranslator implements HalCollectionTranslator {
     return ctor === Array;
   }
 
-  toArray<T>(value: T, ctor: AnyConstructor<T>): any[] {
-    return value;
+  toArray(value: any, ctor: AnyConstructor<any>): any[] {
+    if (Array.isArray(value)) {
+      return value;
+    }
+
+    throw new TypeError(`Expected value of type Array, but got ${value.constructor.name}`);
   }
 
-  fromArray<T>(value: any[], ctor: AnyConstructor<T>): T {
+  fromArray(value: any[], ctor: AnyConstructor<any>): any {
     return value;
   }
 
