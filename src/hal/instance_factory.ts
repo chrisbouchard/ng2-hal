@@ -42,7 +42,7 @@ export class HalInstanceFactory {
       else {
         /* Create instances for each value using the corresponding tuple type to build a type descriptor. */
         return Array.from(wu.zipWith(
-          (element: any, elementCtor: Type) => this.createInstance(element, new HalFieldTypeDescription(elementCtor), resourceFactory),
+          (element: any, elementType: Type) => this.createInstance(element, new HalFieldTypeDescription(elementType), resourceFactory),
           value, typeDescription.type
         ));
       }
@@ -52,19 +52,19 @@ export class HalInstanceFactory {
     else if (value instanceof HalObject) {
       /* Get the instance's type from the type description if present, otherwise use the type of the HAL object's
        * resource. We already handled tuple types, so it must be a constructor. */
-      const ctor = typeDescription.type || value.resource.constructor;
+      const type = typeDescription.type || value.resource.constructor;
 
       /* This is where we'll build the object we send to the translator. */
       const rawInstance = {};
 
       /* Copy fields from the links and embedded sections, then all other fields. The order matters -- fields in later
        * sections will overwrite earlier sections. */
-      this.fillInstance(rawInstance, value.links, ctor, HalFieldSection.LINKS, resourceFactory);
-      this.fillInstance(rawInstance, value.embedded, ctor, HalFieldSection.EMBEDDED, resourceFactory);
-      this.fillInstance(rawInstance, value.resource, ctor, HalFieldSection.RESOURCE, resourceFactory);
+      this.fillInstance(rawInstance, value.links, type, HalFieldSection.LINKS, resourceFactory);
+      this.fillInstance(rawInstance, value.embedded, type, HalFieldSection.EMBEDDED, resourceFactory);
+      this.fillInstance(rawInstance, value.resource, type, HalFieldSection.RESOURCE, resourceFactory);
 
       /* Translate the raw instance into a cooked instance. */
-      return findApplicableObjectTranslator(this.objectTranslators, ctor).fromObject(rawInstance, ctor);
+      return findApplicableObjectTranslator(this.objectTranslators, type).fromObject(rawInstance, type);
     }
 
     /* If the value is a HAL link... */
@@ -76,16 +76,16 @@ export class HalInstanceFactory {
     else if (typeof value === 'object') {
       /* Get the instance's type from the type description if present, otherwise use the type of the HAL object's
        * resource. We already handled tuple types, so it must be a constructor. */
-      const ctor = typeDescription.type || value.constructor;
+      const type = typeDescription.type || value.constructor;
 
       /* This is where we'll build the object we send to the translator. */
       const rawInstance = {};
 
       /* Copy fields from the value. We treat all the fields as if they were in the resource section. */
-      this.fillInstance(rawInstance, value, ctor, HalFieldSection.RESOURCE, resourceFactory);
+      this.fillInstance(rawInstance, value, type, HalFieldSection.RESOURCE, resourceFactory);
 
       /* Translate the raw instance into a cooked instance. */
-      return findApplicableObjectTranslator(this.objectTranslators, ctor).fromObject(rawInstance, ctor);
+      return findApplicableObjectTranslator(this.objectTranslators, type).fromObject(rawInstance, type);
     }
 
     /* If the value is anything else... */
@@ -95,11 +95,11 @@ export class HalInstanceFactory {
     }
   }
 
-  private fillInstance(target: any, source: any, ctor: Type, section: HalFieldSection,
+  private fillInstance(target: any, source: any, type: Type, section: HalFieldSection,
       resourceFactory: HalResourceFactory): void {
     for (let [key, value] of Object.entries(source)) {
       /* Look up a field description using the raw name. */
-      const fieldDescription = getRawFieldDescription(ctor, key);
+      const fieldDescription = getRawFieldDescription(type, key);
 
       /* If the field belongs in this section... */
       if (fieldDescription.section === section) {
@@ -113,31 +113,25 @@ export class HalInstanceFactory {
 }
 
 
-function findApplicableCollectionTranslator(translators: HalCollectionTranslator[], ctor: Type): HalCollectionTranslator {
+function findApplicableCollectionTranslator(translators: HalCollectionTranslator[], type: Type): HalCollectionTranslator {
   try {
-    return findApplicableTranslator(translators, ctor);
+    return findApplicableTranslator(translators, type);
   }
   catch (ex) {
-    if (ex instanceof TypeError) {
-      throw new TypeError(`Error finding an applicable collection translator: ${ex.message}`);
-    }
-
-    throw ex;
+    throw Object.create(ex, {
+      message: `Error finding an applicable collection translator: ${ex.message}`
+    });
   }
 }
 
-function findApplicableObjectTranslator(translators: HalObjectTranslator[], ctor: Type): HalObjectTranslator {
+function findApplicableObjectTranslator(translators: HalObjectTranslator[], type: Type): HalObjectTranslator {
   try {
-    return findApplicableTranslator(translators, ctor);
+    return findApplicableTranslator(translators, type);
   }
   catch (ex) {
-    /*
-    if (ex instanceof TypeError) {
-      throw new TypeError(`Error finding an applicable object translator: ${ex.message}`);
-    }
-    */
-
-    throw ex;
+    throw Object.create(ex, {
+      message: `Error finding an applicable object translator: ${ex.message}`
+    });
   }
 }
 

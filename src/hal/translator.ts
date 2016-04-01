@@ -2,17 +2,17 @@ import {OpaqueToken, Type} from 'angular2/core';
 import {HalObject} from './object';
 
 export interface HalTranslator {
-  appliesTo(ctor: Type): boolean;
+  appliesTo(type: Type): boolean;
 }
 
 export interface HalObjectTranslator extends HalTranslator {
-  toObject(value: any, ctor: Type): any;
-  fromObject(object: any, ctor: Type): any;
+  toObject(value: any, type: Type): any;
+  fromObject(object: any, type: Type): any;
 }
 
 export interface HalCollectionTranslator extends HalTranslator {
-  toArray(value: any, ctor: Type): any[];
-  fromArray(array: any[], ctor: Type): any;
+  toArray(value: any, type: Type): any[];
+  fromArray(array: any[], type: Type): any;
 }
 
 export const HAL_OBJECT_TRANSLATORS = new OpaqueToken('halObjectTranslators');
