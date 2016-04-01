@@ -1,5 +1,4 @@
 import {Type} from 'angular2/core';
-import {IdentifierType} from '../common/core';
 
 const HAL_COOKED_FIELD_METADATA_KEY = Symbol('halCookedFieldMetadataKey');
 const HAL_RAW_FIELD_METADATA_KEY = Symbol('halRawFieldMetadataKey');
@@ -19,8 +18,8 @@ export interface HalFieldMetadata extends HalFieldTypeMetadata {
 }
 
 export class HalFieldDescription {
-  rawName: IdentifierType;
-  cookedName: IdentifierType;
+  rawName: string;
+  cookedName: string;
 
   typeDescription: HalFieldTypeDescription;
 

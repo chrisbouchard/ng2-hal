@@ -3,8 +3,6 @@ import {Observable} from 'rxjs';
 
 import {default as UriTemplate, UriValueType, UriMappingType} from 'uri-templates';
 
-import {mapToObject} from '../common/core';
-
 import {HalFieldTypeDescription, HalFieldTypeMetadata} from './field';
 import {HalHttp} from './http';
 import {HalInstanceFactory} from './instance_factory';
