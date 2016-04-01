@@ -1,6 +1,7 @@
 import {Injectable} from 'angular2/core';
 import {Observable} from 'rxjs';
-import {UriTemplate, ValueType as UriValueType} from 'uri-templates';
+
+import {default as UriTemplate, UriValueType, UriMappingType} from 'uri-templates';
 
 import {mapToObject} from '../common/core';
 
@@ -38,31 +39,29 @@ export class HalHttpResource<T> implements HalResource<T> {
     private resourceFactory: HalHttpResourceFactory
   ) {}
 
-  get(params?: Map<string, UriValueType>): Observable<T> {
+  get(params?: UriMappingType): Observable<T> {
     return this.halHttp.get(this.filledUrl(params)).map(
       object => this.instanceFactory.createInstance(object, this.typeDescription, this.resourceFactory)
     );
   }
 
-  delete(params?: Map<string, UriValueType>): Observable<void> {
+  delete(params?: UriMappingType): Observable<void> {
     return this.halHttp.delete(this.filledUrl(params));
   }
 
-  post<U>(body: any, params?: Map<string, UriValueType>, typeDescription?: HalFieldTypeMetadata): Observable<HalResource<U>> {
+  post<U>(body: any, params?: UriMappingType, typeDescription?: HalFieldTypeMetadata): Observable<HalResource<U>> {
     // TODO: Implement this method.
     return undefined;
   }
 
-  put(body: T, params?: Map<string, UriValueType>): Observable<HalResource<T>> {
+  put(body: T, params?: UriMappingType): Observable<HalResource<T>> {
     // TODO: Implement this method.
     return undefined;
   }
 
-  private filledUrl(params: Map<string, UriValueType>): string {
-    const paramsObj = params ? mapToObject(params) : {};
+  private filledUrl(params: UriMappingType): string {
     const template = new UriTemplate(this.link.href);
-
-    return template.fill(paramsObj);
+    return template.fill(params);
   }
 }
 

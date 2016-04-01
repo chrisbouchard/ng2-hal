@@ -1,6 +1,6 @@
 import {Injectable} from 'angular2/core';
-import {arrayify, construct, IdentifierType} from '../common/core';
-import {HalLinkObject, HalObject, HalObjectArray, HalObjectSerializer} from './object';
+import {arrayify, construct, IdentifierType} from '../../common/core';
+import {HalLinkObject, HalObject, HalObjectSerializer} from '../object';
 
 export abstract class HalJsonObjectSerializerOptions {
   embeddedKey: string;
@@ -10,6 +10,7 @@ export abstract class HalJsonObjectSerializerOptions {
 @Injectable()
 export class BaseHalJsonObjectSerializerOptions extends HalJsonObjectSerializerOptions {
   constructor() {
+    super();
     this.embeddedKey = '_embedded';
     this.linksKey = '_links';
   }
@@ -17,21 +18,23 @@ export class BaseHalJsonObjectSerializerOptions extends HalJsonObjectSerializerO
 
 @Injectable()
 export class HalJsonObjectSerializer extends HalObjectSerializer {
-  constructor (public options: HalJsonObjectSerializerOptions) {}
+  constructor (public options: HalJsonObjectSerializerOptions) {
+    super();
+  }
 
-  deserialize(data: string): HalObject {
+  deserialize(data: string): HalObject | HalObject[] {
     let json: any = JSON.parse(data);
-    return this.deserializeHelper(json);
+    return this.toObject(json);
   }
 
   private toObject(json: any): HalObject | HalObject[] {
     /* Special case when the JSON is an array. */
     if (json instanceof Array) {
-      return json.map(x => this.toObject(x));
+      return json.map((element: any) => this.toObject(element));
     }
 
-    let embedded: { [key: string]: HalObject[] } = {};
-    let links: { [key: string]: HalLinkObject[] } = {};
+    let embedded: { [key: string]: HalObject | HalObject[] } = {};
+    let links: { [key: string]: HalLinkObject | HalLinkObject[] } = {};
     let resource: any = {};
 
     for (let [key, value] of Object.entries(json)) {
@@ -44,9 +47,9 @@ export class HalJsonObjectSerializer extends HalObjectSerializer {
           break;
 
         case this.options.linksKey:
-          /* We need to make sure we wind up with an Array. */
+          /* Propagate HalLinkObject into the links. */
           for (let [linkKey, linkValue] of Object.entries(value)) {
-            links[linkKey] = arrayify(linkValue).map(x => this.toLinkObject(x));
+            links[linkKey] = this.toLinkObject(linkValue);
           }
           break;
 
@@ -60,10 +63,15 @@ export class HalJsonObjectSerializer extends HalObjectSerializer {
   }
 
   private toLinkObject(json: any): HalLinkObject {
+    /* Special case when the JSON is an array. */
+    if (json instanceof Array) {
+      return json.map((element: any) => this.toLinkObject(element));
+    }
+
     return new HalLinkObject(json.href, json.templated);
   }
 
-  serialize(object: HalObject): string {
+  serialize(object: HalObject | HalObject[]): string {
     return '';
   }
 }

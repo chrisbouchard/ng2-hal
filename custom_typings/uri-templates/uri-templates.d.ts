@@ -1,17 +1,17 @@
 declare module 'uri-templates' {
-    export type ValueType = string | string[] | { [key: string]: string };
-    export type MappingType = {} | { [key: string]: ValueType }
+  export default class UriTemplate {
+    constructor(template: string);
 
-    export class UriTemplate {
-        constructor(template: string);
+    fill(obj: UriMappingType): string;
+    fill(fn: (varName: string) => string): string;
+    fillFromObject(obj: UriMappingType): string;
+    fromUri(uri: string): UriMappingType;
+    toString(): string;
 
-        fill(obj: MappingType): string;
-        fill(fn: (varName: string) => string): string;
-        fillFromObject(obj: MappingType): string;
-        fromUri(uri: string): MappingType;
-        toString(): string;
+    varNames: string[];
+  }
 
-        varNames: string[];
-    }
+  export type UriValueType = string | string[] | { [key: string]: string };
+  export type UriMappingType = {} | { [key: string]: UriValueType }
 }
 

@@ -83,8 +83,7 @@ export function HalField(arg: string | AnyConstructor<any> | HalFieldMetadata): 
   return (target, key) => {
     if (typeof key === 'string') {
       let description = new HalFieldDescription(key, arg);
-      Reflect.defineMetadata(HAL_COOKED_FIELD_METADATA_KEY, description, target, description.cookedName);
-      Reflect.defineMetadata(HAL_RAW_FIELD_METADATA_KEY, description, target, description.rawName);
+      defineDescriptionMetadata(description, target);
     }
     else {
       throw new TypeError('The @HalField decorator can only be applied to a field whose name is a String');
@@ -97,8 +96,7 @@ export function HalEmbedded(arg: string | AnyConstructor<any> | HalFieldMetadata
     if (typeof key === 'string') {
       let description = new HalFieldDescription(key, arg);
       description.section = HalFieldSection.EMBEDDED;
-      Reflect.defineMetadata(HAL_COOKED_FIELD_METADATA_KEY, description, target, description.cookedName);
-      Reflect.defineMetadata(HAL_RAW_FIELD_METADATA_KEY, description, target, description.rawName);
+      defineDescriptionMetadata(description, target);
     }
     else {
       throw new TypeError('The @HalEmbedded decorator can only be applied to a field whose name is a String');
@@ -111,8 +109,7 @@ export function HalLink(arg: string | AnyConstructor<any> | HalFieldMetadata): P
     if (typeof key === 'string') {
       let description = new HalFieldDescription(key, arg);
       description.section = HalFieldSection.LINKS;
-      Reflect.defineMetadata(HAL_COOKED_FIELD_METADATA_KEY, description, target, description.cookedName);
-      Reflect.defineMetadata(HAL_RAW_FIELD_METADATA_KEY, description, target, description.rawName);
+      defineDescriptionMetadata(description, target);
     }
     else {
       throw new TypeError('The @HalLink decorator can only be applied to a field whose name is a String');
@@ -120,6 +117,11 @@ export function HalLink(arg: string | AnyConstructor<any> | HalFieldMetadata): P
   };
 }
 
+
+function defineDescriptionMetadata(description: HalFieldDescription, target: any): void {
+  Reflect.defineMetadata(HAL_COOKED_FIELD_METADATA_KEY, description, target.constructor, description.cookedName);
+  Reflect.defineMetadata(HAL_RAW_FIELD_METADATA_KEY, description, target.constructor, description.rawName);
+}
 
 export function getCookedFieldDescription(target: any, key: string): HalFieldDescription {
   return Reflect.getMetadata(HAL_COOKED_FIELD_METADATA_KEY, target, key) || new HalFieldDescription(key, undefined);

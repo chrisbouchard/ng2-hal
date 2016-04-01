@@ -13,7 +13,7 @@ export class HalObject {
 }
 
 export abstract class HalObjectSerializer {
-  abstract deserialize(data: string): HalObject;
-  abstract serialize(object: HalObject): string;
+  abstract deserialize(data: string): HalObject | HalObject[];
+  abstract serialize(object: HalObject | HalObject[]): string;
 }
 

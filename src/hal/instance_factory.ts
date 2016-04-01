@@ -74,8 +74,8 @@ export class HalInstanceFactory {
       return resourceFactory.createResource(value, typeDescription);
     }
 
-    /* If the value is anything else... */
-    else {
+    /* If the value is any other kind of object... */
+    else if (typeof value === 'object') {
       /* Get the instance's type from the type description if present, otherwise use the type of the HAL object's
        * resource. We already handled tuple types, so it must be a constructor. */
       const ctor = typeDescription.type || value.constructor;
@@ -88,6 +88,12 @@ export class HalInstanceFactory {
 
       /* Translate the raw instance into a cooked instance. */
       return findApplicableObjectTranslator(this.objectTranslators, ctor).fromObject(rawInstance, ctor);
+    }
+
+    /* If the value is anything else... */
+    else {
+      /* Just return it. */
+      return value;
     }
   }
 
@@ -127,15 +133,18 @@ function findApplicableObjectTranslator(translators: HalObjectTranslator[], ctor
     return findApplicableTranslator(translators, ctor);
   }
   catch (ex) {
+    /*
     if (ex instanceof TypeError) {
       throw new TypeError(`Error finding an applicable object translator: ${ex.message}`);
     }
+    */
 
     throw ex;
   }
 }
 
 function findApplicableTranslator<T extends HalTranslator>(translators: T[], ctor: AnyConstructor<any>): T {
+  let currentPrototype: any = ctor ? ctor.prototype : undefined;
   let currentCtor = ctor;
 
   while (true) {
@@ -158,8 +167,13 @@ function findApplicableTranslator<T extends HalTranslator>(translators: T[], cto
     }
 
     /* Otherwise we should try using our prototype's constructor (if we have a prototype), or else undefined. */
-    const prototype: any = ctor.prototype;
-    currentCtor = prototype ? prototype.constructor : undefined;
+    if (currentPrototype) {
+      currentCtor = currentPrototype.constructor;
+      currentPrototype = Object.getPrototypeOf(currentPrototype);
+    }
+    else {
+      currentCtor = undefined;
+    }
   }
 
   /* If we get out of the loop, we walked all the way down the prototype chain and didn't find any applicable
