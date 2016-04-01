@@ -1,6 +1,4 @@
-import {Injectable} from 'angular2/core';
-
-import {AnyConstructor} from '../common/core';
+import {Injectable, Type} from 'angular2/core';
 
 import {HalLinkObject} from './object';
 import {HalResource} from './resource';
@@ -14,7 +12,7 @@ import {HalFieldTypeDescription, HalFieldTypeMetadata} from './field';
 export class HalClient {
   constructor(private resourceFactory: HalResourceFactory) {}
 
-  resource<T>(url: string, metadata: AnyConstructor<T> | HalFieldTypeMetadata): HalResource<T> {
+  resource<T>(url: string, metadata: Type | HalFieldTypeMetadata): HalResource<T> {
     return this.resourceFactory.createResource(new HalLinkObject(url, false), new HalFieldTypeDescription(metadata));
   }
 }

@@ -1,4 +1,4 @@
-import {AnyConstructor} from '../../common/core';
+import {Type} from 'angular2/core';
 
 import {HalObject} from '../object';
 import {HalCollectionTranslator} from '../translator';
@@ -11,11 +11,11 @@ export class HalArrayTranslator implements HalCollectionTranslator {
   /**
    * Only apply when we've reached the bottom of the prototype chain.
    */
-  appliesTo(ctor: AnyConstructor<any>): boolean {
+  appliesTo(ctor: Type): boolean {
     return ctor === Array;
   }
 
-  toArray(value: any, ctor: AnyConstructor<any>): any[] {
+  toArray(value: any, ctor: Type): any[] {
     if (Array.isArray(value)) {
       return value;
     }
@@ -23,7 +23,7 @@ export class HalArrayTranslator implements HalCollectionTranslator {
     throw new TypeError(`Expected value of type Array, but got ${value.constructor.name}`);
   }
 
-  fromArray(value: any[], ctor: AnyConstructor<any>): any {
+  fromArray(value: any[], ctor: Type): any {
     return value;
   }
 

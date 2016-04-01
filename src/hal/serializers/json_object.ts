@@ -1,5 +1,4 @@
 import {Injectable} from 'angular2/core';
-import {arrayify, construct, IdentifierType} from '../../common/core';
 import {HalLinkObject, HalObject, HalObjectSerializer} from '../object';
 
 export abstract class HalJsonObjectSerializerOptions {

@@ -1,8 +1,6 @@
 import {Injectable} from 'angular2/core';
-import {Http, RequestOptionsArgs, Response} from 'angular2/http';
+import {Http, Response} from 'angular2/http';
 import {Observable} from 'rxjs';
-
-import {AnyConstructor} from '../common/core';
 
 import {HalError} from './error';
 import {HalFieldTypeDescription} from './field';

@@ -1,5 +1,3 @@
-import {IdentifierType} from '../common/core';
-
 export class HalLinkObject {
   constructor(public href: string, public templated: boolean) {}
 }

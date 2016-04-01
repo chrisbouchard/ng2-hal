@@ -1,6 +1,4 @@
-import {Inject, Injectable} from 'angular2/core';
-
-import {AnyConstructor} from '../common/core';
+import {Inject, Injectable, Type} from 'angular2/core';
 
 import {getCookedFieldDescription, getRawFieldDescription, HalFieldDescription, HalFieldSection, HalFieldTypeDescription} from './field';
 import {HalLinkObject, HalObject, HalObjectSerializer} from './object';
@@ -44,7 +42,7 @@ export class HalInstanceFactory {
       else {
         /* Create instances for each value using the corresponding tuple type to build a type descriptor. */
         return Array.from(wu.zipWith(
-          (element: any, elementCtor: AnyConstructor<any>) => this.createInstance(element, new HalFieldTypeDescription(elementCtor), resourceFactory),
+          (element: any, elementCtor: Type) => this.createInstance(element, new HalFieldTypeDescription(elementCtor), resourceFactory),
           value, typeDescription.type
         ));
       }
@@ -97,7 +95,7 @@ export class HalInstanceFactory {
     }
   }
 
-  private fillInstance(target: any, source: any, ctor: AnyConstructor<any>, section: HalFieldSection,
+  private fillInstance(target: any, source: any, ctor: Type, section: HalFieldSection,
       resourceFactory: HalResourceFactory): void {
     for (let [key, value] of Object.entries(source)) {
       /* Look up a field description using the raw name. */
@@ -115,7 +113,7 @@ export class HalInstanceFactory {
 }
 
 
-function findApplicableCollectionTranslator(translators: HalCollectionTranslator[], ctor: AnyConstructor<any>): HalCollectionTranslator {
+function findApplicableCollectionTranslator(translators: HalCollectionTranslator[], ctor: Type): HalCollectionTranslator {
   try {
     return findApplicableTranslator(translators, ctor);
   }
@@ -128,7 +126,7 @@ function findApplicableCollectionTranslator(translators: HalCollectionTranslator
   }
 }
 
-function findApplicableObjectTranslator(translators: HalObjectTranslator[], ctor: AnyConstructor<any>): HalObjectTranslator {
+function findApplicableObjectTranslator(translators: HalObjectTranslator[], ctor: Type): HalObjectTranslator {
   try {
     return findApplicableTranslator(translators, ctor);
   }
@@ -143,7 +141,7 @@ function findApplicableObjectTranslator(translators: HalObjectTranslator[], ctor
   }
 }
 
-function findApplicableTranslator<T extends HalTranslator>(translators: T[], ctor: AnyConstructor<any>): T {
+function findApplicableTranslator<T extends HalTranslator>(translators: T[], ctor: Type): T {
   let currentPrototype: any = ctor ? ctor.prototype : undefined;
   let currentCtor = ctor;
 

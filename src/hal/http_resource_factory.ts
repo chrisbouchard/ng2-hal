@@ -21,8 +21,8 @@ export class HalHttpResourceFactory extends HalResourceFactory {
     super();
   }
 
-  createResource(link: HalLinkObject, typeDescription: HalFieldTypeDescription): HalHttpResource<any> {
-    return new HalHttpResource<any>(link, typeDescription, this.halHttp, this.instanceFactory, this);
+  createResource<T>(link: HalLinkObject, typeDescription: HalFieldTypeDescription): HalHttpResource<T> {
+    return new HalHttpResource<T>(link, typeDescription, this.halHttp, this.instanceFactory, this);
   }
 }
 

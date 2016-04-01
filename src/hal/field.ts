@@ -1,4 +1,5 @@
-import {AnyConstructor, IdentifierType} from '../common/core';
+import {Type} from 'angular2/core';
+import {IdentifierType} from '../common/core';
 
 const HAL_COOKED_FIELD_METADATA_KEY = Symbol('halCookedFieldMetadataKey');
 const HAL_RAW_FIELD_METADATA_KEY = Symbol('halRawFieldMetadataKey');
@@ -8,8 +9,8 @@ export enum HalFieldSection {
 }
 
 export interface HalFieldTypeMetadata {
-  type?: AnyConstructor<any> | AnyConstructor<any>[];
-  collection?: AnyConstructor<any>;
+  type?: Type | Type[];
+  collection?: Type;
 }
 
 export interface HalFieldMetadata extends HalFieldTypeMetadata {
@@ -25,7 +26,7 @@ export class HalFieldDescription {
 
   section: HalFieldSection = HalFieldSection.RESOURCE;
 
-  constructor(key: string, arg: string | AnyConstructor<any> | HalFieldMetadata) {
+  constructor(key: string, arg: string | Type | HalFieldMetadata) {
     this.rawName = key;
     this.cookedName = key;
 
@@ -34,7 +35,7 @@ export class HalFieldDescription {
       this.typeDescription = new HalFieldTypeDescription({});
     }
     else if (arg instanceof Function) {
-      this.typeDescription = new HalFieldTypeDescription(arg as AnyConstructor<any>);
+      this.typeDescription = new HalFieldTypeDescription(arg as Type);
     }
     else {
       let metadata = (arg as HalFieldMetadata) || {};
@@ -53,12 +54,12 @@ export class HalFieldDescription {
 }
 
 export class HalFieldTypeDescription {
-  type: AnyConstructor<any> | AnyConstructor<any>[];
-  collection: AnyConstructor<any>;
+  type: Type | Type[];
+  collection: Type;
 
-  constructor(arg: AnyConstructor<any> | HalFieldTypeMetadata) {
+  constructor(arg: Type | HalFieldTypeMetadata) {
     if (arg instanceof Function) {
-      this.type = arg as AnyConstructor<any>;
+      this.type = arg as Type;
     }
     else {
       let metadata = (arg as HalFieldTypeMetadata) || {};
@@ -79,7 +80,7 @@ export class HalFieldTypeDescription {
   }
 }
 
-export function HalField(arg: string | AnyConstructor<any> | HalFieldMetadata): PropertyDecorator {
+export function HalField(arg: string | Type | HalFieldMetadata): PropertyDecorator {
   return (target, key) => {
     if (typeof key === 'string') {
       let description = new HalFieldDescription(key, arg);
@@ -91,7 +92,7 @@ export function HalField(arg: string | AnyConstructor<any> | HalFieldMetadata): 
   };
 }
 
-export function HalEmbedded(arg: string | AnyConstructor<any> | HalFieldMetadata): PropertyDecorator {
+export function HalEmbedded(arg: string | Type | HalFieldMetadata): PropertyDecorator {
   return (target, key) => {
     if (typeof key === 'string') {
       let description = new HalFieldDescription(key, arg);
@@ -104,7 +105,7 @@ export function HalEmbedded(arg: string | AnyConstructor<any> | HalFieldMetadata
   };
 }
 
-export function HalLink(arg: string | AnyConstructor<any> | HalFieldMetadata): PropertyDecorator {
+export function HalLink(arg: string | Type | HalFieldMetadata): PropertyDecorator {
   return (target, key) => {
     if (typeof key === 'string') {
       let description = new HalFieldDescription(key, arg);

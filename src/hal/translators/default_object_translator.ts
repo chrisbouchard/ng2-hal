@@ -1,4 +1,4 @@
-import {AnyConstructor} from '../../common/core';
+import {Type} from 'angular2/core';
 
 import {HalObject} from '../object';
 import {HalObjectTranslator} from '../translator';
@@ -11,18 +11,18 @@ export class HalDefaultObjectTranslator implements HalObjectTranslator {
   /**
    * Only apply when we've reached the bottom of the prototype chain.
    */
-  appliesTo(ctor: AnyConstructor<any>): boolean {
+  appliesTo(ctor: Type): boolean {
     return !ctor;
   }
 
-  toObject(value: any, ctor: AnyConstructor<any>): any {
+  toObject(value: any, ctor: Type): any {
     const instance: any = {};
     Object.assign(instance, value);
     return instance;
   }
 
-  fromObject(value: any, ctor: AnyConstructor<any>): any {
-    const instance: any = new ctor();
+  fromObject(value: any, ctor: Type): any {
+    const instance: any = Reflect.construct(ctor, []);
     Object.assign(instance, value);
     return instance;
   }

@@ -1,19 +1,18 @@
-import {OpaqueToken} from 'angular2/core';
-import {AnyConstructor} from '../common/core';
+import {OpaqueToken, Type} from 'angular2/core';
 import {HalObject} from './object';
 
 export interface HalTranslator {
-  appliesTo(ctor: AnyConstructor<any>): boolean;
+  appliesTo(ctor: Type): boolean;
 }
 
 export interface HalObjectTranslator extends HalTranslator {
-  toObject(value: any, ctor: AnyConstructor<any>): any;
-  fromObject(object: any, ctor: AnyConstructor<any>): any;
+  toObject(value: any, ctor: Type): any;
+  fromObject(object: any, ctor: Type): any;
 }
 
 export interface HalCollectionTranslator extends HalTranslator {
-  toArray(value: any, ctor: AnyConstructor<any>): any[];
-  fromArray(array: any[], ctor: AnyConstructor<any>): any;
+  toArray(value: any, ctor: Type): any[];
+  fromArray(array: any[], ctor: Type): any;
 }
 
 export const HAL_OBJECT_TRANSLATORS = new OpaqueToken('halObjectTranslators');

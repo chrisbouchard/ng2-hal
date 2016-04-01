@@ -1,8 +1,6 @@
 import {Observable} from 'rxjs';
 import {UriMappingType} from 'uri-templates';
 
-import {AnyConstructor} from '../common/core';
-
 import {HalFieldTypeMetadata} from './field';
 
 export interface HalResource<T> {
