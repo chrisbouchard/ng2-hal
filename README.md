@@ -24,6 +24,18 @@ $ gulp server # Live development server
 The compiled bundles and assets will wind up in `dist`. The app may be run with any static http server with `dist` as
 the webroot.
 
+## Testing
+
+Automated tests can be run using `gulp`. The following command will run unit tests once.
+```console
+$ gulp test
+```
+
+Unit tests can also be run continuously.
+```console
+$ gulp ci
+```
+
 ## Related Projects
 
 The following projects are used by FATE Character Sheet:
@@ -32,6 +44,8 @@ The following projects are used by FATE Character Sheet:
 * [Babel](//github.com/babel/babel) to transpile ES6 output from `tsc` down to ES5.
 * [Gulp](//github.com/gulpjs/gulp) to manage the build process.
 * [Haml](//github.com/haml/haml) to write templates more succinctly.
+* [Jasmine](//github.com/jasmine/jasmine) to write unit tests.
+* [Karma](//github.com/karma-runner/karma) to run automated tests.
 * [Less](//github.com/less/less.js) to write styles more succinctly.
 * [Semantic-UI](//github.com/Semantic-Org/Semantic-UI) as the main style and layout library.
 * [Typescript](//github.com/Microsoft/TypeScript) to write type-aware JavaScript for components and services.
