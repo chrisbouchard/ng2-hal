@@ -31,7 +31,7 @@ Automated tests are run using `gulp`. The following command will run unit tests 
 $ gulp test
 ```
 
-Unit tests can also be run continuously.
+Tests can also be run continuously.
 ```console
 $ gulp ci
 ```
