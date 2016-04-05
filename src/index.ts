@@ -1,42 +1,16 @@
-import {bootstrap} from 'angular2/platform/browser';
-import {enableProdMode, provide} from 'angular2/core';
-import {HTTP_PROVIDERS} from 'angular2/http';
-import {HashLocationStrategy, LocationStrategy, ROUTER_PROVIDERS} from 'angular2/router';
+export {UriMappingType} from 'uri-templates';
 
-import {CharacterFacade} from './common/character_facade';
-import {App} from './app/app';
+export {HalClient} from './client';
+export {HalError} from './error';
+export {HalEmbedded, HalField, HalFieldMetadata, HalFieldSection, HalFieldTypeMetadata, HalLink} from './field';
+export {HalHttp} from './http';
+export {HalInstanceFactory} from './instance_factory';
+export {HAL_PROVIDERS} from './providers';
+export {HalResource} from './resource';
+export {HalResourceFactory} from './resource_factory';
+export {HalCollectionTranslator, HalObjectTranslator, HalTranslator, HAL_COLLECTION_TRANSLATORS, HAL_OBJECT_TRANSLATORS} from './translator';
 
-import {HAL_PROVIDERS} from './hal';
+export {BaseHalJsonObjectSerializerOptions, HalJsonObjectSerializer, HalJsonObjectSerializerOptions} from './serializers/json_object';
 
-import {__PRODUCTION__} from './globals';
-
-/* Load CSS stylesheets. */
-import 'semantic/semantic.css';
-
-/* Load packages for side-effects. */
-import 'angular2/bundles/angular2-polyfills';
-import 'babel-polyfill';
-import 'jquery';
-import 'rxjs/Rx';
-import 'semantic/semantic';
-
-if (__PRODUCTION__) {
-  /* Switch Angular to production mode. */
-  enableProdMode();
-}
-else {
-  (window as any).jQuery = jQuery;
-}
-
-jQuery(() => {
-  bootstrap(App, [
-    CharacterFacade,
-    HAL_PROVIDERS,
-    HTTP_PROVIDERS,
-    ROUTER_PROVIDERS,
-    provide(LocationStrategy, {
-      useClass: HashLocationStrategy
-    })
-  ]).catch(err => console.error(err));
-});
+var keepBabelHappy: any = false;
 
