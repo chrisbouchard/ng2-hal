@@ -1,6 +1,8 @@
 import {Component, Input} from 'angular2/core';
 import {RouterLink} from 'angular2/router';
 
+import {autobind} from 'core-decorators';
+
 import {COMMON_PIPES} from '../common/pipes';
 import {Character} from '../model/character';
 import {StressBox} from '../model/stress_track';
@@ -18,6 +20,7 @@ export class Sheet {
 
   emptyStressBox: StressBox = { enabled: false, marked: false };
 
+  @autobind
   namedAspect(slot: string): {title: string, name: string} {
     return {
       title: this.character.template.aspectNames.get(slot),
