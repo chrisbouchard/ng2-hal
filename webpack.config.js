@@ -1,7 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 
-var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
+//var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var DefinePlugin = webpack.DefinePlugin;
 var ProvidePlugin = webpack.ProvidePlugin;
 
@@ -9,7 +9,7 @@ var DedupePlugin = webpack.optimize.DedupePlugin;
 var OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin;
 var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+//var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -25,7 +25,7 @@ module.exports = {
   entry: {
     'app': [
       './src'
-    ],
+    ] /*,
     'vendor': [
       'angular2/bundles/angular2-polyfills',
       'angular2/common',
@@ -36,6 +36,7 @@ module.exports = {
       'babel-polyfill',
       'jquery'
     ]
+    */
   },
 
   output: {
@@ -69,13 +70,15 @@ module.exports = {
       {
         test: /\.css$/,
         loader: 'css',
-        include: [path.join(__dirname, 'src')]
+        //include: [path.join(__dirname, 'src')]
       },
+      /*
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract('style', 'css'),
         exclude: [path.join(__dirname, 'src')]
       },
+      */
       {
         test: /\.html.haml$/,
         loader: 'haml-haml'
@@ -114,11 +117,11 @@ function devtool() {
 
 function commonPlugins() {
   return [
-    new CommonsChunkPlugin('vendor', 'vendor.js'),
+    //new CommonsChunkPlugin('vendor', 'vendor.js'),
     new DefinePlugin({
       __PRODUCTION__: JSON.stringify(isProduction())
     }),
-    new ExtractTextPlugin('vendor.css'),
+    //new ExtractTextPlugin('vendor.css'),
     new HtmlWebpackPlugin({
       inject: 'head',
       template: './src/index.html.haml'

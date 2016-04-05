@@ -1,6 +1,8 @@
 var gulp = require('gulp');
 var gulpUtil = require('gulp-util');
 
+var karma = require('karma');
+
 var semantic = {
   build: require('./semantic/tasks/build'),
   watch: require('./semantic/tasks/watch')
@@ -57,5 +59,18 @@ gulp.task('webpack-dev-server', function (callback) {
 
     gulpUtil.log('[webpack-dev-server]', 'http://localhost:8080/');
   });
+});
+
+gulp.task('test', function (done) {
+  new karma.Server({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done).start();
+});
+
+gulp.task('ci', function (done) {
+  new karma.Server({
+    configFile: __dirname + '/karma.conf.js'
+  }, done).start();
 });
 
