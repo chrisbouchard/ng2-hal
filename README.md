@@ -26,7 +26,7 @@ the webroot.
 
 ## Testing
 
-Automated tests can be run using `gulp`. The following command will run unit tests once.
+Automated tests are run using `gulp`. The following command will run unit tests once.
 ```console
 $ gulp test
 ```
