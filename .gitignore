@@ -1,4 +1,5 @@
-/dist
+/.awcache/
+/dist/
 /node_modules/
 /npm-debug.log
 /semantic/dist/

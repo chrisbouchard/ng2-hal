@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "declaration": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
@@ -10,6 +11,9 @@
   "files": [
     "custom_typings/custom.d.ts",
     "typings/index.d.ts"
-  ]
+  ],
+  "awesomeTypescriptLoaderOptions": {
+    "useBabel": true
+  }
 }
 

@@ -1,14 +1,11 @@
-var path = require('path');
 var webpack = require('webpack');
 
 var DedupePlugin = webpack.optimize.DedupePlugin;
 var OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin;
-var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
 module.exports = {
   verbose: true,
   displayErrorDetails: true,
-  devtool: devtool(),
 
   stats: {
     colors: true,
@@ -16,13 +13,12 @@ module.exports = {
   },
 
   entry: {
-    'ng2-hal': ['./src']
+    'index': ['./index.ts']
   },
 
   output: {
     filename: '[name].js',
-    path: path.join(__dirname, 'dist'),
-    publicPath: '',
+    path: './dist',
     sourceMapFilename: '[name].js.map'
   },
 
@@ -35,58 +31,22 @@ module.exports = {
       {
         test: /\.ts$/,
         loader: 'tslint',
-        exclude: [path.join(__dirname, 'node_modules')]
+        exclude: ['./node_modules']
       }
     ],
 
     loaders: [
       {
         test: /\.ts$/,
-        loader: 'babel!ts',
-        exclude: [path.join(__dirname, 'node_modules')]
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel',
-        exclude: [
-          path.join(__dirname, 'node_modules'),
-          path.join(__dirname, 'semantic')
-        ]
+        loader: 'awesome-typescript-loader',
+        exclude: ['./node_modules']
       }
-    ],
-
-    noParse: [
-      path.join(__dirname, 'node_modules', 'zone.js'),
-      path.join(__dirname, 'node_modules', 'reflect-metadata')
     ]
   },
 
   plugins: [
-    ...productionPlugins()
-  ]
-}
-
-function devtool() {
-  if (!isProduction()) {
-    return undefined;
-  }
-
-  return '#cheap-module-eval-source-map';
-}
-
-function productionPlugins() {
-  if (!isProduction()) {
-    return [];
-  }
-
-  return [
     new DedupePlugin(),
     new OccurenceOrderPlugin(),
-    new UglifyJsPlugin()
-  ];
-}
-
-function isProduction() {
-  return process.env.NODE_ENV === 'production';
+  ]
 }
 
