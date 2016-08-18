@@ -60,7 +60,6 @@
     "phantomjs-prebuilt": "2.1.11",
     "run-sequence": "1.2.2",
     "source-map-loader": "0.1.5",
-    "ts-loader": "0.8.2",
     "tslint": "3.14.0",
     "tslint-loader": "2.1.5",
     "typescript": "2.0.0",
