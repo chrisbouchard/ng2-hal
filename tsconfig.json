@@ -9,7 +9,7 @@
   },
   "files": [
     "custom_typings/custom.d.ts",
-    "typings/browser.d.ts"
+    "typings/index.d.ts"
   ]
 }
 

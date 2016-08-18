@@ -9,7 +9,7 @@ import { HalResourceFactory } from './resource-factory';
 import { HAL_COLLECTION_TRANSLATORS, HAL_OBJECT_TRANSLATORS, HalCollectionTranslator, HalObjectTranslator,
   HalTranslator } from './translator';
 
-import {BaseHalJsonObjectSerializerOptions, HalJsonObjectSerializer, HalJsonObjectSerializerOptions} from './serializers/json-object';
+import { BaseHalJsonObjectSerializerOptions, HalJsonObjectSerializer, HalJsonObjectSerializerOptions } from './serializers/json-object';
 
 import { HalArrayTranslator } from './translators/array-translator';
 import { HalDefaultObjectTranslator } from './translators/default-object-translator';

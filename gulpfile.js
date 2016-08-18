@@ -1,12 +1,10 @@
 var gulp = require('gulp');
+var gulpClean = require('gulp-clean');
 var gulpUtil = require('gulp-util');
 
 var karma = require('karma');
 
-var semantic = {
-  build: require('./semantic/tasks/build'),
-  watch: require('./semantic/tasks/watch')
-};
+var runSequence = require('run-sequence');
 
 var webpack = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
@@ -15,11 +13,11 @@ var webpackConfig = require('./webpack.config');
 
 gulp.task('default', ['build']);
 
-gulp.task('build', ['webpack:build']);
-gulp.task('server', ['semantic:watch', 'webpack-dev-server']);
+gulp.task('build', function (callback) {
+    runSequence('clean', 'webpack:build', callback);
+});
 
-gulp.task('semantic:build', semantic.build);
-gulp.task('semantic:watch', semantic.watch);
+gulp.task('server', ['webpack-dev-server']);
 
 var statsConfig = {
   colors: true,
@@ -48,6 +46,7 @@ gulp.task('webpack-dev-server', function (callback) {
 
   var server = new WebpackDevServer(compiler, {
     contentBase: 'dist',
+    historyApiFallback: true,
     publicPath: serverConfig.output.publicPath,
     stats: statsConfig
   });
@@ -61,6 +60,10 @@ gulp.task('webpack-dev-server', function (callback) {
   });
 });
 
+gulp.task('clean', function () {
+    return gulp.src('./dist', {read: false}).pipe(gulpClean());
+});
+
 gulp.task('test', function (done) {
   new karma.Server({
     configFile: __dirname + '/karma.conf.js',
@@ -68,7 +71,7 @@ gulp.task('test', function (done) {
   }, done).start();
 });
 
-gulp.task('ci', function (done) {
+gulp.task('test-ci', function (done) {
   new karma.Server({
     configFile: __dirname + '/karma.conf.js'
   }, done).start();

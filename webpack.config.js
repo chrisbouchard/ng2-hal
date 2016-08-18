@@ -1,8 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
 
-var DefinePlugin = webpack.DefinePlugin;
-
 var DedupePlugin = webpack.optimize.DedupePlugin;
 var OccurenceOrderPlugin = webpack.optimize.OccurenceOrderPlugin;
 var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
@@ -18,9 +16,7 @@ module.exports = {
   },
 
   entry: {
-    'app': [
-      './src'
-    ]
+    'ng2-hal': ['./src']
   },
 
   output: {
@@ -31,9 +27,6 @@ module.exports = {
   },
 
   resolve: {
-    alias: {
-      'semantic': path.join(__dirname, 'semantic/dist')
-    },
     extensions: ['', '.ts', '.js']
   },
 
@@ -42,23 +35,33 @@ module.exports = {
       {
         test: /\.ts$/,
         loader: 'tslint',
-        exclude: [/node_modules/]
+        exclude: [path.join(__dirname, 'node_modules')]
       }
     ],
+
     loaders: [
       {
         test: /\.ts$/,
         loader: 'babel!ts',
-        exclude: [/node_modules/]
+        exclude: [path.join(__dirname, 'node_modules')]
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel',
+        exclude: [
+          path.join(__dirname, 'node_modules'),
+          path.join(__dirname, 'semantic')
+        ]
       }
     ],
+
     noParse: [
-      path.join(__dirname, 'node_modules', 'angular2', 'bundles')
+      path.join(__dirname, 'node_modules', 'zone.js'),
+      path.join(__dirname, 'node_modules', 'reflect-metadata')
     ]
   },
 
   plugins: [
-    ...commonPlugins(),
     ...productionPlugins()
   ]
 }
@@ -71,14 +74,6 @@ function devtool() {
   return '#cheap-module-eval-source-map';
 }
 
-function commonPlugins() {
-  return [
-    new DefinePlugin({
-      __PRODUCTION__: JSON.stringify(isProduction())
-    })
-  ];
-}
-
 function productionPlugins() {
   if (!isProduction()) {
     return [];
@@ -87,7 +82,6 @@ function productionPlugins() {
   return [
     new DedupePlugin(),
     new OccurenceOrderPlugin(),
-    // TODO: Figure out how to enable this without breaking things.
     new UglifyJsPlugin()
   ];
 }
