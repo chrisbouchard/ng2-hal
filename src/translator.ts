@@ -1,5 +1,6 @@
-import {OpaqueToken, Type} from 'angular2/core';
-import {HalObject} from './object';
+import { OpaqueToken, Type } from '@angular/core';
+
+import { HalObject } from './object';
 
 export interface HalTranslator {
   appliesTo(type: Type): boolean;

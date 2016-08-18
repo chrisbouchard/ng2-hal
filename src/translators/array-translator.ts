@@ -1,7 +1,7 @@
-import {Type} from 'angular2/core';
+import { Type } from '@angular/core';
 
-import {HalObject} from '../object';
-import {HalCollectionTranslator} from '../translator';
+import { HalObject } from '../object';
+import { HalCollectionTranslator } from '../translator';
 
 /**
  * A translator that simply returns the value as given.

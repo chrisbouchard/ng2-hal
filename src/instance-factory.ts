@@ -1,11 +1,12 @@
-import {Inject, Injectable, Type} from 'angular2/core';
+import { Inject, Injectable, Type } from '@angular/core';
 
-import {getCookedFieldDescription, getRawFieldDescription, HalFieldDescription, HalFieldSection, HalFieldTypeDescription} from './field';
-import {HalLinkObject, HalObject, HalObjectSerializer} from './object';
-import {HalResource} from './resource';
-import {HalResourceFactory} from './resource_factory';
-import {HalCollectionTranslator, HAL_COLLECTION_TRANSLATORS, HalObjectTranslator, HAL_OBJECT_TRANSLATORS,
-  HalTranslator} from './translator';
+import { getCookedFieldDescription, getRawFieldDescription, HalFieldDescription, HalFieldSection,
+  HalFieldTypeDescription } from './field';
+import { HalLinkObject, HalObject, HalObjectSerializer } from './object';
+import { HalResource } from './resource';
+import { HalResourceFactory } from './resource-factory';
+import { HAL_COLLECTION_TRANSLATORS, HAL_OBJECT_TRANSLATORS, HalCollectionTranslator, HalObjectTranslator,
+  HalTranslator } from './translator';
 
 @Injectable()
 export class HalInstanceFactory {
@@ -25,7 +26,9 @@ export class HalInstanceFactory {
       else {
         /* Create instance of all the elements. */
         const elementTypeDescription = typeDescription.getElementTypeDescription();
-        const instanceArray = value.map((element: any) => this.createInstance(element, elementTypeDescription, resourceFactory));
+        const instanceArray = value.map(
+          (element: any) => this.createInstance(element, elementTypeDescription, resourceFactory)
+        );
 
         /* Then translate the array into a collection instance. */
         return findApplicableCollectionTranslator(this.collectionTranslators, typeDescription.collection)
@@ -42,7 +45,8 @@ export class HalInstanceFactory {
       else {
         /* Create instances for each value using the corresponding tuple type to build a type descriptor. */
         return Array.from(wu.zipWith(
-          (element: any, elementType: Type) => this.createInstance(element, new HalFieldTypeDescription(elementType), resourceFactory),
+          (element: any, elementType: Type) =>
+            this.createInstance(element, new HalFieldTypeDescription(elementType), resourceFactory),
           value, typeDescription.type
         ));
       }
@@ -105,7 +109,8 @@ export class HalInstanceFactory {
       if (fieldDescription.section === section) {
         /* Create an instance from the value, then assign it using the cooked name. */
         /* TODO: Should we throw an exception if a field is reassigned? */
-        target[fieldDescription.cookedName] = this.createInstance(value, fieldDescription.typeDescription, resourceFactory);
+        target[fieldDescription.cookedName] =
+          this.createInstance(value, fieldDescription.typeDescription, resourceFactory);
       }
     }
   }

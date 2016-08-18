@@ -1,17 +1,18 @@
-import {provide} from 'angular2/core';
+import { provide } from '@angular/core';
 
-import {HalClient} from './client';
-import {HalHttp} from './http';
-import {HalHttpResourceFactory} from './http_resource_factory';
-import {HalInstanceFactory} from './instance_factory';
-import {HalObjectSerializer} from './object';
-import {HalResourceFactory} from './resource_factory';
-import {HalCollectionTranslator, HalObjectTranslator, HalTranslator, HAL_COLLECTION_TRANSLATORS, HAL_OBJECT_TRANSLATORS} from './translator';
+import { HalClient } from './client';
+import { HalHttp } from './http';
+import { HalHttpResourceFactory } from './http-resource-factory';
+import { HalInstanceFactory } from './instance-factory';
+import { HalObjectSerializer } from './object';
+import { HalResourceFactory } from './resource-factory';
+import { HAL_COLLECTION_TRANSLATORS, HAL_OBJECT_TRANSLATORS, HalCollectionTranslator, HalObjectTranslator,
+  HalTranslator } from './translator';
 
-import {BaseHalJsonObjectSerializerOptions, HalJsonObjectSerializer, HalJsonObjectSerializerOptions} from './serializers/json_object';
+import {BaseHalJsonObjectSerializerOptions, HalJsonObjectSerializer, HalJsonObjectSerializerOptions} from './serializers/json-object';
 
-import {HalArrayTranslator} from './translators/array_translator';
-import {HalDefaultObjectTranslator} from './translators/default_object_translator';
+import { HalArrayTranslator } from './translators/array-translator';
+import { HalDefaultObjectTranslator } from './translators/default-object-translator';
 
 export const HAL_PROVIDERS: any[] = [
   HalClient, HalHttp, HalInstanceFactory,

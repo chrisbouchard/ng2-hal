@@ -1,4 +1,4 @@
-import {override} from 'core-decorators';
+import { override } from 'core-decorators';
 
 /**
  *

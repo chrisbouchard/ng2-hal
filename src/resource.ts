@@ -1,7 +1,7 @@
-import {Observable} from 'rxjs';
-import {UriMappingType} from 'uri-templates';
+import { Observable } from 'rxjs';
+import { UriMappingType } from 'uri-templates';
 
-import {HalFieldTypeMetadata} from './field';
+import { HalFieldTypeMetadata } from './field';
 
 export interface HalResource<T> {
   get(params?: UriMappingType): Observable<T>;

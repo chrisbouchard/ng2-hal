@@ -1,14 +1,14 @@
-import {Injectable} from 'angular2/core';
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
-import {default as UriTemplate, UriValueType, UriMappingType} from 'uri-templates';
+import { default as UriTemplate, UriMappingType, UriValueType } from 'uri-templates';
 
-import {HalFieldTypeDescription, HalFieldTypeMetadata} from './field';
-import {HalHttp} from './http';
-import {HalInstanceFactory} from './instance_factory';
-import {HalLinkObject} from './object';
-import {HalResource} from './resource';
-import {HalResourceFactory} from './resource_factory';
+import { HalFieldTypeDescription, HalFieldTypeMetadata } from './field';
+import { HalHttp } from './http';
+import { HalInstanceFactory } from './instance-factory';
+import { HalLinkObject } from './object';
+import { HalResource } from './resource';
+import { HalResourceFactory } from './resource-factory';
 
 /**
  *
