@@ -1,5 +1,3 @@
-import { provide } from '@angular/core';
-
 import { HalClient } from './client';
 import { HalHttp } from './http';
 import { HalHttpResourceFactory } from './http-resource-factory';
@@ -17,10 +15,10 @@ import { HalDefaultObjectTranslator } from './translators/default-object-transla
 export const HAL_PROVIDERS: any[] = [
   HalClient, HalHttp, HalInstanceFactory,
 
-  provide(HalObjectSerializer, {useClass: HalJsonObjectSerializer}),
-  provide(HalJsonObjectSerializerOptions, {useClass: BaseHalJsonObjectSerializerOptions}),
-  provide(HalResourceFactory, {useClass: HalHttpResourceFactory}),
-  provide(HAL_COLLECTION_TRANSLATORS, {useClass: HalArrayTranslator, multi: true}),
-  provide(HAL_OBJECT_TRANSLATORS, {useClass: HalDefaultObjectTranslator, multi: true}),
+  { provide: HalObjectSerializer, useClass: HalJsonObjectSerializer },
+  { provide: HalJsonObjectSerializerOptions, useClass: BaseHalJsonObjectSerializerOptions },
+  { provide: HalResourceFactory, useClass: HalHttpResourceFactory },
+  { provide: HAL_COLLECTION_TRANSLATORS, useClass: HalArrayTranslator, multi: true },
+  { provide: HAL_OBJECT_TRANSLATORS, useClass: HalDefaultObjectTranslator, multi: true }
 ];
 
