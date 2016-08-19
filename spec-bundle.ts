@@ -24,6 +24,6 @@ function requireAll<T>(requireContext: RequireContext): T[] {
   return requireContext.keys().map(requireContext);
 }
 
-const testContext = require.context('./src', true, /\.spec\.ts/);
+const testContext = require.context('./lib', true, /\.spec\.ts/);
 requireAll(testContext);
 
