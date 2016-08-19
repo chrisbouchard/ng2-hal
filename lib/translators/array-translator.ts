@@ -20,7 +20,7 @@ export class HalArrayTranslator implements HalCollectionTranslator {
       return value;
     }
 
-    throw new TypeError(`Expected value of type Array, but got ${value.construtype.name}`);
+    throw new TypeError(`Expected value of type Array, but got ${value.constructor.name}`);
   }
 
   fromArray(value: any[], type: Type): any {
