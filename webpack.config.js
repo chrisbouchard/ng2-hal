@@ -20,7 +20,7 @@ module.exports = {
     filename: '[name].js',
     path: './dist',
     sourceMapFilename: '[name].js.map',
-    libraryTarget: 'umd'
+    libraryTarget: 'commonjs2'
   },
 
   resolve: {
