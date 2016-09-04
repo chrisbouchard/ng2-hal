@@ -7,7 +7,7 @@ export declare class HalDefaultObjectTranslator implements HalObjectTranslator {
     /**
      * Only apply when we've reached the bottom of the prototype chain.
      */
-    appliesTo(type: Type): boolean;
-    toObject(value: any, type: Type): any;
-    fromObject(value: any, type: Type): any;
+    appliesTo(type: Type<any>): boolean;
+    toObject(value: any, type: Type<any>): any;
+    fromObject(value: any, type: Type<any>): any;
 }

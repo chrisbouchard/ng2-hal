@@ -5,8 +5,8 @@ export declare enum HalFieldSection {
     RESOURCE = 2,
 }
 export interface HalFieldTypeMetadata {
-    type?: Type | Type[];
-    collection?: Type;
+    type?: Type<any> | Type<any>[];
+    collection?: Type<any>;
 }
 export interface HalFieldMetadata extends HalFieldTypeMetadata {
     name?: string;
@@ -17,16 +17,16 @@ export declare class HalFieldDescription {
     cookedName: string;
     typeDescription: HalFieldTypeDescription;
     section: HalFieldSection;
-    constructor(key: string, arg: string | Type | HalFieldMetadata);
+    constructor(key: string, arg: string | Type<any> | HalFieldMetadata);
 }
 export declare class HalFieldTypeDescription {
-    type: Type | Type[];
-    collection: Type;
-    constructor(arg: Type | HalFieldTypeMetadata);
+    type: Type<any> | Type<any>[];
+    collection: Type<any>;
+    constructor(arg: Type<any> | HalFieldTypeMetadata);
     getElementTypeDescription(): HalFieldTypeDescription;
 }
-export declare function HalField(arg: string | Type | HalFieldMetadata): PropertyDecorator;
-export declare function HalEmbedded(arg: string | Type | HalFieldMetadata): PropertyDecorator;
-export declare function HalLink(arg: string | Type | HalFieldMetadata): PropertyDecorator;
+export declare function HalField(arg: string | Type<any> | HalFieldMetadata): PropertyDecorator;
+export declare function HalEmbedded(arg: string | Type<any> | HalFieldMetadata): PropertyDecorator;
+export declare function HalLink(arg: string | Type<any> | HalFieldMetadata): PropertyDecorator;
 export declare function getCookedFieldDescription(target: any, key: string): HalFieldDescription;
 export declare function getRawFieldDescription(target: any, key: string): HalFieldDescription;

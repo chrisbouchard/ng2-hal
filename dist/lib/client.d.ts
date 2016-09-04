@@ -8,5 +8,5 @@ import { HalResourceFactory } from './resource-factory';
 export declare class HalClient {
     private resourceFactory;
     constructor(resourceFactory: HalResourceFactory);
-    resource<T>(url: string, metadata: Type | HalFieldTypeMetadata): HalResource<T>;
+    resource<T>(url: string, metadata: Type<any> | HalFieldTypeMetadata): HalResource<T>;
 }
