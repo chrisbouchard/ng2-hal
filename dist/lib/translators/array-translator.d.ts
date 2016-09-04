@@ -1,11 +1,11 @@
 import { Type } from '@angular/core';
 import { HalCollectionTranslator } from '../translator';
 /**
- * A translator that simply returns the value as given.
+ * A translator that returns Arrays as-is.
  */
 export declare class HalArrayTranslator implements HalCollectionTranslator {
     /**
-     * Only apply when we've reached the bottom of the prototype chain.
+     * Only apply to Arrays.
      */
     appliesTo(type: Type): boolean;
     toArray(value: any, type: Type): any[];

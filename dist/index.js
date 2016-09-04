@@ -22662,7 +22662,7 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	/**
-	 * A translator that simply returns the value as given.
+	 * A translator that returns Arrays as-is.
 	 */
 	var HalArrayTranslator = exports.HalArrayTranslator = function () {
 	    function HalArrayTranslator() {
@@ -22673,7 +22673,7 @@
 	        key: "appliesTo",
 
 	        /**
-	         * Only apply when we've reached the bottom of the prototype chain.
+	         * Only apply to Arrays.
 	         */
 	        value: function appliesTo(type) {
 	            return type === Array;
@@ -22684,7 +22684,7 @@
 	            if (Array.isArray(value)) {
 	                return value;
 	            }
-	            throw new TypeError("Expected value of type Array, but got " + value.construtype.name);
+	            throw new TypeError("Expected value of type Array, but got " + value.constructor.name);
 	        }
 	    }, {
 	        key: "fromArray",
@@ -29269,8 +29269,6 @@
 	});
 	exports.HAL_PROVIDERS = undefined;
 
-	var _core = __webpack_require__(1);
-
 	var _client = __webpack_require__(187);
 
 	var _http = __webpack_require__(111);
@@ -29291,7 +29289,7 @@
 
 	var _defaultObjectTranslator = __webpack_require__(192);
 
-	var HAL_PROVIDERS = exports.HAL_PROVIDERS = [_client.HalClient, _http.HalHttp, _instanceFactory.HalInstanceFactory, (0, _core.provide)(_object.HalObjectSerializer, { useClass: _jsonObject.HalJsonObjectSerializer }), (0, _core.provide)(_jsonObject.HalJsonObjectSerializerOptions, { useClass: _jsonObject.BaseHalJsonObjectSerializerOptions }), (0, _core.provide)(_resourceFactory.HalResourceFactory, { useClass: _httpResourceFactory.HalHttpResourceFactory }), (0, _core.provide)(_translator.HAL_COLLECTION_TRANSLATORS, { useClass: _arrayTranslator.HalArrayTranslator, multi: true }), (0, _core.provide)(_translator.HAL_OBJECT_TRANSLATORS, { useClass: _defaultObjectTranslator.HalDefaultObjectTranslator, multi: true })];
+	var HAL_PROVIDERS = exports.HAL_PROVIDERS = [_client.HalClient, _http.HalHttp, _instanceFactory.HalInstanceFactory, { provide: _object.HalObjectSerializer, useClass: _jsonObject.HalJsonObjectSerializer }, { provide: _jsonObject.HalJsonObjectSerializerOptions, useClass: _jsonObject.BaseHalJsonObjectSerializerOptions }, { provide: _resourceFactory.HalResourceFactory, useClass: _httpResourceFactory.HalHttpResourceFactory }, { provide: _translator.HAL_COLLECTION_TRANSLATORS, useClass: _arrayTranslator.HalArrayTranslator, multi: true }, { provide: _translator.HAL_OBJECT_TRANSLATORS, useClass: _defaultObjectTranslator.HalDefaultObjectTranslator, multi: true }];
 
 /***/ },
 /* 262 */

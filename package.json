@@ -23,21 +23,21 @@
     "index.ts"
   ],
   "dependencies": {
-    "@angular/common": "2.0.0-rc.5",
-    "@angular/compiler": "2.0.0-rc.5",
-    "@angular/core": "2.0.0-rc.5",
-    "@angular/http": "2.0.0-rc.5",
-    "@angular/platform-browser": "2.0.0-rc.5",
-    "@angular/platform-browser-dynamic": "2.0.0-rc.5",
+    "@angular/common": "2.0.0-rc.6",
+    "@angular/compiler": "2.0.0-rc.6",
+    "@angular/core": "2.0.0-rc.6",
+    "@angular/http": "2.0.0-rc.6",
+    "@angular/platform-browser": "2.0.0-rc.6",
+    "@angular/platform-browser-dynamic": "2.0.0-rc.6",
     "babel-polyfill": "6.13.0",
     "core-decorators": "0.12.3",
     "es6-promise": "3.2.1",
     "es6-shim": "0.35.1",
     "reflect-metadata": "0.1.8",
-    "rxjs": "5.0.0-beta.6",
+    "rxjs": "5.0.0-beta.11",
     "uri-templates": "0.2.0",
     "wu": "2.1.0",
-    "zone.js": "0.6.12"
+    "zone.js": "0.6.17"
   },
   "devDependencies": {
     "awesome-typescript-loader": "2.2.1",
