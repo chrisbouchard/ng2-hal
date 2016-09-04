@@ -19,7 +19,8 @@ module.exports = {
   output: {
     filename: '[name].js',
     path: './dist',
-    sourceMapFilename: '[name].js.map'
+    sourceMapFilename: '[name].js.map',
+    libraryTarget: 'umd'
   },
 
   resolve: {
