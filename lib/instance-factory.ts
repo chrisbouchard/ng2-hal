@@ -45,7 +45,7 @@ export class HalInstanceFactory {
       else {
         /* Create instances for each value using the corresponding tuple type to build a type descriptor. */
         return Array.from(wu.zipWith(
-          (element: any, elementType: Type) =>
+          (element: any, elementType: Type<any>) =>
             this.createInstance(element, new HalFieldTypeDescription(elementType), resourceFactory),
           value, typeDescription.type
         ));
@@ -99,7 +99,7 @@ export class HalInstanceFactory {
     }
   }
 
-  private fillInstance(target: any, source: any, type: Type, section: HalFieldSection,
+  private fillInstance(target: any, source: any, type: Type<any>, section: HalFieldSection,
       resourceFactory: HalResourceFactory): void {
     for (let [key, value] of Object.entries(source)) {
       /* Look up a field description using the raw name. */
@@ -118,7 +118,7 @@ export class HalInstanceFactory {
 }
 
 
-function findApplicableCollectionTranslator(translators: HalCollectionTranslator[], type: Type): HalCollectionTranslator {
+function findApplicableCollectionTranslator(translators: HalCollectionTranslator[], type: Type<any>): HalCollectionTranslator {
   try {
     return findApplicableTranslator(translators, type);
   }
@@ -129,7 +129,7 @@ function findApplicableCollectionTranslator(translators: HalCollectionTranslator
   }
 }
 
-function findApplicableObjectTranslator(translators: HalObjectTranslator[], type: Type): HalObjectTranslator {
+function findApplicableObjectTranslator(translators: HalObjectTranslator[], type: Type<any>): HalObjectTranslator {
   try {
     return findApplicableTranslator(translators, type);
   }
@@ -140,7 +140,7 @@ function findApplicableObjectTranslator(translators: HalObjectTranslator[], type
   }
 }
 
-function findApplicableTranslator<T extends HalTranslator>(translators: T[], ctor: Type): T {
+function findApplicableTranslator<T extends HalTranslator>(translators: T[], ctor: Type<any>): T {
   let currentPrototype: any = ctor ? ctor.prototype : undefined;
   let currentCtor = ctor;
 

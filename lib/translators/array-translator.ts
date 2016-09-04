@@ -11,11 +11,11 @@ export class HalArrayTranslator implements HalCollectionTranslator {
   /**
    * Only apply to Arrays.
    */
-  appliesTo(type: Type): boolean {
+  appliesTo(type: Type<any>): boolean {
     return type === Array;
   }
 
-  toArray(value: any, type: Type): any[] {
+  toArray(value: any, type: Type<any>): any[] {
     if (Array.isArray(value)) {
       return value;
     }
@@ -23,7 +23,7 @@ export class HalArrayTranslator implements HalCollectionTranslator {
     throw new TypeError(`Expected value of type Array, but got ${value.constructor.name}`);
   }
 
-  fromArray(value: any[], type: Type): any {
+  fromArray(value: any[], type: Type<any>): any {
     return value;
   }
 

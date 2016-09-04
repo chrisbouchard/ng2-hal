@@ -8,8 +8,8 @@ export enum HalFieldSection {
 }
 
 export interface HalFieldTypeMetadata {
-  type?: Type | Type[];
-  collection?: Type;
+  type?: Type<any> | Type<any>[];
+  collection?: Type<any>;
 }
 
 export interface HalFieldMetadata extends HalFieldTypeMetadata {
@@ -25,7 +25,7 @@ export class HalFieldDescription {
 
   section: HalFieldSection = HalFieldSection.RESOURCE;
 
-  constructor(key: string, arg: string | Type | HalFieldMetadata) {
+  constructor(key: string, arg: string | Type<any> | HalFieldMetadata) {
     this.rawName = key;
     this.cookedName = key;
 
@@ -34,7 +34,7 @@ export class HalFieldDescription {
       this.typeDescription = new HalFieldTypeDescription({});
     }
     else if (arg instanceof Function) {
-      this.typeDescription = new HalFieldTypeDescription(arg as Type);
+      this.typeDescription = new HalFieldTypeDescription(arg as Type<any>);
     }
     else {
       let metadata = (arg as HalFieldMetadata) || {};
@@ -53,12 +53,12 @@ export class HalFieldDescription {
 }
 
 export class HalFieldTypeDescription {
-  type: Type | Type[];
-  collection: Type;
+  type: Type<any> | Type<any>[];
+  collection: Type<any>;
 
-  constructor(arg: Type | HalFieldTypeMetadata) {
+  constructor(arg: Type<any> | HalFieldTypeMetadata) {
     if (arg instanceof Function) {
-      this.type = arg as Type;
+      this.type = arg as Type<any>;
     }
     else {
       let metadata = (arg as HalFieldTypeMetadata) || {};
@@ -79,7 +79,7 @@ export class HalFieldTypeDescription {
   }
 }
 
-export function HalField(arg: string | Type | HalFieldMetadata): PropertyDecorator {
+export function HalField(arg: string | Type<any> | HalFieldMetadata): PropertyDecorator {
   return (target, key) => {
     if (typeof key === 'string') {
       let description = new HalFieldDescription(key, arg);
@@ -91,7 +91,7 @@ export function HalField(arg: string | Type | HalFieldMetadata): PropertyDecorat
   };
 }
 
-export function HalEmbedded(arg: string | Type | HalFieldMetadata): PropertyDecorator {
+export function HalEmbedded(arg: string | Type<any> | HalFieldMetadata): PropertyDecorator {
   return (target, key) => {
     if (typeof key === 'string') {
       let description = new HalFieldDescription(key, arg);
@@ -104,7 +104,7 @@ export function HalEmbedded(arg: string | Type | HalFieldMetadata): PropertyDeco
   };
 }
 
-export function HalLink(arg: string | Type | HalFieldMetadata): PropertyDecorator {
+export function HalLink(arg: string | Type<any> | HalFieldMetadata): PropertyDecorator {
   return (target, key) => {
     if (typeof key === 'string') {
       let description = new HalFieldDescription(key, arg);

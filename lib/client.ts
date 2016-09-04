@@ -12,7 +12,7 @@ import { HalResourceFactory } from './resource-factory';
 export class HalClient {
   constructor(private resourceFactory: HalResourceFactory) {}
 
-  resource<T>(url: string, metadata: Type | HalFieldTypeMetadata): HalResource<T> {
+  resource<T>(url: string, metadata: Type<any> | HalFieldTypeMetadata): HalResource<T> {
     return this.resourceFactory.createResource<T>(new HalLinkObject(url, false), new HalFieldTypeDescription(metadata));
   }
 }
