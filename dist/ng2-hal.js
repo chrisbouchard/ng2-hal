@@ -1,0 +1,27 @@
+"use strict";
+var client_1 = require('./client');
+exports.HalClient = client_1.HalClient;
+var error_1 = require('./error');
+exports.HalError = error_1.HalError;
+var field_1 = require('./field');
+exports.HalEmbedded = field_1.HalEmbedded;
+exports.HalField = field_1.HalField;
+exports.HalFieldSection = field_1.HalFieldSection;
+exports.HalLink = field_1.HalLink;
+var hal_module_1 = require('./hal.module');
+exports.HalModule = hal_module_1.HalModule;
+var http_1 = require('./http');
+exports.HalHttp = http_1.HalHttp;
+var instance_factory_1 = require('./instance-factory');
+exports.HalInstanceFactory = instance_factory_1.HalInstanceFactory;
+var resource_factory_1 = require('./resource-factory');
+exports.HalResourceFactory = resource_factory_1.HalResourceFactory;
+var json_object_1 = require('./serializers/json-object');
+exports.BaseHalJsonObjectSerializerOptions = json_object_1.BaseHalJsonObjectSerializerOptions;
+exports.HalJsonObjectSerializer = json_object_1.HalJsonObjectSerializer;
+exports.HalJsonObjectSerializerOptions = json_object_1.HalJsonObjectSerializerOptions;
+var array_translator_1 = require('./translators/array-translator');
+exports.HalArrayTranslator = array_translator_1.HalArrayTranslator;
+var default_object_translator_1 = require('./translators/default-object-translator');
+exports.HalDefaultObjectTranslator = default_object_translator_1.HalDefaultObjectTranslator;
+//# sourceMappingURL=ng2-hal.js.map

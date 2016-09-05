@@ -3,17 +3,17 @@
     "declaration": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
+    "outDir": "./dist",
     "sourceMap": true,
     "target": "es6"
   },
   "files": [
     "custom_typings/custom.d.ts",
-    "typings/index.d.ts"
-  ],
-  "awesomeTypescriptLoaderOptions": {
-    "useBabel": true
-  }
+    "typings/index.d.ts",
+    "lib/ng2-hal.ts"
+  ]
 }
 
