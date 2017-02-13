@@ -4,12 +4,12 @@
   "description": "Angular 2 library to communicate with REST services that use HAL",
   "repository": "chrisbouchard/ng2-hal",
   "scripts": {
-    "build": "cross-env NODE_ENV=production webpack",
     "build-dev": "cross-env NODE_ENV=development webpack --env.profile=development",
     "build-prod": "cross-env NODE_ENV=production webpack --env.profile=production",
     "clean": "rimraf dist",
     "test": "cross-env NODE_ENV=test gulp test",
-    "test-ci": "cross-env NODE_ENV=test gulp test-ci"
+    "test-ci": "cross-env NODE_ENV=test gulp test-ci",
+    "prepublish": "build-prod"
   },
   "keywords": [],
   "author": "Chris Bouchard <chris@upliftinglemma.net>",
