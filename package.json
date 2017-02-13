@@ -17,6 +17,7 @@
   "main": "dist/ng2-hal.js",
   "typings": "src/index.ts",
   "files": [
+    "dist",
     "src"
   ],
   "dependencies": {
