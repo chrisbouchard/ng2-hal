@@ -15,7 +15,7 @@
   "author": "Chris Bouchard <chris@upliftinglemma.net>",
   "license": "BSD-2-Clause",
   "main": "dist/ng2-hal.js",
-  "typings": "src/index.ts",
+  "typings": "dist/src/index.d.ts",
   "files": [
     "dist",
     "src"
