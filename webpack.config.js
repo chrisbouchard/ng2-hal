@@ -11,7 +11,7 @@ const defaultEnv = {
 
 module.exports = (env = defaultEnv) => ({
   entry: {
-    'index': ['./index.ts']
+    'ng2-hal': ['./src']
   },
 
   output: {
@@ -29,21 +29,26 @@ module.exports = (env = defaultEnv) => ({
   module: {
     rules: [
       {
-        test: /\.ts$/,
-        use: [
+        include: path.resolve(__dirname, 'src'),
+        rules: [
           {
-            loader: 'awesome-typescript-loader',
-            options: {
-              useBabel: true,
-              useCache: true
-            }
+            test: /\.ts$/,
+            use: [
+              {
+                loader: 'awesome-typescript-loader',
+                options: {
+                  useBabel: true,
+                  useCache: true
+                }
+              },
+              { loader: 'tslint-loader' }
+            ]
           },
-          { loader: 'tslint-loader' }
+          {
+            test: /\.js$/,
+            loader: 'babel-loader'
+          }
         ]
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader'
       }
     ]
   },

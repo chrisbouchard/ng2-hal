@@ -14,12 +14,11 @@
   "keywords": [],
   "author": "Chris Bouchard <chris@upliftinglemma.net>",
   "license": "BSD-2-Clause",
-  "main": "dist/index.js",
-  "typings": "dist/index",
+  "main": "dist/ng2-hal.js",
+  "typings": "src/index.ts",
   "files": [
     "dist",
-    "lib",
-    "index.ts"
+    "src"
   ],
   "dependencies": {
     "@angular/common": "^2.0.0",
