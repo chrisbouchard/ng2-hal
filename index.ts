@@ -1,17 +1,17 @@
 export { UriMappingType } from 'uri-templates';
 
-export { HalClient } from './lib/client';
-export { HalError } from './lib/error';
-export { HalEmbedded, HalField, HalFieldMetadata, HalFieldSection, HalFieldTypeMetadata, HalLink } from './lib/field';
-export { HalModule } from './lib/hal.module';
-export { HalHttp } from './lib/http';
-export { HalInstanceFactory } from './lib/instance-factory';
-export { HalResource } from './lib/resource';
-export { HalResourceFactory } from './lib/resource-factory';
-export { HalCollectionTranslator, HalObjectTranslator, HalTranslator } from './lib/translator';
+export * from './lib/client';
+export * from './lib/error';
+export * from './lib/field';
+export * from './lib/hal.module';
+export * from './lib/http';
+export * from './lib/instance-factory';
+export * from './lib/resource';
+export * from './lib/resource-factory';
+export * from './lib/translator';
 
-export { BaseHalJsonObjectSerializerOptions, HalJsonObjectSerializer, HalJsonObjectSerializerOptions } from './lib/serializers/json-object';
+export * from './lib/serializers/json-object';
 
-export { HalArrayTranslator } from './lib/translators/array-translator';
-export { HalDefaultObjectTranslator } from './lib/translators/default-object-translator';
+export * from './lib/translators/array-translator';
+export * from './lib/translators/default-object-translator';
 
