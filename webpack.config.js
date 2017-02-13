@@ -1,5 +1,8 @@
 var path = require('path');
+var nodeExternals = require('webpack-node-externals');
 var webpack = require('webpack');
+
+var UnminifiedWebpackPlugin = require('unminified-webpack-plugin');
 
 var { DefinePlugin } = webpack;
 
@@ -14,10 +17,13 @@ module.exports = (env = defaultEnv) => ({
     'ng2-hal': ['./src']
   },
 
+  target: 'node',
+  externals: [nodeExternals()],
+
   output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'dist'),
-    sourceMapFilename: '[name].js.map'
+    filename: filename(env),
+    libraryTarget: 'commonjs2',
+    path: path.resolve(__dirname, 'dist')
   },
 
   stats: stats(env),
@@ -68,6 +74,14 @@ function devtool(env) {
   return 'source-map';
 }
 
+function filename(env) {
+  if (isProduction(env)) {
+    return '[name].min.js';
+  }
+
+  return '[name].js';
+}
+
 function stats(env) {
   return {
     children: false,
@@ -93,7 +107,8 @@ function productionPlugins(env) {
   }
 
   return [
-    new UglifyJsPlugin()
+    new UglifyJsPlugin(),
+    new UnminifiedWebpackPlugin()
   ];
 }
 
