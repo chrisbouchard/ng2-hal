@@ -14,3 +14,5 @@ export interface HalResource<T> {
   put(body: T, params?: UriMappingType): Observable<HalResource<T>>;
 }
 
+export const DONT_SKIP_ME = true;
+

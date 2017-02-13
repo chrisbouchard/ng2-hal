@@ -64,7 +64,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 19);
+/******/ 	return __webpack_require__(__webpack_require__.s = 20);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -236,7 +236,7 @@ function getRawFieldDescription(target, key) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__angular_http__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__error__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__object__ = __webpack_require__(1);
@@ -600,7 +600,7 @@ HalClient = __decorate([__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angul
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_core_decorators__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_core_decorators__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_core_decorators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_core_decorators__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HalError; });
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -975,19 +975,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalHttp", function() { return __WEBPACK_IMPORTED_MODULE_4__http__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__instance_factory__ = __webpack_require__(5);
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalInstanceFactory", function() { return __WEBPACK_IMPORTED_MODULE_5__instance_factory__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__resource_factory__ = __webpack_require__(2);
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalResourceFactory", function() { return __WEBPACK_IMPORTED_MODULE_6__resource_factory__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__translator__ = __webpack_require__(6);
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HAL_OBJECT_TRANSLATORS", function() { return __WEBPACK_IMPORTED_MODULE_7__translator__["a"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HAL_COLLECTION_TRANSLATORS", function() { return __WEBPACK_IMPORTED_MODULE_7__translator__["b"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__serializers_json_object__ = __webpack_require__(9);
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalJsonObjectSerializerOptions", function() { return __WEBPACK_IMPORTED_MODULE_8__serializers_json_object__["a"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BaseHalJsonObjectSerializerOptions", function() { return __WEBPACK_IMPORTED_MODULE_8__serializers_json_object__["b"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalJsonObjectSerializer", function() { return __WEBPACK_IMPORTED_MODULE_8__serializers_json_object__["c"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__translators_array_translator__ = __webpack_require__(10);
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalArrayTranslator", function() { return __WEBPACK_IMPORTED_MODULE_9__translators_array_translator__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__translators_default_object_translator__ = __webpack_require__(11);
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalDefaultObjectTranslator", function() { return __WEBPACK_IMPORTED_MODULE_10__translators_default_object_translator__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__resource__ = __webpack_require__(16);
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "DONT_SKIP_ME", function() { return __WEBPACK_IMPORTED_MODULE_6__resource__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__resource_factory__ = __webpack_require__(2);
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalResourceFactory", function() { return __WEBPACK_IMPORTED_MODULE_7__resource_factory__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__translator__ = __webpack_require__(6);
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HAL_OBJECT_TRANSLATORS", function() { return __WEBPACK_IMPORTED_MODULE_8__translator__["a"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HAL_COLLECTION_TRANSLATORS", function() { return __WEBPACK_IMPORTED_MODULE_8__translator__["b"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__serializers_json_object__ = __webpack_require__(9);
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalJsonObjectSerializerOptions", function() { return __WEBPACK_IMPORTED_MODULE_9__serializers_json_object__["a"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BaseHalJsonObjectSerializerOptions", function() { return __WEBPACK_IMPORTED_MODULE_9__serializers_json_object__["b"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalJsonObjectSerializer", function() { return __WEBPACK_IMPORTED_MODULE_9__serializers_json_object__["c"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__translators_array_translator__ = __webpack_require__(10);
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalArrayTranslator", function() { return __WEBPACK_IMPORTED_MODULE_10__translators_array_translator__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__translators_default_object_translator__ = __webpack_require__(11);
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalDefaultObjectTranslator", function() { return __WEBPACK_IMPORTED_MODULE_11__translators_default_object_translator__["a"]; });
+
 
 
 
@@ -1036,7 +1039,7 @@ HalModule = __decorate([__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angul
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_uri_templates__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_uri_templates__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_uri_templates___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_uri_templates__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__http__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__instance_factory__ = __webpack_require__(5);
@@ -1177,24 +1180,32 @@ var HAL_PROVIDERS = [__WEBPACK_IMPORTED_MODULE_0__client__["a" /* HalClient */],
 
 /***/ }),
 /* 16 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = require("@angular/http");
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DONT_SKIP_ME; });
+var DONT_SKIP_ME = true;
 
 /***/ }),
 /* 17 */
 /***/ (function(module, exports) {
 
-module.exports = require("core-decorators");
+module.exports = require("@angular/http");
 
 /***/ }),
 /* 18 */
 /***/ (function(module, exports) {
 
-module.exports = require("uri-templates");
+module.exports = require("core-decorators");
 
 /***/ }),
 /* 19 */
+/***/ (function(module, exports) {
+
+module.exports = require("uri-templates");
+
+/***/ }),
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(12);
