@@ -15,5 +15,3 @@ export { BaseHalJsonObjectSerializerOptions, HalJsonObjectSerializer, HalJsonObj
 export { HalArrayTranslator } from './lib/translators/array-translator';
 export { HalDefaultObjectTranslator } from './lib/translators/default-object-translator';
 
-var keepBabelHappy: any = false;
-

@@ -10,7 +10,9 @@ export declare class HalJsonObjectSerializer extends HalObjectSerializer {
     options: HalJsonObjectSerializerOptions;
     constructor(options: HalJsonObjectSerializerOptions);
     deserialize(data: string): HalObject | HalObject[];
+    private toObjectOrArray(json);
     private toObject(json);
+    private toLinkObjectOrArray(json);
     private toLinkObject(json);
     serialize(object: HalObject | HalObject[]): string;
 }

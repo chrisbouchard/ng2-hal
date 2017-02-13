@@ -24,15 +24,19 @@ export class HalJsonObjectSerializer extends HalObjectSerializer {
 
   deserialize(data: string): HalObject | HalObject[] {
     let json: any = JSON.parse(data);
-    return this.toObject(json);
+    return this.toObjectOrArray(json);
   }
 
-  private toObject(json: any): HalObject | HalObject[] {
+  private toObjectOrArray(json: any): HalObject | HalObject[] {
     /* Special case when the JSON is an array. */
     if (json instanceof Array) {
       return json.map((element: any) => this.toObject(element));
     }
 
+    return this.toObject(json);
+  }
+
+  private toObject(json: any): HalObject {
     let embedded: { [key: string]: HalObject | HalObject[] } = {};
     let links: { [key: string]: HalLinkObject | HalLinkObject[] } = {};
     let resource: any = {};
@@ -49,7 +53,7 @@ export class HalJsonObjectSerializer extends HalObjectSerializer {
         case this.options.linksKey:
           /* Propagate HalLinkObject into the links. */
           for (let [linkKey, linkValue] of Object.entries(value)) {
-            links[linkKey] = this.toLinkObject(linkValue);
+            links[linkKey] = this.toLinkObjectOrArray(linkValue);
           }
           break;
 
@@ -62,12 +66,16 @@ export class HalJsonObjectSerializer extends HalObjectSerializer {
     return new HalObject(embedded, links, resource);
   }
 
-  private toLinkObject(json: any): HalLinkObject {
+  private toLinkObjectOrArray(json: any): HalLinkObject | HalLinkObject[] {
     /* Special case when the JSON is an array. */
     if (json instanceof Array) {
       return json.map((element: any) => this.toLinkObject(element));
     }
 
+    return this.toLinkObject(json);
+  }
+
+  private toLinkObject(json: any): HalLinkObject {
     return new HalLinkObject(json.href, json.templated);
   }
 

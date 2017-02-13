@@ -1,4 +1,9 @@
 {
-  presets: ['es2015']
+  compact: false,
+  presets: [
+    ['es2015', { modules: false }],
+    ['es2016'],
+    ['es2017']
+  ]
 }
 

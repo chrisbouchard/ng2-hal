@@ -11,17 +11,17 @@ export class HalDefaultObjectTranslator implements HalObjectTranslator {
   /**
    * Only apply when we've reached the bottom of the prototype chain.
    */
-  appliesTo(type: Type): boolean {
+  appliesTo(type: Type<any>): boolean {
     return !type;
   }
 
-  toObject(value: any, type: Type): any {
+  toObject(value: any, type: Type<any>): any {
     const instance: any = {};
     Object.assign(instance, value);
     return instance;
   }
 
-  fromObject(value: any, type: Type): any {
+  fromObject(value: any, type: Type<any>): any {
     const instance: any = Reflect.construct(type, []);
     Object.assign(instance, value);
     return instance;
