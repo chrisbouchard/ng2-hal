@@ -4,12 +4,12 @@
   "description": "Angular 2 library to communicate with REST services that use HAL",
   "repository": "chrisbouchard/ng2-hal",
   "scripts": {
-    "build-dev": "cross-env NODE_ENV=development webpack --env.profile=development",
-    "build-prod": "cross-env NODE_ENV=production webpack --env.profile=production",
+    "build": "webpack --env.profile=production",
+    "build-dev": "webpack --env.profile=development",
     "clean": "rimraf dist",
-    "test": "cross-env NODE_ENV=test gulp test",
-    "test-ci": "cross-env NODE_ENV=test gulp test-ci",
-    "prepublish": "build-prod"
+    "test": "karma start karma.conf.js --single-run",
+    "test-ci": "karma start karma.conf.js",
+    "prepublish": "npm run build"
   },
   "keywords": [],
   "author": "Chris Bouchard <chris@upliftinglemma.net>",
@@ -26,20 +26,24 @@
     "wu": "^2.1.0"
   },
   "devDependencies": {
+    "@angular/compiler": "2.4.6",
+    "@angular/platform-browser-dynamic": "2.4.6",
+    "@angular/platform-browser": "2.4.6",
     "@types/core-decorators": "0.10.30",
     "@types/jasmine": "2.5.41",
     "@types/wu": "2.1.30",
     "awesome-typescript-loader": "3.0.4-rc.2",
     "babel-core": "6.22.1",
     "babel-loader": "6.2.10",
+    "babel-polyfill": "6.22.0",
     "babel-preset-es2015": "6.22.0",
     "babel-preset-es2016": "6.22.0",
     "babel-preset-es2017": "6.22.0",
     "codelyzer": "2.0.0-beta.4",
     "cross-env": "3.1.4",
     "declaration-bundler-webpack-plugin": "1.0.3",
-    "gulp": "3.9.1",
-    "gulp-clean": "0.3.2",
+    "es6-promise": "4.0.5",
+    "es6-shim": "0.35.3",
     "jasmine-core": "2.5.2",
     "karma": "1.4.1",
     "karma-chrome-launcher": "2.0.0",
@@ -60,15 +64,13 @@
     "webpack-dev-server": "2.3.0",
     "webpack-merge": "2.6.1",
     "webpack-node-externals": "1.5.4",
-    "webpack-sources": "0.1.4"
+    "webpack-sources": "0.1.4",
+    "zone.js": "0.7.6"
   },
   "peerDependencies": {
     "@angular/common": "^2.0.0",
-    "@angular/compiler": "^2.0.0",
     "@angular/core": "^2.0.0",
     "@angular/http": "^2.0.0",
-    "@angular/platform-browser": "^2.0.0",
-    "@angular/platform-browser-dynamic": "^2.0.0",
     "reflect-metadata": "^0.1.8",
     "rxjs": "^5.1.0"
   }
