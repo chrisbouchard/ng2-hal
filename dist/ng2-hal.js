@@ -64,56 +64,116 @@ module.exports =
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 20);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, exports) {
+/******/ ({
 
-module.exports = require("@angular/core");
-
-/***/ }),
-/* 1 */
+/***/ "./src/client.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return HalLinkObject; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HalObject; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return HalObjectSerializer; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__field__ = __webpack_require__("./src/field.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__object__ = __webpack_require__("./src/object.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__resource_factory__ = __webpack_require__("./src/resource-factory.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HalClient; });
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var HalLinkObject = function HalLinkObject(href, templated) {
-    _classCallCheck(this, HalLinkObject);
+var __decorate = this && this.__decorate || function (decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
+        if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    }return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = this && this.__metadata || function (k, v) {
+    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 
-    this.href = href;
-    this.templated = templated;
-};
-var HalObject = function HalObject(embedded, links, resource) {
-    _classCallCheck(this, HalObject);
 
-    this.embedded = embedded;
-    this.links = links;
-    this.resource = resource;
-};
-var HalObjectSerializer = function HalObjectSerializer() {
-    _classCallCheck(this, HalObjectSerializer);
-};
+
+
+/**
+ *
+ */
+var HalClient = function () {
+    function HalClient(resourceFactory) {
+        _classCallCheck(this, HalClient);
+
+        this.resourceFactory = resourceFactory;
+    }
+
+    _createClass(HalClient, [{
+        key: "resource",
+        value: function resource(url, metadata) {
+            return this.resourceFactory.createResource(new __WEBPACK_IMPORTED_MODULE_2__object__["b" /* HalLinkObject */](url, false), new __WEBPACK_IMPORTED_MODULE_1__field__["c" /* HalFieldTypeDescription */](metadata));
+        }
+    }]);
+
+    return HalClient;
+}();
+HalClient = __decorate([__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(), __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__resource_factory__["a" /* HalResourceFactory */]])], HalClient);
+
 
 /***/ }),
-/* 2 */
+
+/***/ "./src/error.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HalResourceFactory; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_core_decorators__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_core_decorators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_core_decorators__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HalError; });
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var HalResourceFactory = function HalResourceFactory() {
-  _classCallCheck(this, HalResourceFactory);
+var __decorate = this && this.__decorate || function (decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
+        if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    }return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = this && this.__metadata || function (k, v) {
+    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
+/**
+ *
+ */
+var HalError = function () {
+    function HalError(status, message) {
+        _classCallCheck(this, HalError);
+
+        this.status = status;
+        this.message = message;
+    }
+
+    _createClass(HalError, [{
+        key: "toString",
+        value: function toString() {
+            return this.status + ": " + this.message;
+        }
+    }]);
+
+    return HalError;
+}();
+__decorate([__WEBPACK_IMPORTED_MODULE_0_core_decorators__["override"], __metadata("design:type", Function), __metadata("design:paramtypes", []), __metadata("design:returntype", String)], HalError.prototype, "toString", null);
+
 /***/ }),
-/* 3 */
+
+/***/ "./src/field.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -230,16 +290,166 @@ function getRawFieldDescription(target, key) {
 }
 
 /***/ }),
-/* 4 */
+
+/***/ "./src/hal.module.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers__ = __webpack_require__("./src/providers.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HalModule; });
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var __decorate = this && this.__decorate || function (decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
+        if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    }return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+var HalModule = function HalModule() {
+    _classCallCheck(this, HalModule);
+};
+HalModule = __decorate([__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({ providers: [__WEBPACK_IMPORTED_MODULE_1__providers__["a" /* HAL_PROVIDERS */]] })], HalModule);
+
+
+/***/ }),
+
+/***/ "./src/http-resource-factory.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_uri_templates__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_uri_templates___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_uri_templates__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__http__ = __webpack_require__("./src/http.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__instance_factory__ = __webpack_require__("./src/instance-factory.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__resource_factory__ = __webpack_require__("./src/resource-factory.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HalHttpResourceFactory; });
+/* unused harmony export HalHttpResource */
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var __decorate = this && this.__decorate || function (decorators, target, key, desc) {
+    var c = arguments.length,
+        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+        d;
+    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
+        if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    }return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = this && this.__metadata || function (k, v) {
+    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+/**
+ *
+ */
+var HalHttpResourceFactory = function (_HalResourceFactory) {
+    _inherits(HalHttpResourceFactory, _HalResourceFactory);
+
+    function HalHttpResourceFactory(halHttp, instanceFactory) {
+        _classCallCheck(this, HalHttpResourceFactory);
+
+        var _this = _possibleConstructorReturn(this, (HalHttpResourceFactory.__proto__ || Object.getPrototypeOf(HalHttpResourceFactory)).call(this));
+
+        _this.halHttp = halHttp;
+        _this.instanceFactory = instanceFactory;
+        return _this;
+    }
+
+    _createClass(HalHttpResourceFactory, [{
+        key: "createResource",
+        value: function createResource(link, typeDescription) {
+            return new HalHttpResource(link, typeDescription, this.halHttp, this.instanceFactory, this);
+        }
+    }]);
+
+    return HalHttpResourceFactory;
+}(__WEBPACK_IMPORTED_MODULE_4__resource_factory__["a" /* HalResourceFactory */]);
+HalHttpResourceFactory = __decorate([__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(), __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__http__["a" /* HalHttp */], __WEBPACK_IMPORTED_MODULE_3__instance_factory__["a" /* HalInstanceFactory */]])], HalHttpResourceFactory);
+
+/**
+ *
+ */
+var HalHttpResource = function () {
+    function HalHttpResource(link, typeDescription, halHttp, instanceFactory, resourceFactory) {
+        _classCallCheck(this, HalHttpResource);
+
+        this.link = link;
+        this.typeDescription = typeDescription;
+        this.halHttp = halHttp;
+        this.instanceFactory = instanceFactory;
+        this.resourceFactory = resourceFactory;
+    }
+
+    _createClass(HalHttpResource, [{
+        key: "get",
+        value: function get(params) {
+            var _this2 = this;
+
+            return this.halHttp.get(this.filledUrl(params)).map(function (object) {
+                return _this2.instanceFactory.createInstance(object, _this2.typeDescription, _this2.resourceFactory);
+            });
+        }
+    }, {
+        key: "delete",
+        value: function _delete(params) {
+            return this.halHttp.delete(this.filledUrl(params));
+        }
+    }, {
+        key: "post",
+        value: function post(body, params, typeDescription) {
+            // TODO: Implement this method.
+            return undefined;
+        }
+    }, {
+        key: "put",
+        value: function put(body, params) {
+            // TODO: Implement this method.
+            return undefined;
+        }
+    }, {
+        key: "filledUrl",
+        value: function filledUrl(params) {
+            var template = new __WEBPACK_IMPORTED_MODULE_1_uri_templates___default.a(this.link.href);
+            return template.fill(params);
+        }
+    }]);
+
+    return HalHttpResource;
+}();
+
+/***/ }),
+
+/***/ "./src/http.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__angular_http__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__error__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__object__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__error__ = __webpack_require__("./src/error.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__object__ = __webpack_require__("./src/object.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HalHttp; });
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -323,15 +533,70 @@ function mapUpdate(response) {
 }
 
 /***/ }),
-/* 5 */
+
+/***/ "./src/index.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__client__ = __webpack_require__("./src/client.ts");
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalClient", function() { return __WEBPACK_IMPORTED_MODULE_0__client__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__error__ = __webpack_require__("./src/error.ts");
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalError", function() { return __WEBPACK_IMPORTED_MODULE_1__error__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__field__ = __webpack_require__("./src/field.ts");
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalFieldSection", function() { return __WEBPACK_IMPORTED_MODULE_2__field__["a"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalFieldDescription", function() { return __WEBPACK_IMPORTED_MODULE_2__field__["b"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalFieldTypeDescription", function() { return __WEBPACK_IMPORTED_MODULE_2__field__["c"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalField", function() { return __WEBPACK_IMPORTED_MODULE_2__field__["d"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalEmbedded", function() { return __WEBPACK_IMPORTED_MODULE_2__field__["e"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalLink", function() { return __WEBPACK_IMPORTED_MODULE_2__field__["f"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getCookedFieldDescription", function() { return __WEBPACK_IMPORTED_MODULE_2__field__["g"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getRawFieldDescription", function() { return __WEBPACK_IMPORTED_MODULE_2__field__["h"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__hal_module__ = __webpack_require__("./src/hal.module.ts");
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalModule", function() { return __WEBPACK_IMPORTED_MODULE_3__hal_module__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__http__ = __webpack_require__("./src/http.ts");
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalHttp", function() { return __WEBPACK_IMPORTED_MODULE_4__http__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__instance_factory__ = __webpack_require__("./src/instance-factory.ts");
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalInstanceFactory", function() { return __WEBPACK_IMPORTED_MODULE_5__instance_factory__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__resource__ = __webpack_require__("./src/resource.ts");
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "DONT_SKIP_ME", function() { return __WEBPACK_IMPORTED_MODULE_6__resource__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__resource_factory__ = __webpack_require__("./src/resource-factory.ts");
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalResourceFactory", function() { return __WEBPACK_IMPORTED_MODULE_7__resource_factory__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__translator__ = __webpack_require__("./src/translator.ts");
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HAL_OBJECT_TRANSLATORS", function() { return __WEBPACK_IMPORTED_MODULE_8__translator__["a"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HAL_COLLECTION_TRANSLATORS", function() { return __WEBPACK_IMPORTED_MODULE_8__translator__["b"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__serializers_json_object__ = __webpack_require__("./src/serializers/json-object.ts");
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalJsonObjectSerializerOptions", function() { return __WEBPACK_IMPORTED_MODULE_9__serializers_json_object__["a"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BaseHalJsonObjectSerializerOptions", function() { return __WEBPACK_IMPORTED_MODULE_9__serializers_json_object__["b"]; });
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalJsonObjectSerializer", function() { return __WEBPACK_IMPORTED_MODULE_9__serializers_json_object__["c"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__translators_array_translator__ = __webpack_require__("./src/translators/array-translator.ts");
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalArrayTranslator", function() { return __WEBPACK_IMPORTED_MODULE_10__translators_array_translator__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__translators_default_object_translator__ = __webpack_require__("./src/translators/default-object-translator.ts");
+/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalDefaultObjectTranslator", function() { return __WEBPACK_IMPORTED_MODULE_11__translators_default_object_translator__["a"]; });
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./src/instance-factory.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__field__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__object__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__translator__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__field__ = __webpack_require__("./src/field.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__object__ = __webpack_require__("./src/object.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__translator__ = __webpack_require__("./src/translator.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HalInstanceFactory; });
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
@@ -529,128 +794,93 @@ function findApplicableTranslator(translators, ctor) {
 }
 
 /***/ }),
-/* 6 */
+
+/***/ "./src/object.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HAL_OBJECT_TRANSLATORS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return HAL_COLLECTION_TRANSLATORS; });
-
-var HAL_OBJECT_TRANSLATORS = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["OpaqueToken"]('halObjectTranslators');
-var HAL_COLLECTION_TRANSLATORS = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["OpaqueToken"]('halCollectionTranslators');
-
-/***/ }),
-/* 7 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__field__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__object__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__resource_factory__ = __webpack_require__(2);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HalClient; });
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return HalLinkObject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HalObject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return HalObjectSerializer; });
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var __decorate = this && this.__decorate || function (decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
-        if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    }return c > 3 && r && Object.defineProperty(target, key, r), r;
+var HalLinkObject = function HalLinkObject(href, templated) {
+    _classCallCheck(this, HalLinkObject);
+
+    this.href = href;
+    this.templated = templated;
 };
-var __metadata = this && this.__metadata || function (k, v) {
-    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+var HalObject = function HalObject(embedded, links, resource) {
+    _classCallCheck(this, HalObject);
+
+    this.embedded = embedded;
+    this.links = links;
+    this.resource = resource;
 };
-
-
-
-
-/**
- *
- */
-var HalClient = function () {
-    function HalClient(resourceFactory) {
-        _classCallCheck(this, HalClient);
-
-        this.resourceFactory = resourceFactory;
-    }
-
-    _createClass(HalClient, [{
-        key: "resource",
-        value: function resource(url, metadata) {
-            return this.resourceFactory.createResource(new __WEBPACK_IMPORTED_MODULE_2__object__["b" /* HalLinkObject */](url, false), new __WEBPACK_IMPORTED_MODULE_1__field__["c" /* HalFieldTypeDescription */](metadata));
-        }
-    }]);
-
-    return HalClient;
-}();
-HalClient = __decorate([__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(), __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__resource_factory__["a" /* HalResourceFactory */]])], HalClient);
-
+var HalObjectSerializer = function HalObjectSerializer() {
+    _classCallCheck(this, HalObjectSerializer);
+};
 
 /***/ }),
-/* 8 */
+
+/***/ "./src/providers.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_core_decorators__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_core_decorators___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_core_decorators__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HalError; });
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__client__ = __webpack_require__("./src/client.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__http__ = __webpack_require__("./src/http.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__http_resource_factory__ = __webpack_require__("./src/http-resource-factory.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__instance_factory__ = __webpack_require__("./src/instance-factory.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__object__ = __webpack_require__("./src/object.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__resource_factory__ = __webpack_require__("./src/resource-factory.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__translator__ = __webpack_require__("./src/translator.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__serializers_json_object__ = __webpack_require__("./src/serializers/json-object.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__translators_array_translator__ = __webpack_require__("./src/translators/array-translator.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__translators_default_object_translator__ = __webpack_require__("./src/translators/default-object-translator.ts");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HAL_PROVIDERS; });
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var __decorate = this && this.__decorate || function (decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
-        if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    }return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = this && this.__metadata || function (k, v) {
-    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 
-/**
- *
- */
-var HalError = function () {
-    function HalError(status, message) {
-        _classCallCheck(this, HalError);
 
-        this.status = status;
-        this.message = message;
-    }
 
-    _createClass(HalError, [{
-        key: "toString",
-        value: function toString() {
-            return this.status + ": " + this.message;
-        }
-    }]);
 
-    return HalError;
-}();
-__decorate([__WEBPACK_IMPORTED_MODULE_0_core_decorators__["override"], __metadata("design:type", Function), __metadata("design:paramtypes", []), __metadata("design:returntype", String)], HalError.prototype, "toString", null);
+
+
+
+var HAL_PROVIDERS = [__WEBPACK_IMPORTED_MODULE_0__client__["a" /* HalClient */], __WEBPACK_IMPORTED_MODULE_1__http__["a" /* HalHttp */], __WEBPACK_IMPORTED_MODULE_3__instance_factory__["a" /* HalInstanceFactory */], { provide: __WEBPACK_IMPORTED_MODULE_4__object__["c" /* HalObjectSerializer */], useClass: __WEBPACK_IMPORTED_MODULE_7__serializers_json_object__["c" /* HalJsonObjectSerializer */] }, { provide: __WEBPACK_IMPORTED_MODULE_7__serializers_json_object__["a" /* HalJsonObjectSerializerOptions */], useClass: __WEBPACK_IMPORTED_MODULE_7__serializers_json_object__["b" /* BaseHalJsonObjectSerializerOptions */] }, { provide: __WEBPACK_IMPORTED_MODULE_5__resource_factory__["a" /* HalResourceFactory */], useClass: __WEBPACK_IMPORTED_MODULE_2__http_resource_factory__["a" /* HalHttpResourceFactory */] }, { provide: __WEBPACK_IMPORTED_MODULE_6__translator__["b" /* HAL_COLLECTION_TRANSLATORS */], useClass: __WEBPACK_IMPORTED_MODULE_8__translators_array_translator__["a" /* HalArrayTranslator */], multi: true }, { provide: __WEBPACK_IMPORTED_MODULE_6__translator__["a" /* HAL_OBJECT_TRANSLATORS */], useClass: __WEBPACK_IMPORTED_MODULE_9__translators_default_object_translator__["a" /* HalDefaultObjectTranslator */], multi: true }];
 
 /***/ }),
-/* 9 */
+
+/***/ "./src/resource-factory.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HalResourceFactory; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var HalResourceFactory = function HalResourceFactory() {
+  _classCallCheck(this, HalResourceFactory);
+};
+
+/***/ }),
+
+/***/ "./src/resource.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DONT_SKIP_ME; });
+var DONT_SKIP_ME = true;
+
+/***/ }),
+
+/***/ "./src/serializers/json-object.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__object__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__object__ = __webpack_require__("./src/object.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HalJsonObjectSerializerOptions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return BaseHalJsonObjectSerializerOptions; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return HalJsonObjectSerializer; });
@@ -860,7 +1090,22 @@ HalJsonObjectSerializer = __decorate([__webpack_require__.i(__WEBPACK_IMPORTED_M
 
 
 /***/ }),
-/* 10 */
+
+/***/ "./src/translator.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HAL_OBJECT_TRANSLATORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return HAL_COLLECTION_TRANSLATORS; });
+
+var HAL_OBJECT_TRANSLATORS = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["OpaqueToken"]('halObjectTranslators');
+var HAL_COLLECTION_TRANSLATORS = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["OpaqueToken"]('halCollectionTranslators');
+
+/***/ }),
+
+/***/ "./src/translators/array-translator.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -905,7 +1150,8 @@ var HalArrayTranslator = function () {
 }();
 
 /***/ }),
-/* 11 */
+
+/***/ "./src/translators/default-object-translator.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -951,265 +1197,41 @@ var HalDefaultObjectTranslator = function () {
 }();
 
 /***/ }),
-/* 12 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__client__ = __webpack_require__(7);
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalClient", function() { return __WEBPACK_IMPORTED_MODULE_0__client__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__error__ = __webpack_require__(8);
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalError", function() { return __WEBPACK_IMPORTED_MODULE_1__error__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__field__ = __webpack_require__(3);
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalFieldSection", function() { return __WEBPACK_IMPORTED_MODULE_2__field__["a"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalFieldDescription", function() { return __WEBPACK_IMPORTED_MODULE_2__field__["b"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalFieldTypeDescription", function() { return __WEBPACK_IMPORTED_MODULE_2__field__["c"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalField", function() { return __WEBPACK_IMPORTED_MODULE_2__field__["d"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalEmbedded", function() { return __WEBPACK_IMPORTED_MODULE_2__field__["e"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalLink", function() { return __WEBPACK_IMPORTED_MODULE_2__field__["f"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getCookedFieldDescription", function() { return __WEBPACK_IMPORTED_MODULE_2__field__["g"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getRawFieldDescription", function() { return __WEBPACK_IMPORTED_MODULE_2__field__["h"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__hal_module__ = __webpack_require__(13);
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalModule", function() { return __WEBPACK_IMPORTED_MODULE_3__hal_module__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__http__ = __webpack_require__(4);
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalHttp", function() { return __WEBPACK_IMPORTED_MODULE_4__http__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__instance_factory__ = __webpack_require__(5);
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalInstanceFactory", function() { return __WEBPACK_IMPORTED_MODULE_5__instance_factory__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__resource__ = __webpack_require__(16);
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "DONT_SKIP_ME", function() { return __WEBPACK_IMPORTED_MODULE_6__resource__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__resource_factory__ = __webpack_require__(2);
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalResourceFactory", function() { return __WEBPACK_IMPORTED_MODULE_7__resource_factory__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__translator__ = __webpack_require__(6);
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HAL_OBJECT_TRANSLATORS", function() { return __WEBPACK_IMPORTED_MODULE_8__translator__["a"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HAL_COLLECTION_TRANSLATORS", function() { return __WEBPACK_IMPORTED_MODULE_8__translator__["b"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__serializers_json_object__ = __webpack_require__(9);
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalJsonObjectSerializerOptions", function() { return __WEBPACK_IMPORTED_MODULE_9__serializers_json_object__["a"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BaseHalJsonObjectSerializerOptions", function() { return __WEBPACK_IMPORTED_MODULE_9__serializers_json_object__["b"]; });
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalJsonObjectSerializer", function() { return __WEBPACK_IMPORTED_MODULE_9__serializers_json_object__["c"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__translators_array_translator__ = __webpack_require__(10);
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalArrayTranslator", function() { return __WEBPACK_IMPORTED_MODULE_10__translators_array_translator__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__translators_default_object_translator__ = __webpack_require__(11);
-/* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "HalDefaultObjectTranslator", function() { return __WEBPACK_IMPORTED_MODULE_11__translators_default_object_translator__["a"]; });
+/***/ 0:
+/***/ (function(module, exports) {
 
-
-
-
-
-
-
-
-
-
-
-
+module.exports = require("@angular/core");
 
 /***/ }),
-/* 13 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__providers__ = __webpack_require__(15);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HalModule; });
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var __decorate = this && this.__decorate || function (decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
-        if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    }return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-
-
-var HalModule = function HalModule() {
-    _classCallCheck(this, HalModule);
-};
-HalModule = __decorate([__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({ providers: [__WEBPACK_IMPORTED_MODULE_1__providers__["a" /* HAL_PROVIDERS */]] })], HalModule);
-
-
-/***/ }),
-/* 14 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__angular_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_uri_templates__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_uri_templates___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_uri_templates__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__http__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__instance_factory__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__resource_factory__ = __webpack_require__(2);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HalHttpResourceFactory; });
-/* unused harmony export HalHttpResource */
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var __decorate = this && this.__decorate || function (decorators, target, key, desc) {
-    var c = arguments.length,
-        r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-        d;
-    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
-        if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    }return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = this && this.__metadata || function (k, v) {
-    if ((typeof Reflect === "undefined" ? "undefined" : _typeof(Reflect)) === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-/**
- *
- */
-var HalHttpResourceFactory = function (_HalResourceFactory) {
-    _inherits(HalHttpResourceFactory, _HalResourceFactory);
-
-    function HalHttpResourceFactory(halHttp, instanceFactory) {
-        _classCallCheck(this, HalHttpResourceFactory);
-
-        var _this = _possibleConstructorReturn(this, (HalHttpResourceFactory.__proto__ || Object.getPrototypeOf(HalHttpResourceFactory)).call(this));
-
-        _this.halHttp = halHttp;
-        _this.instanceFactory = instanceFactory;
-        return _this;
-    }
-
-    _createClass(HalHttpResourceFactory, [{
-        key: "createResource",
-        value: function createResource(link, typeDescription) {
-            return new HalHttpResource(link, typeDescription, this.halHttp, this.instanceFactory, this);
-        }
-    }]);
-
-    return HalHttpResourceFactory;
-}(__WEBPACK_IMPORTED_MODULE_4__resource_factory__["a" /* HalResourceFactory */]);
-HalHttpResourceFactory = __decorate([__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Injectable"])(), __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__http__["a" /* HalHttp */], __WEBPACK_IMPORTED_MODULE_3__instance_factory__["a" /* HalInstanceFactory */]])], HalHttpResourceFactory);
-
-/**
- *
- */
-var HalHttpResource = function () {
-    function HalHttpResource(link, typeDescription, halHttp, instanceFactory, resourceFactory) {
-        _classCallCheck(this, HalHttpResource);
-
-        this.link = link;
-        this.typeDescription = typeDescription;
-        this.halHttp = halHttp;
-        this.instanceFactory = instanceFactory;
-        this.resourceFactory = resourceFactory;
-    }
-
-    _createClass(HalHttpResource, [{
-        key: "get",
-        value: function get(params) {
-            var _this2 = this;
-
-            return this.halHttp.get(this.filledUrl(params)).map(function (object) {
-                return _this2.instanceFactory.createInstance(object, _this2.typeDescription, _this2.resourceFactory);
-            });
-        }
-    }, {
-        key: "delete",
-        value: function _delete(params) {
-            return this.halHttp.delete(this.filledUrl(params));
-        }
-    }, {
-        key: "post",
-        value: function post(body, params, typeDescription) {
-            // TODO: Implement this method.
-            return undefined;
-        }
-    }, {
-        key: "put",
-        value: function put(body, params) {
-            // TODO: Implement this method.
-            return undefined;
-        }
-    }, {
-        key: "filledUrl",
-        value: function filledUrl(params) {
-            var template = new __WEBPACK_IMPORTED_MODULE_1_uri_templates___default.a(this.link.href);
-            return template.fill(params);
-        }
-    }]);
-
-    return HalHttpResource;
-}();
-
-/***/ }),
-/* 15 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__client__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__http__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__http_resource_factory__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__instance_factory__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__object__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__resource_factory__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__translator__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__serializers_json_object__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__translators_array_translator__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__translators_default_object_translator__ = __webpack_require__(11);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HAL_PROVIDERS; });
-
-
-
-
-
-
-
-
-
-
-var HAL_PROVIDERS = [__WEBPACK_IMPORTED_MODULE_0__client__["a" /* HalClient */], __WEBPACK_IMPORTED_MODULE_1__http__["a" /* HalHttp */], __WEBPACK_IMPORTED_MODULE_3__instance_factory__["a" /* HalInstanceFactory */], { provide: __WEBPACK_IMPORTED_MODULE_4__object__["c" /* HalObjectSerializer */], useClass: __WEBPACK_IMPORTED_MODULE_7__serializers_json_object__["c" /* HalJsonObjectSerializer */] }, { provide: __WEBPACK_IMPORTED_MODULE_7__serializers_json_object__["a" /* HalJsonObjectSerializerOptions */], useClass: __WEBPACK_IMPORTED_MODULE_7__serializers_json_object__["b" /* BaseHalJsonObjectSerializerOptions */] }, { provide: __WEBPACK_IMPORTED_MODULE_5__resource_factory__["a" /* HalResourceFactory */], useClass: __WEBPACK_IMPORTED_MODULE_2__http_resource_factory__["a" /* HalHttpResourceFactory */] }, { provide: __WEBPACK_IMPORTED_MODULE_6__translator__["b" /* HAL_COLLECTION_TRANSLATORS */], useClass: __WEBPACK_IMPORTED_MODULE_8__translators_array_translator__["a" /* HalArrayTranslator */], multi: true }, { provide: __WEBPACK_IMPORTED_MODULE_6__translator__["a" /* HAL_OBJECT_TRANSLATORS */], useClass: __WEBPACK_IMPORTED_MODULE_9__translators_default_object_translator__["a" /* HalDefaultObjectTranslator */], multi: true }];
-
-/***/ }),
-/* 16 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DONT_SKIP_ME; });
-var DONT_SKIP_ME = true;
-
-/***/ }),
-/* 17 */
+/***/ 1:
 /***/ (function(module, exports) {
 
 module.exports = require("@angular/http");
 
 /***/ }),
-/* 18 */
+
+/***/ 2:
 /***/ (function(module, exports) {
 
 module.exports = require("core-decorators");
 
 /***/ }),
-/* 19 */
+
+/***/ 3:
 /***/ (function(module, exports) {
 
 module.exports = require("uri-templates");
 
 /***/ }),
-/* 20 */
+
+/***/ 4:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(12);
+module.exports = __webpack_require__("./src/index.ts");
 
 
 /***/ })
-/******/ ]);
+
+/******/ });

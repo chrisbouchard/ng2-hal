@@ -1,18 +1,17 @@
 module.exports = function (config) {
-  var webpack = require('./webpack.config.js');
+  var webpackConfig = require('./webpack.config.js')({
+    profile: 'test'
+  });
 
   config.set({
     basePath: '',
     frameworks: ['jasmine'],
-    files: [
-      {pattern: 'spec-bundle.ts', watched: false}
-    ],
-    exclude: [],
+    files: ['./test/index.ts'],
     preprocessors: {
-      'spec-bundle.ts': ['webpack', 'sourcemap']
+      './test/index.ts': ['webpack']
     },
-    webpack: webpack,
-    webpackServer: {
+    webpack: webpackConfig,
+    webpackMiddleware: {
       noInfo: true
     },
     reporters: ['mocha'],
@@ -20,8 +19,7 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['PhantomJS'],
-    //singleRun: true
+    browsers: ['PhantomJS']
   });
 }
 
