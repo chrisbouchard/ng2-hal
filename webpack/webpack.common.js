@@ -1,5 +1,3 @@
-const { NamedModulesPlugin } = require('webpack');
-
 module.exports = resolve => ({
   entry: {
     'ng2-hal': ['./src']
@@ -50,10 +48,6 @@ module.exports = resolve => ({
         ]
       }
     ]
-  },
-
-  plugins: [
-    new NamedModulesPlugin()
-  ]
+  }
 });
 
